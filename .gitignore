@@ -1,0 +1,29 @@
+# Created by http://www.gitignore.io
+
+### OlimpiadasBD  ###
+OlimpiadasBD/nbproject/private/
+OlimpiadasBD/nbproject/
+OlimpiadasBD/build/
+OlimpiadasBD/nbbuild/
+OlimpiadasBD/dist/
+OlimpiadasBD/nbdist/
+OlimpiadasBD/nbactions.xml
+OlimpiadasBD/nb-configuration.xml
+
+
+### EventPassWeb2 ###
+OlimpiadasWeb/nbproject/private/
+OlimpiadasWeb/build/
+OlimpiadasWeb/nbbuild/
+OlimpiadasWeb/dist/
+OlimpiadasWeb/nbdist/
+OlimpiadasWeb/nbactions.xml
+OlimpiadasWeb/nb-configuration.xml
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
