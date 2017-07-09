@@ -11,4 +11,8 @@ var URLS = {
     SEDE_EDIT:'SedeEdit',
     SEDE_DEL:'SedeDel',
     
+    DELEGACION:'Delegacion',
+    DELEGACION_LIST:'DelegacionList',
+    DELEGACION_EDIT:'DelegacionEdit',
+    DELEGACION_DEL:'DelegacionDel',
 }

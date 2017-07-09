@@ -20,16 +20,15 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             
-                            Listado de Sedes <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
+                            Listado de Delegaciones <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
                             
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-condensed" id="tblSede">
+                                <table class="table table-striped table-bordered table-condensed" id="tblDelegacion">
                                     <colgroup>
-                                        <col style="width:5%"></col>
-                                        <col style="width:10%"></col>
+                                        <col style="width:5%"></col>                                        
                                         <col style="width:10%"></col>
                                         <col style=""></col>
                                         <col style="width:10%"></col>
@@ -37,8 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Direcci&oacute;n</th>
+                                            <th>Nombre</th>                                            
                                             <th>Observaciones</th>
                                             <th></th>
                                         </tr>
@@ -65,21 +63,25 @@
     <!-- /#wrapper -->
 
     <%@include file="tpl_scripts.jsp" %>
-    <script id="sede_list" type="text/x-handlebars-template">
+    <script id="delegacion_list" type="text/x-handlebars-template">
         {{#each records}}
           <tr class="">
             <td class="">{{id}}</td>
             <td class="">{{nombre}}</td>
-            <td class="">{{direccion}}</td>
             <td class="">{{observaciones}}</td>
             <td class="">
-              <span href="" data-index="{{id}}" data-nombre={{nombre}} data-direccion="{{direccion}} " data-observaciones="{{observaciones}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
+              <span href="" data-index="{{id}}" data-nombre={{nombre}} " data-observaciones="{{observaciones}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
               <span href="" data-index="{{id}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
               </td>
           </tr>
-        {{/each}}    
+        {{else}}
+            <tr>
+            <td colspan="4"><center><strong>No se encontraron resultados</strong></center></td>
+            </tr>
+        {{/each}}
+        
     </script>   
-     <script id="sede_edit" type="text/x-handlebars-template">
+     <script id="delegacion_edit" type="text/x-handlebars-template">
         <div class="row">
           <div class="col-md-12">
               <form class="form-vertical">
@@ -91,11 +93,6 @@
                    </div>
 
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="direccion">Direcci&oacute;n:</label>
-                      <div class="col-md-8">
-                      <input id="direccion" name="direccion" type="text" class="form-control input-md" value="{{direccion}}">
-                   </div>
-                   <div class="form-group">
                       <label class="col-md-4 control-label" for="observaciones">Observaciones:</label>
                       <div class="col-md-8">                      
                       <textarea id="observaciones" name="observaciones" type="text" class="form-control input-md" >{{observaciones}}</textarea>
@@ -105,7 +102,7 @@
           </div>
         </div>                     
     </script>    
-    <script src="js/sede.js"></script>
+    <script src="js/delegacion.js"></script>
 </body>
 
 </html>

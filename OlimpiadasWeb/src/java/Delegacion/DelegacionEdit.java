@@ -5,12 +5,17 @@
  */
 package Delegacion;
 
+import bd.Delegacion;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TDelegacion;
+import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
@@ -44,7 +49,6 @@ public class DelegacionEdit extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -70,7 +74,35 @@ public class DelegacionEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");                       
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        Integer id = Parser.parseInt(request.getParameter("id"));
+        String nombre = request.getParameter("nombre");
+        String observaciones = request.getParameter("observaciones");
+        TDelegacion tdelegacion = new TDelegacion();
+        Delegacion delegacion;
+        boolean nuevo = false;
+        try {
+            delegacion = tdelegacion.getById(id);
+            if(delegacion==null){
+                delegacion = new Delegacion();
+                nuevo = true;
+            }
+            delegacion.setNombre(nombre);            
+            delegacion.setObservaciones(observaciones);
+            if(nuevo) tdelegacion.alta(delegacion);
+            else tdelegacion.actualizar(delegacion);
+            
+            JsonRespuesta jr = new JsonRespuesta();
+            jr.setResult("OK");
+            jr.setRecord(delegacion);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } finally {            
+            out.close();
+        }
     }
 
     /**

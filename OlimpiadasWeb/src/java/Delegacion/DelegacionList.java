@@ -5,12 +5,19 @@
  */
 package Delegacion;
 
+import Delegacion.DelegacionList;
+import bd.Delegacion;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TDelegacion;
+import utils.JsonRespuesta;
 
 /**
  *
@@ -29,18 +36,29 @@ public class DelegacionList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DelegacionList</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DelegacionList at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+         response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");       
+                
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+         
+        try {
+            JsonRespuesta jr = new JsonRespuesta();
+            List<Delegacion> lista = new TDelegacion().getList();
+            List<DelegacionDet> listaDet = new ArrayList();            
+                        
+            if (lista != null) {
+                for(Delegacion c:lista) listaDet.add(new DelegacionList.DelegacionDet(c));
+                jr.setTotalRecordCount(listaDet.size());
+            } else {
+                jr.setTotalRecordCount(0);
+            }            
+            jr.setResult("OK");
+            jr.setRecords(listaDet);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } finally {            
+            out.close();
         }
     }
 
@@ -82,5 +100,12 @@ public class DelegacionList extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static class DelegacionDet extends Delegacion {
+
+        public DelegacionDet(Delegacion delegacion) {
+            super(delegacion);
+        }
+    }
 
 }

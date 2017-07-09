@@ -39,5 +39,9 @@ public class PathCfg {
     public static final String SEDE_DEL  = SEDE + "Del";
     public static final String SEDE_SEARCH  = SEDE + "Search";
 
-
+    public static final String DELEGACION      ="Delegacion";
+    public static final String DELEGACION_LIST = DELEGACION + "List";
+    public static final String DELEGACION_EDIT = DELEGACION + "Edit";
+    public static final String DELEGACION_DEL  = DELEGACION + "Del";
+    public static final String DELEGACION_SEARCH  = DELEGACION + "Search";
 }

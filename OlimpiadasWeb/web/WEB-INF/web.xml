@@ -109,7 +109,7 @@
         <servlet-class>Sede.SedeEdit</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SedeDel</servlet-name>
+        <servlet-name>ServletDel</servlet-name>
         <servlet-class>Sede.SedeDel</servlet-class>
     </servlet>
     <servlet>
@@ -213,8 +213,8 @@
         <url-pattern>/SedeEdit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SedeDel</servlet-name>
-        <url-pattern>/SedeDel</url-pattern>
+        <servlet-name>ServletDel</servlet-name>
+        <url-pattern>/ServletDel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PruebaServlet</servlet-name>

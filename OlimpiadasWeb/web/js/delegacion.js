@@ -1,25 +1,18 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
-        agregarSede({});
+        agregarDelegacion({});
     });
-    filtrarSede();
+    filtrarDelegacion();
 });
-function filtrarSede(){
+function filtrarDelegacion(){
     var data = {};
-    loadDataSede(data);
+    loadDataDelegacion(data);
 }
-function loadDataSede(data){
-    var $tabla = $('#tblSede');
+function loadDataDelegacion(data){
+    var $tabla = $('#tblDelegacion');
     $tabla.DataTable().destroy();
     $.ajax({
-           url: URLS.SEDE_LIST,
+           url: URLS.DELEGACION_LIST,
            data: data,
            method:"POST",
            dataType: "json",
@@ -30,50 +23,37 @@ function loadDataSede(data){
            success: function(data) {
                if(data.Result === "OK") {
                    $tabla.find('tbody').html(createTable(data.Records));
-                    $('.btn-del').click(borrarSede);
-                    $('.btn-edit').click(editarSede);
-//                    $tabla.DataTable({
-//                            responsive: true,
-//                            retrieve: true,
-//                            paging: false,
-//                            ordering: true,
-//                            searching: false,
-//                            lengthChange:false,
-//                            bInfo: false,
-//                            language: {
-//                                url:'vendor/datatables-plugins/i18n/Spanish.json',
-//                            }
-//                    });
+                    $('.btn-del').click(borrarDelegacion);
+                    $('.btn-edit').click(editarDelegacion);
                }
            }
        });
     }
-    function borrarSede(){
+    function borrarDelegacion(){
         var id = $(this).data('index');
         var $tr = $(this).parent().parent();
-        deleteData(URLS.SEDE_DEL,{id:id},function(result) {     
+        deleteData(URLS.DELEGACION_DEL,{id:id},function(result) {     
                 if(result.Result === "OK") {
                     $tr.remove();
                 } else if (result.Message) bootbox.alert(result.Message);
         });
     }
     function createTable(data){
-        var template = Handlebars.compile($("#sede_list").html());
+        var template = Handlebars.compile($("#delegacion_list").html());
         return template({records:data});    
     }
-    function editarSede(){
+    function editarDelegacion(){
         var data = {};
         data.id = $(this).data('index');
         data.nombre = $(this).data('nombre');
-        data.direccion = $(this).data('direccion');
         data.observaciones  = $(this).data('observaciones');        
-        agregarSede(data);
+        agregarDelegacion(data);
     }
     
-    function agregarSede(data){
-        var template = Handlebars.compile($('#sede_edit').html());
+    function agregarDelegacion(data){
+        var template = Handlebars.compile($('#delegacion_edit').html());
         bootbox.dialog({
-                title: "Configuraci&oacute;n de sede",
+                title: "Configuraci&oacute;n de delegaci&oacute;n",
                 message: template(data), 
                 buttons: {
                     success: {
@@ -82,12 +62,12 @@ function loadDataSede(data){
                         callback: function () {
                             var data = recuperarCampos();
                             $.ajax({
-                                url:URLS.SEDE_EDIT,
+                                url:URLS.DELEGACION_EDIT,
                                 data: data,
                                 method:'POST',
                                 dataType:'json',
                                 success:function(){
-                                    filtrarSede();
+                                    filtrarDelegacion();
                                 }
                             });                            
                         }
@@ -104,7 +84,6 @@ function loadDataSede(data){
         var data = {};
         data.id = $('#id').val();
         data.nombre = $('#nombre').val();
-        data.direccion = $('#direccion').val();
         data.observaciones  = $('#observaciones').val();
         return data;   
     }
