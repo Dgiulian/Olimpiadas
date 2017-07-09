@@ -77,10 +77,6 @@
               <span href="" data-index="{{id}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
               </td>
           </tr>
-           {{else}}
-            <tr>
-            <td colspan="5"><center><strong>No se encontraron resultados</strong></center></td>
-            </tr>
         {{/each}}    
     </script>   
      <script id="sede_edit" type="text/x-handlebars-template">
