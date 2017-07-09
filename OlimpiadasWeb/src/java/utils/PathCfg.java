@@ -32,6 +32,12 @@ public class PathCfg {
     public static final String PARAMETRO_LIST   = PARAMETRO + "List";
     public static final String PARAMETRO_EDIT   = PARAMETRO + "Edit";
     public static final String PARAMETRO_DEL    = PARAMETRO + "Del";    
+    
+    public static final String SEDE      ="Sede";
+    public static final String SEDE_LIST = SEDE + "List";
+    public static final String SEDE_EDIT = SEDE + "Edit";
+    public static final String SEDE_DEL  = SEDE + "Del";
+    public static final String SEDE_SEARCH  = SEDE + "Search";
 
 
 }

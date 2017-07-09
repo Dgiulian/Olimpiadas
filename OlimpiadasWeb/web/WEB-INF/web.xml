@@ -105,12 +105,12 @@
         <servlet-class>Sede.SedeList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletEdit</servlet-name>
-        <servlet-class>Sede.ServletEdit</servlet-class>
+        <servlet-name>SedeEdit</servlet-name>
+        <servlet-class>Sede.SedeEdit</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletDel</servlet-name>
-        <servlet-class>Sede.ServletDel</servlet-class>
+        <servlet-name>SedeDel</servlet-name>
+        <servlet-class>Sede.SedeDel</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PruebaServlet</servlet-name>
@@ -136,7 +136,7 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Usuario.Logout</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
         <servlet-class>Usuario.UsuarioServlet</servlet-class>
     </servlet>
@@ -209,12 +209,12 @@
         <url-pattern>/SedeList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletEdit</servlet-name>
-        <url-pattern>/ServletEdit</url-pattern>
+        <servlet-name>SedeEdit</servlet-name>
+        <url-pattern>/SedeEdit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletDel</servlet-name>
-        <url-pattern>/ServletDel</url-pattern>
+        <servlet-name>SedeDel</servlet-name>
+        <url-pattern>/SedeDel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PruebaServlet</servlet-name>
@@ -232,7 +232,7 @@
         <servlet-name>PruebaDel</servlet-name>
         <url-pattern>/PruebaDel</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
@@ -240,7 +240,7 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/Usuario</url-pattern>
     </servlet-mapping>

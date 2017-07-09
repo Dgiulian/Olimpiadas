@@ -5,18 +5,23 @@
  */
 package Sede;
 
+import bd.Sede;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TSede;
+import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
  * @author Diego
  */
-public class ServletEdit extends HttpServlet {
+public class SedeEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +49,6 @@ public class ServletEdit extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -70,7 +74,37 @@ public class ServletEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");                       
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        Integer id = Parser.parseInt(request.getParameter("id"));
+        String nombre = request.getParameter("nombre");
+        String direccion = request.getParameter("direccion");
+        String observaciones = request.getParameter("observaciones");
+        TSede tsede = new TSede();
+        Sede sede;
+        boolean nuevo = false;
+        try {
+            sede = tsede.getById(id);
+            if(sede==null){
+                sede = new Sede();
+                nuevo = true;
+            }
+            sede.setNombre(nombre);
+            sede.setDireccion(direccion);
+            sede.setObservaciones(observaciones);
+            if(nuevo) tsede.alta(sede);
+            else tsede.actualizar(sede);
+            
+            JsonRespuesta jr = new JsonRespuesta();
+            jr.setResult("OK");
+            jr.setRecord(sede);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } finally {            
+            out.close();
+        }
     }
 
     /**

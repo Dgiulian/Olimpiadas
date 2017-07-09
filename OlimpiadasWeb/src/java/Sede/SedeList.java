@@ -5,12 +5,18 @@
  */
 package Sede;
 
+import bd.Sede;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TSede;
+import utils.JsonRespuesta;
 
 /**
  *
@@ -29,18 +35,29 @@ public class SedeList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SedeList</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SedeList at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");       
+                
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+         
+        try {
+            JsonRespuesta jr = new JsonRespuesta();
+            List<Sede> lista = new TSede().getList();
+            List<SedeDet> listaDet = new ArrayList();            
+                        
+            if (lista != null) {
+                for(Sede c:lista) listaDet.add(new SedeDet(c));
+                jr.setTotalRecordCount(listaDet.size());
+            } else {
+                jr.setTotalRecordCount(0);
+            }            
+            jr.setResult("OK");
+            jr.setRecords(listaDet);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } finally {            
+            out.close();
         }
     }
 
@@ -82,5 +99,12 @@ public class SedeList extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static class SedeDet extends Sede {
+
+        public SedeDet(Sede sede) {
+            super(sede);
+        }
+    }
 
 }

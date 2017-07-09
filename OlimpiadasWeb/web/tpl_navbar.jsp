@@ -54,7 +54,7 @@
                         <li><a href="/"><i class="fa fa-dashboard fa-fw"></i> Equipos</a></li>
                         <li><a href="/"><i class="fa fa-users fa-fw"></i> Jugadores</a></li>
                         <li><a href="/"><i class="fa fa-dashboard fa-fw"></i> Pruebas</a></li>
-                        <li><a href="/"><i class="fa fa-dashboard fa-fw"></i> Sedes</a></li>     
+                        <li><a href="<%=PathCfg.SEDE%>"><i class="fa fa-dashboard fa-fw"></i> Sedes</a></li>     
                         <li>
                             <a href="<%=PathCfg.USUARIO%>"><i class="fa fa-user fa-fw"></i> Usuarios</a>
                         </li>

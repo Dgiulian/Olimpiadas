@@ -190,33 +190,33 @@
         data.checked = (data.activo)?"checked":"";
         var template = Handlebars.compile($('#parametro_edit').html());
         bootbox.dialog({
-                title: "Configuraci&oacute;n de par&aacute;metro",
-                message: template(data), 
-                buttons: {
-                    success: {
-                        label: "Guardar",
-                        className: "btn-success",
-                        callback: function () {
-                            var data = recuperarCampos();
-                            $.ajax({
-                                url:PathCfg.PARAMETRO_EDIT,
-                                data: data,
-                                method:'POST',
-                                dataType:'json',
-                                success:function(){
-                                    loadData();
-                                }
-                                });
-                            //bootbox.alert("Nombre " + nombre + ". Email: <b>" + email + "</b>");
-                        }
-                    },
-                    cancel: {
-                        label: "Cancelar",
-                        callback: function () {
-                        }
+            title: "Configuraci&oacute;n de par&aacute;metro",
+            message: template(data), 
+            buttons: {
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                    callback: function () {
+                        var data = recuperarCampos();
+                        $.ajax({
+                            url:PathCfg.PARAMETRO_EDIT,
+                            data: data,
+                            method:'POST',
+                            dataType:'json',
+                            success:function(){
+                                loadData();
+                            }
+                        });
+                        //bootbox.alert("Nombre " + nombre + ". Email: <b>" + email + "</b>");
+                    }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    callback: function () {
                     }
                 }
-            });
+            }
+        });
     }
     function recuperarCampos(){
         var data = {};
