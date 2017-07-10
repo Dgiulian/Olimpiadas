@@ -1,3 +1,4 @@
+var delegaciones = [];
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarDelegacion({});
@@ -10,7 +11,6 @@ function filtrarDelegacion(){
 }
 function loadDataDelegacion(data){
     var $tabla = $('#tblDelegacion');
-    $tabla.DataTable().destroy();
     $.ajax({
            url: URLS.DELEGACION_LIST,
            data: data,
@@ -22,7 +22,8 @@ function loadDataDelegacion(data){
            },
            success: function(data) {
                if(data.Result === "OK") {
-                   $tabla.find('tbody').html(createTable(data.Records));
+                   delegaciones = data.Records;
+                   $tabla.find('tbody').html(createTable(delegaciones));
                     $('.btn-del').click(borrarDelegacion);
                     $('.btn-edit').click(editarDelegacion);
                }
@@ -30,11 +31,11 @@ function loadDataDelegacion(data){
        });
     }
     function borrarDelegacion(){
-        var id = $(this).data('index');
-        var $tr = $(this).parent().parent();
+        var index = $(this).data('index');
+        var id = delegaciones[index].id;
         deleteData(URLS.DELEGACION_DEL,{id:id},function(result) {     
                 if(result.Result === "OK") {
-                    $tr.remove();
+                    filtrarDelegacion();
                 } else if (result.Message) bootbox.alert(result.Message);
         });
     }
@@ -44,9 +45,8 @@ function loadDataDelegacion(data){
     }
     function editarDelegacion(){
         var data = {};
-        data.id = $(this).data('index');
-        data.nombre = $(this).data('nombre');
-        data.observaciones  = $(this).data('observaciones');        
+        var index = $(this).data('index');
+        data = delegaciones[index];        
         agregarDelegacion(data);
     }
     
