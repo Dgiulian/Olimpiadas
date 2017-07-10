@@ -109,7 +109,7 @@
         <servlet-class>Sede.SedeEdit</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletDel</servlet-name>
+        <servlet-name>SedeDel</servlet-name>
         <servlet-class>Sede.SedeDel</servlet-class>
     </servlet>
     <servlet>
@@ -168,6 +168,22 @@
         <servlet-name>ParametroDel</servlet-name>
         <servlet-class>Parametro.ParametroDel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeporteServlet</servlet-name>
+        <servlet-class>Deporte.DeporteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeporteList</servlet-name>
+        <servlet-class>Deporte.DeporteList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeporteEdit</servlet-name>
+        <servlet-class>Deporte.DeporteEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeporteDel</servlet-name>
+        <servlet-class>Deporte.DeporteDel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/Categoria</url-pattern>
@@ -213,8 +229,8 @@
         <url-pattern>/SedeEdit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletDel</servlet-name>
-        <url-pattern>/ServletDel</url-pattern>
+        <servlet-name>SedeDel</servlet-name>
+        <url-pattern>/SedeDel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PruebaServlet</servlet-name>
@@ -271,6 +287,22 @@
     <servlet-mapping>
         <servlet-name>ParametroDel</servlet-name>
         <url-pattern>/ParametroDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeporteServlet</servlet-name>
+        <url-pattern>/Deporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeporteList</servlet-name>
+        <url-pattern>/DeporteList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeporteEdit</servlet-name>
+        <url-pattern>/DeporteEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeporteDel</servlet-name>
+        <url-pattern>/DeporteDel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

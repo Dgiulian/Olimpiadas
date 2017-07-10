@@ -73,8 +73,8 @@
             <td class="">{{direccion}}</td>
             <td class="">{{observaciones}}</td>
             <td class="">
-              <span href="" data-index="{{id}}" data-nombre={{nombre}} data-direccion="{{direccion}} " data-observaciones="{{observaciones}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
-              <span href="" data-index="{{id}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+              <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
+              <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
               </td>
           </tr>
            {{else}}

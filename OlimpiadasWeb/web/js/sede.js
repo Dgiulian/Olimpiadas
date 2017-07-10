@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-
+var sedes = [];
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarSede({});
@@ -17,7 +17,7 @@ function filtrarSede(){
 }
 function loadDataSede(data){
     var $tabla = $('#tblSede');
-    $tabla.DataTable().destroy();
+    //$tabla.DataTable().destroy();
     $.ajax({
            url: URLS.SEDE_LIST,
            data: data,
@@ -29,6 +29,7 @@ function loadDataSede(data){
            },
            success: function(data) {
                if(data.Result === "OK") {
+                   sedes = data.Records;
                    $tabla.find('tbody').html(createTable(data.Records));
                     $('.btn-del').click(borrarSede);
                     $('.btn-edit').click(editarSede);
@@ -49,11 +50,11 @@ function loadDataSede(data){
        });
     }
     function borrarSede(){
-        var id = $(this).data('index');
-        var $tr = $(this).parent().parent();
+        var index = $(this).data('index');
+        var id = sedes[index].id;        
         deleteData(URLS.SEDE_DEL,{id:id},function(result) {     
                 if(result.Result === "OK") {
-                    $tr.remove();
+                    filtrarSede();
                 } else if (result.Message) bootbox.alert(result.Message);
         });
     }
@@ -63,10 +64,8 @@ function loadDataSede(data){
     }
     function editarSede(){
         var data = {};
-        data.id = $(this).data('index');
-        data.nombre = $(this).data('nombre');
-        data.direccion = $(this).data('direccion');
-        data.observaciones  = $(this).data('observaciones');        
+        var id = $(this).data('index');
+        data = sedes[id];
         agregarSede(data);
     }
     
