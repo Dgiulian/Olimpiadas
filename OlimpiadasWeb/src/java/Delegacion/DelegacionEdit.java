@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TDelegacion;
+import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
 
@@ -84,6 +85,7 @@ public class DelegacionEdit extends HttpServlet {
         TDelegacion tdelegacion = new TDelegacion();
         Delegacion delegacion;
         boolean nuevo = false;
+        JsonRespuesta jr = new JsonRespuesta();
         try {
             delegacion = tdelegacion.getById(id);
             if(delegacion==null){
@@ -92,14 +94,20 @@ public class DelegacionEdit extends HttpServlet {
             }
             delegacion.setNombre(nombre);            
             delegacion.setObservaciones(observaciones);
-            if(nuevo) tdelegacion.alta(delegacion);
-            else tdelegacion.actualizar(delegacion);
+            boolean todoOk;
+            if(nuevo) {
+                id = tdelegacion.alta(delegacion);
+                todoOk = id!=0;
+            } else todoOk = tdelegacion.actualizar(delegacion);
             
-            JsonRespuesta jr = new JsonRespuesta();
+            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
             jr.setResult("OK");
             jr.setRecord(delegacion);
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
+        } catch(BaseException ex){
+            jr.setResult(ex.getResult());
+            jr.setMessage(ex.getMessage());
         } finally {            
             out.close();
         }
