@@ -20,6 +20,11 @@ var URLS = {
     DEPORTE_LIST:'DeporteList',
     DEPORTE_EDIT:'DeporteEdit',
     DEPORTE_DEL:'DeporteDel',
+ 
+    EQUIPO:'Equipo',
+    EQUIPO_LIST:'EquipoList',
+    EQUIPO_EDIT:'EquipoEdit',
+    EQUIPO_DEL:'EquipoDel',
     
     SEDE:'Sede',
     SEDE_LIST:'SedeList',

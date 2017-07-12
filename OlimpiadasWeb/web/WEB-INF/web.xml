@@ -184,6 +184,22 @@
         <servlet-name>DeporteDel</servlet-name>
         <servlet-class>Deporte.DeporteDel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EquipoServlet</servlet-name>
+        <servlet-class>Equipo.EquipoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EquipoList</servlet-name>
+        <servlet-class>Equipo.EquipoList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EquipoEdit</servlet-name>
+        <servlet-class>Equipo.EquipoEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EquipoDel</servlet-name>
+        <servlet-class>Equipo.EquipoDel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/Categoria</url-pattern>
@@ -303,6 +319,22 @@
     <servlet-mapping>
         <servlet-name>DeporteDel</servlet-name>
         <url-pattern>/DeporteDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoServlet</servlet-name>
+        <url-pattern>/Equipo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoList</servlet-name>
+        <url-pattern>/EquipoList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoEdit</servlet-name>
+        <url-pattern>/EquipoEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoDel</servlet-name>
+        <url-pattern>/EquipoDel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
