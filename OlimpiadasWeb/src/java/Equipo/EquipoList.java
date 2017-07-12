@@ -65,7 +65,7 @@ public class EquipoList extends HttpServlet {
             out.close();
         }
     }
-     private class EquipoDet extends Equipo {
+    private class EquipoDet extends Equipo {
         Delegacion delegacion;
         public EquipoDet(Equipo equipo) {
             super(equipo);
