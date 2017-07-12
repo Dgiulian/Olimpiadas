@@ -73,9 +73,8 @@ function guardarParametro(data){
         data: data,
         method:'POST',
         dataType:'json',
-        success:function(){
-            loadData();
-        }
+    }).done(function(){
+        loadData();
     });
 }
 function recuperarCampos(){

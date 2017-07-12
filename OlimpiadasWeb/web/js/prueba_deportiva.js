@@ -103,11 +103,10 @@ function guardarPrueba(data){
         url:URLS.PRUEBA_EDIT,
         data: data,
         method:'POST',
-        dataType:'json',
-        success:function(){
-            filtrarPrueba();
-        }
-    });   
+        dataType:'json'
+    }).done(function(){
+        filtrarPrueba();
+    });
 }
 function recuperarCampos(){
     var data = {};

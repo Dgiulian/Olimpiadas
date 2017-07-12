@@ -62,8 +62,7 @@ function agregarDelegacion(data){
             },
             cancel: {
                 label: "Cancelar",
-                callback: function () {
-                }
+                callback: function () {}
             }
         }
     });
@@ -73,10 +72,9 @@ function guardarDelegacion(data){
         url:URLS.DELEGACION_EDIT,
         data: data,
         method:'POST',
-        dataType:'json',
-        success:function(){
-            filtrarDelegacion();
-        }
+        dataType:'json'        
+    }).done(function(){
+        filtrarDelegacion();
     });
 }
 function recuperarCampos(){

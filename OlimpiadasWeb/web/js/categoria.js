@@ -88,10 +88,9 @@ function guardarCategoria(data){
         url:URLS.CATEGORIA_EDIT,
         data: data,
         method:'POST',
-        dataType:'json',
-        success:function(){
-            filtrarCategoria();
-        }
+        dataType:'json'        
+    }).done(function(){
+        filtrarCategoria();
     });   
 }
 function recuperarCampos(){

@@ -79,8 +79,7 @@ function loadDataEquipo(filter){
                     },
                     cancel: {
                         label: "Cancelar",
-                        callback: function () {
-                        }
+                        callback: function () {}
                     }
                 }
             });
@@ -91,9 +90,8 @@ function guardarEquipo(data){
         data: data,
         method:'POST',
         dataType:'json',
-        success: function(){
-            filtrarEquipo();
-        }
+    }).done(function(){
+        filtrarEquipo();
     });      
 }
 function recuperarCampos(){

@@ -80,10 +80,9 @@ function guardarDeporte(data){
         url:URLS.DEPORTE_EDIT,
         data: data,
         method:'POST',
-        dataType:'json',
-        success: function(){
-            filtrarDeporte();
-        }
+        dataType:'json'        
+    }).done(function(){
+        filtrarDeporte();
     });  
 }
 function recuperarCampos(){

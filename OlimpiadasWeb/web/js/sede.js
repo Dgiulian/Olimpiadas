@@ -77,10 +77,9 @@ function guardarSede(data){
         url:URLS.SEDE_EDIT,
         data: data,
         method:'POST',
-        dataType:'json',
-        success:function(){
-            filtrarSede();
-        }
+        dataType:'json'        
+    }).done(function(){
+        filtrarSede();
     });
 }
 function recuperarCampos(){
