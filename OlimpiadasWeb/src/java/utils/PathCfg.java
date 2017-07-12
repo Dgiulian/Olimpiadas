@@ -56,4 +56,10 @@ public class PathCfg {
     public static final String DEPORTE_EDIT = DEPORTE + "Edit";
     public static final String DEPORTE_DEL  = DEPORTE + "Del";
     public static final String DEPORTE_SEARCH  = DEPORTE + "Search";    
+    
+    public static final String PRUEBA      ="Prueba";
+    public static final String PRUEBA_LIST = PRUEBA + "List";
+    public static final String PRUEBA_EDIT = PRUEBA + "Edit";
+    public static final String PRUEBA_DEL  = PRUEBA + "Del";
+    public static final String PRUEBA_SEARCH  = PRUEBA + "Search";    
 }

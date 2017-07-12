@@ -5,12 +5,18 @@
  */
 package Prueba;
 
+import bd.Prueba_deportiva;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TPrueba_deportiva;
+import utils.BaseException;
+import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
@@ -44,7 +50,6 @@ public class PruebaEdit extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -70,7 +75,45 @@ public class PruebaEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");                       
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        Integer id = Parser.parseInt(request.getParameter("id"));
+        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
+        Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
+        String observaciones = request.getParameter("observaciones");
+        TPrueba_deportiva tprueba_deportiva = new TPrueba_deportiva();
+        Prueba_deportiva prueba_deportiva;
+        boolean nuevo = false;
+        JsonRespuesta jr = new JsonRespuesta();
+        try {
+            prueba_deportiva = tprueba_deportiva.getById(id);
+            if(prueba_deportiva==null){
+                prueba_deportiva = new Prueba_deportiva();
+                nuevo = true;
+            }
+            prueba_deportiva.setId_categoria(id_categoria);
+            prueba_deportiva.setObservaciones(observaciones);
+            prueba_deportiva.setId_deporte(id_deporte);            
+            boolean todoOk;
+            if(nuevo) {
+                id = tprueba_deportiva.alta(prueba_deportiva);
+                todoOk = id!=0; 
+            } else todoOk = tprueba_deportiva.actualizar(prueba_deportiva);
+            
+            
+            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
+            jr.setResult("OK");
+            jr.setRecord(prueba_deportiva);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } catch(BaseException ex){
+            jr.setResult(ex.getResult());
+            jr.setMessage(ex.getMessage());
+        }finally {            
+            out.close();
+        }
     }
 
     /**
