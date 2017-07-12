@@ -25,6 +25,11 @@ var URLS = {
     EQUIPO_LIST:'EquipoList',
     EQUIPO_EDIT:'EquipoEdit',
     EQUIPO_DEL:'EquipoDel',
+
+    PRUEBA:'Prueba',
+    PRUEBA_LIST:'PruebaList',
+    PRUEBA_EDIT:'PruebaEdit',
+    PRUEBA_DEL:'PruebaDel',
     
     SEDE:'Sede',
     SEDE_LIST:'SedeList',
