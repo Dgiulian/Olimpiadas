@@ -3,22 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Categoria;
+package Deporte;
 
-import Categoria.CategoriaList;
-import bd.Categoria;
 import bd.Deporte;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
 import transaccion.TDeporte;
 import utils.JsonRespuesta;
 
@@ -26,8 +22,8 @@ import utils.JsonRespuesta;
  *
  * @author Diego
  */
-public class CategoriaList extends HttpServlet {
-    HashMap<Integer, Deporte> mapDeportes;
+public class DeporteList extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,15 +40,14 @@ public class CategoriaList extends HttpServlet {
         String pagNro = request.getParameter("pagNro");       
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        mapDeportes = new TDeporte().getMap();
-        
+         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Categoria> lista = new TCategoria().getList();
-            List<CategoriaDet> listaDet = new ArrayList();            
+            List<Deporte> lista = new TDeporte().getList();
+            List<DeporteList.DeporteDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
-                for(Categoria c:lista) listaDet.add(new CategoriaDet(c));
+                for(Deporte c:lista) listaDet.add(new DeporteList.DeporteDet(c));
                 jr.setTotalRecordCount(listaDet.size());
             } else {
                 jr.setTotalRecordCount(0);
@@ -66,7 +61,6 @@ public class CategoriaList extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -105,11 +99,9 @@ public class CategoriaList extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private class CategoriaDet extends Categoria {
-        Deporte deporte;
-        public CategoriaDet(Categoria categoria) {
-            super(categoria);
-            deporte = mapDeportes.get(categoria.getId_deporte());            
+    private static class DeporteDet extends Deporte{
+        public DeporteDet(Deporte deporte) {
+            super(deporte );
         }
     }
 

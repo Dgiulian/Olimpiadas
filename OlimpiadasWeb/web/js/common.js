@@ -2,172 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var PathCfg = {
-    PAGE_TITLE : "ActiSoft",
-    LOGIN      : "Login",
-    LOGOUT     : "Logout",
-    FORBIDDEN  : "Forbidden",
-
-    ACTIVO                 : "Activo",
-    ACTIVO_LIST            : "ActivoList",
-    ACTIVO_EDIT            : "ActivoEdit",
-    ACTIVO_DEL             : "ActivoDel",
-    ACTIVO_SEARCH          : "ActivoSearch",
-    ACTIVO_CHECK           : "ActivoCheck",
-    ACTIVO_ETIQUETA        : "ActivoEtiqueta",
-    ACTIVO_CONTRATO_LIST   : "ActivoContratoList",
-    ACTIVO_CONTRATO_SEARCH : "ActivoContratoSearch",
-    ACTIVO_HISTORIA_LIST   : "ActivoHistoriaList",
-
-    CLIENTE         : "Cliente",
-    CLIENTE_LIST    : "ClienteList",
-    CLIENTE_EDIT    : "ClienteEdit",
-    CLIENTE_DEL     : "ClienteDel",
-    CLIENTE_SEARCH  : "ClienteSearch",
-
-    PROVEEDOR       : "Proveedor",
-    PROVEEDOR_LIST  : "ProveedorList",
-    PROVEEDOR_EDIT  : "ProveedorEdit",
-    PROVEEDOR_DEL   : "ProveedorDel",
-    PROVEEDOR_SEARCH: "ProveedorSearch",
-
-    POZO           : "Pozo",
-    POZO_LIST      : "PozoList",
-    POZO_EDIT      : "PozoEdit",
-    POZO_DEL       : "PozoDel",
-    POZO_SEARCH    : "PozoSearch",
-    
-    EQUIPO         : "Equipo",
-    EQUIPO_LIST    : "EquipoList",
-    EQUIPO_EDIT    : "EquipoEdit",
-    EQUIPO_DEL     : "EquipoDel",
-    EQUIPO_SEARCH  : "EquipoSearch",
-
-    REMITO          : "Remito",
-    REMITO_LIST     : "RemitoList",
-    REMITO_ALTA     : "RemitoAlta",
-    REMITO_EDIT     : "RemitoEdit",
-    REMITO_VIEW     : "RemitoView",
-    REMITO_DEL      : "RemitoDel",
-    REMITO_PRINT    : "RemitoPrint",
-    REMITO_DET_LIST : "RemitoDetList",
-    REMITO_UPLOAD   : "RemitoUpload",
-    REMITO_DETALLE  : "RemitoDetalle",
-    REMITO_DIARIO   : "RemitoDiario",
-    REMITO_DEV      : "Devolucion",
-
-    REMITO_CONTRATO_LIST : "RemitoContratoList",
-
-    LOCALIDAD        : "Localidad",
-    LOCALIDAD_LIST   : "LocalidadList",
-    LOCALIDAD_EDIT   : "LocalidadEdit",
-    LOCALIDAD_DEL    : "LocalidadDel",
-    CONTRATO         : "Contrato",
-    CONTRATO_LIST    : "ContratoList",
-    CONTRATO_EDIT    : "ContratoEdit",
-    CONTRATO_DEL     : "ContratoDel",
-    CONTRATO_SEARCH  : "ContratoSearch",
-
-    CONTRATO_DETALLE         : "ContratoDetalle",
-    CONTRATO_DETALLE_LIST    : "Contrato_detalleList",
-    CONTRATO_DETALLE_SEARCH  : "Contrato_detalleSearch",
-
-    RUBRO        : "Rubro",
-    RUBRO_LIST   : "RubroList",
-    RUBRO_EDIT   : "RubroEdit",
-    RUBRO_DEL    : "RubroDel",
-    RUBRO_SEARCH : "RubroSearch",
-
-    SUBRUBRO        : "Subrubro",
-    SUBRUBRO_LIST   : "SubrubroList",
-    SUBRUBRO_EDIT   : "SubrubroEdit",
-    SUBRUBRO_DEL    : "SubrubroDel",
-    SUBRUBRO_SEARCH : "SubrubroSearch",
-
-    CERTIFICADO        : "Certificado",
-    CERTIFICADO_LIST   : "CertificadoList",
-    CERTIFICADO_EDIT   : "CertificadoEdit",
-    CERTIFICADO_DEL    : "CertificadoDel",
-    CERTIFICADO_SEARCH : "CertificadoSearch",
-
-    COMPRA        : "Compra",
-    COMPRA_LIST   : "CompraList",
-    COMPRA_EDIT   : "CompraEdit",
-    COMPRA_DEL    : "CompraDel",
-    COMPRA_SEARCH : "CompraSearch",
-    SITE        : "Site",
-    SITE_LIST   : "SiteList",
-    SITE_EDIT   : "SiteEdit",
-    SITE_DEL    : "SiteDel",
-    SITE_SEARCH : "SiteSearch",
-
-    PRETICKET : "Preticket",
-    PRETICKET_LIST   : "PreticketList",
-    PRETICKET_CREATE   : "PreticketCreate",
-    PRETICKET_EDIT   : "PreticketEdit",
-    PRETICKET_DEL    : "PreticketDel",
-    PRETICKET_SEARCH : "PreticketSearch",
-    PRETICKET_PRINT  : "PreticketPrint",
-
-    USUARIO        : "Usuario",
-    USUARIO_LIST   : "UsuarioList",
-    USUARIO_EDIT   : "UsuarioEdit",
-    USUARIO_DEL    : "UsuarioDel",
-    USUARIO_SEARCH : "UsuarioSearch",
-
-    CORRECTIVO        : "Correctivo",
-    CORRECTIVO_LIST   : "CorrectivoList",
-    CORRECTIVO_EDIT   : "CorrectivoEdit",
-    CORRECTIVO_DEL    : "CorrectivoDel",
-    CORRECTIVO_SEARCH : "CorrectivoSearch",
-
-    KIT        : "Kit",
-    KIT_LIST   : "KitList",
-    KIT_EDIT   : "KitEdit",
-    KIT_DEL    : "KitDel",
-    KIT_SEARCH : "KitSearch",
-
-    KIT_HISTORIA        : "KitHistoria",
-    KIT_HISTORIA_LIST   : "Kit_historiaList",
-    KIT_CONTRATO_LIST   : "KitContratoList",
-    KIT_CONTRATO_SEARCH : "KitContratoSearch",
-
-    AGENDA        : "Agenda",
-    AGENDA_LIST   : "AgendaList",
-    AGENDA_EDIT   : "AgendaEdit",
-    AGENDA_DEL    : "AgendaDel",
-    AGENDA_SEARCH : "AgendaSearch",
-
-    TRANSPORTISTA        : "Transportista",
-    TRANSPORTISTA_LIST   : "TransportistaList",
-    TRANSPORTISTA_EDIT   : "TransportistaEdit",
-    TRANSPORTISTA_DEL    : "TransportistaDel",
-    TRANSPORTISTA_SEARCH : "TransportistaSearch",
-
-    VEHICULO        : "Vehiculo",
-    VEHICULO_LIST   : "VehiculoList",
-    VEHICULO_EDIT   : "VehiculoEdit",
-    VEHICULO_DEL    : "VehiculoDel",
-    VEHICULO_SEARCH : "VehiculoSearch",
-
-    PARAMETRO      : "Parametro",
-    PARAMETRO_LIST : "ParametroList",
-    PARAMETRO_EDIT : "ParametroEdit",
-    PARAMETRO_DEL  : "ParametroDel",
-
-    AUDITORIA      : "Auditoria",
-    AUDITORIA_LIST : "AuditoriaList",
-
-    GRAPH_PATH : "Graph",
-    GRAPH_LIST : "GraphList",
-
-    OPTIONS  : "Options",
-    DOWNLOAD : "Download",
-    JSONOK   : "JsonOk",
-    EXCEL    : "Excel",
-    MAIL     : "Mail",
-
-};
  function siguienteHora(fecha,hora){
     if ( fecha === "" ) fecha = moment().format('DD/MM/YYYY');
     if ( hora === "" ) hora = moment().subtract(1,'hour').format('HH:mm:ss');  // Tomamos una hora antes
@@ -352,8 +186,7 @@ function selTodos(filtro,checked){
 }
 
 $(document).ready(function(){
-   $('.uppercase').keyup(function(e) {
-       console.log(e);
+   $('.uppercase').keyup(function(e) {       
         if(e.keyCode>=65 && e.keyCode <= 90) 
             this.value = this.value.toUpperCase();
         return true;
@@ -389,10 +222,14 @@ $(document).ready(function(){
        $('#data').slideToggle();
     });
     
-   $('#lnkVRCertificado').click(lnkVRCertificado);
-   $('#lnkVRHistorial').click(lnkVRHistorial);
-   $('#lnkVRSites').click(lnkVRSites);
-   
+    if(window.Handlebars) {
+        window.Handlebars.registerHelper('select', function( value, options ){
+            console.log(value,options);
+            var $el = $('<select />').html( options.fn(this) );
+            $el.find('[value="' + value + '"]').attr({'selected':'selected'});
+            return $el.html();
+        });
+    }
 });
 
  function validarCampo (campo,mensajeError,check){     
@@ -418,96 +255,6 @@ function validarCampoFecha(e){
     return !validarFecha(e.val());
 }
 function validarNoCero(e){return parseInt(e.val())===0}    
-function lnkVRCertificado(){
-       bootbox.prompt("Ingrese el c&oacute;digo de activo",function(result){
-          if (result !== null) {
-                $.ajax({
-                   url: 'ActivoSearch',
-                   data: {codigo:result},
-                   method:"POST",
-                   dataType: "json",
-                   beforeSend:function(){},
-                   success: function(result) {
-                       if(result.Result === "OK" ) {
-                           if(result.TotalRecordCount === 0 ){
-                               bootbox.alert("No se encontr&oacute; el activo");
-                               return false;
-                           } else if(result.TotalRecordCount > 1 ){
-                               bootbox.alert("Existe m&aacute;s de un activo con ese c&oacute;digo");
-                               return false;
-                           }
-                           else {
-                               window.location = "CertificadoEdit?id_activo=" + result.Record.id;
-                           }
-                           console.log(result);
-                       }
-                   }
-               });
-          } else {}
-           
-       });
-   }
-function lnkVRHistorial(){
-       bootbox.prompt("Ingrese el nombre del cliente",function(result){
-          if (result !== null) {
-                $.ajax({
-                   url: 'ClienteSearch',
-                   data: {nombre:result},
-                   method:"POST",
-                   dataType: "json",
-                   beforeSend:function(){},
-                   success: function(result) {
-                       if(result.Result === "OK" ) {
-                           if(result.TotalRecordCount === 0 ){
-                               bootbox.alert("No se encontr&oacute; el cliente");
-                               return false;
-                           } else if(result.TotalRecordCount > 1 ){
-                               bootbox.alert("Existe m&aacute;s de un cliente con ese nombre");
-                               return false;
-                           }
-                           else {
-                               $('#mdlClienteHistoria').modal('show');
-//                               window.location = "CertificadoEdit?id_activo=" + result.Record.id;
-                           }
-                           console.log(result);
-                       }
-                   }
-               });
-          } else {}
-           
-       });
-   }        
-
-   function lnkVRSites(){
-       bootbox.prompt("Ingrese el nombre del cliente",function(result){
-          if (result !== null) {
-                $.ajax({
-                   url: 'ClienteSearch',
-                   data: {nombre:result},
-                   method:"POST",
-                   dataType: "json",
-                   beforeSend:function(){},
-                   success: function(result) {
-                       if(result.Result === "OK" ) {
-                           if(result.TotalRecordCount === 0 ){
-                               bootbox.alert("No se encontr&oacute; el cliente");
-                               return false;
-                           } else if(result.TotalRecordCount > 1 ){
-                               bootbox.alert("Existe m&aacute;s de un cliente con ese nombre");
-                               return false;
-                           }
-                           else {
-                               window.location = "Site?id_cliente=" + result.Record.id;
-                           }
-                           console.log(result);
-                       } else bootbox.alert(result.Message);
-                   }
-               });
-          } else {}
-           
-       });
-   }        
-//$('#nav-bar').width('50px'); $('$('.side - bar').width('50px');$('#page - wrapper').css('margin - left','50px')
 
 function escapeHTML(mystring){
     return mystring.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Categoria;
+package Deporte;
 
-import bd.Categoria;
+import bd.Deporte;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
+import transaccion.TDeporte;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -22,7 +22,7 @@ import utils.Parser;
  *
  * @author Diego
  */
-public class CategoriaDel extends HttpServlet {
+public class DeporteEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,17 +41,16 @@ public class CategoriaDel extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoriaDel</title>");            
+            out.println("<title>Servlet DeporteEdit</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CategoriaDel at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeporteEdit at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    
-    /**
+   /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -78,22 +77,41 @@ public class CategoriaDel extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");                       
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        Integer id = Parser.parseInt(request.getParameter("id"));
+        Integer tipo = Parser.parseInt(request.getParameter("tipo"));
+        String nombre = request.getParameter("nombre");
+        Integer cantidad =Parser.parseInt( request.getParameter("cantidad_jugadores"));
+        TDeporte tdeporte = new TDeporte();
+        Deporte deporte;
+        boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
-        try {           
-           Integer id = Parser.parseInt(request.getParameter("id"));
-           Categoria parametro = new TCategoria().getById(id);            
-           if (parametro==null) throw new BaseException("ERROR","No existe el registro");
-           
-           boolean baja = new TCategoria().baja(parametro);
-           if ( baja){
-               jr.setResult("OK");
-           } else throw new BaseException("ERROR","Ocurrio un error al eliminar el registro");                     
-        }  catch (BaseException ex) {
+        try {
+            deporte = tdeporte.getById(id);
+            if(deporte==null){
+                deporte = new Deporte();
+                nuevo = true;
+            }
+            deporte.setNombre(nombre);
+            deporte.setCantidad_jugadores(cantidad);
+            deporte.setTipo(tipo);            
+            boolean todoOk;
+            if(nuevo) {
+                id = tdeporte.alta(deporte);
+                todoOk = id!=0; 
+            } else todoOk = tdeporte.actualizar(deporte);
+            
+            
+            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
+            jr.setResult("OK");
+            jr.setRecord(deporte);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } catch(BaseException ex){
             jr.setResult(ex.getResult());
-            jr.setMessage(ex.getMessage());            
-        }
-        finally {
-            out.print(new Gson().toJson(jr));
+            jr.setMessage(ex.getMessage());
+        }finally {            
             out.close();
         }
     }

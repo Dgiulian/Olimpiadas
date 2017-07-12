@@ -44,4 +44,16 @@ public class PathCfg {
     public static final String DELEGACION_EDIT = DELEGACION + "Edit";
     public static final String DELEGACION_DEL  = DELEGACION + "Del";
     public static final String DELEGACION_SEARCH  = DELEGACION + "Search";
+    
+    public static final String CATEGORIA      ="Categoria";
+    public static final String CATEGORIA_LIST = CATEGORIA + "List";
+    public static final String CATEGORIA_EDIT = CATEGORIA + "Edit";
+    public static final String CATEGORIA_DEL  = CATEGORIA + "Del";
+    public static final String CATEGORIA_SEARCH  = CATEGORIA + "Search";    
+    
+    public static final String DEPORTE      ="Deporte";
+    public static final String DEPORTE_LIST = DEPORTE + "List";
+    public static final String DEPORTE_EDIT = DEPORTE + "Edit";
+    public static final String DEPORTE_DEL  = DEPORTE + "Del";
+    public static final String DEPORTE_SEARCH  = DEPORTE + "Search";    
 }
