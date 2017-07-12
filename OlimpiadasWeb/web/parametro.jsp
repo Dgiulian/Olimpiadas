@@ -61,26 +61,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- DataTables JavaScript -->
-<!--    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>-->
-    <script src="js/bootbox.min.js"></script>
-    <script src="vendor/handlebars/handlebars-v4.0.10.js"></script>    
-    
-    <!-- Custom Theme JavaScript -->
-    <script src="js/sb-admin-2.js"></script>
-    <script src="js/moment-with-locales.min.js"></script>
-    <script src="js/common.js"></script>
-    
+    <%@include file="tpl_scripts.jsp" %>
    
     <script id="parametro_list" type="text/x-handlebars-template">
         {{#each records}}
@@ -95,6 +76,10 @@
               <span href="" data-index="{{id}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
               </td>
           </tr>
+          {{else}}
+            <tr>
+                <td colspan="5"><center><strong>No se encontraron resultados</strong></center></td>
+            </tr>
         {{/each}}    
     </script>   
      <script id="parametro_edit" type="text/x-handlebars-template">
@@ -136,99 +121,9 @@
         </div>                     
     </script>    
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        loadData({});
-        $('#btnNuevo').click(function(){
-            agregarParametro({id:0,numero:'',codigo:'',nombre:'',valor:'',activo:1});
-        });
+            
+<script src="js/parametro.js" >
 
-    });
-    function loadData(data){
-        var $tabla = $('#tblParametro');
-        $.ajax({
-            url: PathCfg.PARAMETRO_LIST,
-            data: data,
-            method:"POST",
-            dataType: "json",
-            beforeSend:function(){
-                 var cant_cols = $tabla.find('thead th').length;
-                 $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
-            },
-            success: function(result) {
-                if(result.Result === "OK") {
-                    $tabla.find('tbody').html(createTable(result.Records));
-                    $('.btn-del').click(borrarParametro);
-                    $('.btn-edit').click(editarParametro);
-                }
-            }
-        });
-    }
-    function borrarParametro(){
-        var id = $(this).data('index');
-        var $tr = $(this).parent().parent();
-        deleteData(PathCfg.PARAMETRO_DEL,{id:id},function(result) {
-                if(result.Result === "OK") {
-                    $tr.remove();
-                } else if (result.Message) bootbox.alert(result.Message);
-        });
-    }
-    function createTable(data){   
-        var template = Handlebars.compile($("#parametro_list").html());
-        return template({records:data});       
-    }
-    function editarParametro(){
-        var numero = $(this).data('numero');
-        var codigo = $(this).data('codigo');
-        var nombre = $(this).data('nombre');
-        var valor  = $(this).data('valor');
-        var index  = $(this).data('index');
-        var activo = $(this).data('activo');
-        agregarParametro({numero:numero,codigo:codigo,nombre:nombre,id:index,valor:valor,activo:activo});
-    }
-    function agregarParametro(data){
-        data.checked = (data.activo)?"checked":"";
-        var template = Handlebars.compile($('#parametro_edit').html());
-        bootbox.dialog({
-            title: "Configuraci&oacute;n de par&aacute;metro",
-            message: template(data), 
-            buttons: {
-                success: {
-                    label: "Guardar",
-                    className: "btn-success",
-                    callback: function () {
-                        var data = recuperarCampos();
-                        $.ajax({
-                            url:PathCfg.PARAMETRO_EDIT,
-                            data: data,
-                            method:'POST',
-                            dataType:'json',
-                            success:function(){
-                                loadData();
-                            }
-                        });
-                        //bootbox.alert("Nombre " + nombre + ". Email: <b>" + email + "</b>");
-                    }
-                },
-                cancel: {
-                    label: "Cancelar",
-                    callback: function () {
-                    }
-                }
-            }
-        });
-    }
-    function recuperarCampos(){
-        var data = {};
-        data.id     = $('#id').val();
-        data.numero = $('#numero').val();
-        data.codigo = $('#codigo').val();
-        data.nombre = $('#nombre').val();
-        data.valor  = $('#valor').val();
-        data.activo = $('#activo').prop('checked')?'1':'';
-        data.activo = 1;
-        return data;
-    }
 </script>
 <%@include file="tpl_footer.jsp"%>
 </body>
