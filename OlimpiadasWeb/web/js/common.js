@@ -258,3 +258,8 @@ function validarNoCero(e){return parseInt(e.val())===0}
 function escapeHTML(mystring){
     return mystring.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 }
+
+function setLoader($tabla){
+    var cant_cols = $tabla.find('thead th').length;
+    $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
+}

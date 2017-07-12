@@ -25,7 +25,12 @@ var URLS = {
     EQUIPO_LIST:'EquipoList',
     EQUIPO_EDIT:'EquipoEdit',
     EQUIPO_DEL:'EquipoDel',
-
+    
+    PARAMETRO:'Parametro',
+    PARAMETRO_LIST:'ParametroList',
+    PARAMETRO_EDIT:'ParametroEdit',
+    PARAMETRO_DEL:'ParametroDel',
+    
     PRUEBA:'Prueba',
     PRUEBA_LIST:'PruebaList',
     PRUEBA_EDIT:'PruebaEdit',

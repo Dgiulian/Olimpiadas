@@ -11,15 +11,12 @@ function filtrarDelegacion(){
 }
 function loadDataDelegacion(filter){
     var $tabla = $('#tblDelegacion');
+    setLoader($tabla);
     $.ajax({
            url: URLS.DELEGACION_LIST,
            data: filter,
            method:"POST",
-           dataType: "json",
-           beforeSend:function(){
-                var cant_cols = $tabla.find('thead th').length;
-                $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
-           }
+           dataType: "json"
        }).done( function(result) {
             if(result.Result === "OK") {
                 delegaciones = result.Records;

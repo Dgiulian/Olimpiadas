@@ -18,15 +18,12 @@ function filtrarDeporte(){
 }
 function loadDataDeporte(filter){
     var $tabla = $('#tblDeporte');
+    setLoader($tabla);    
     $.ajax({
            url: URLS.DEPORTE_LIST,
            data: filter,
            method:"POST",
-           dataType: "json",
-           beforeSend:function(){
-                var cant_cols = $tabla.find('thead th').length;
-                $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
-           },
+           dataType: "json"
        }).done(function(result) {
             if(result.Result === "OK") {
                 deportes = result.Records;

@@ -18,7 +18,7 @@ function loadDeportes(data){
         data: data,
         method:"POST",
         dataType: "json",
-     }).done(function(data) {
+    }).done(function(data) {
         if(data.Result === "OK") {
             deportes = data.Records;
         }
@@ -26,15 +26,12 @@ function loadDeportes(data){
 }
 function loadDataCategoria(filter){
     var $tabla = $('#tblCategoria');
+    setLoader($tabla);
     $.ajax({
         url: URLS.CATEGORIA_LIST,
         data: filter,
         method:"POST",
-        dataType: "json",
-        beforeSend:function(){
-             var cant_cols = $tabla.find('thead th').length;
-             $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
-        },
+        dataType: "json"
     }).done(function(result) {
         if(result.Result === "OK") {
             categorias = result.Records;
