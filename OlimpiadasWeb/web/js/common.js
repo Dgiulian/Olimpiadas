@@ -224,7 +224,6 @@ $(document).ready(function(){
     
     if(window.Handlebars) {
         window.Handlebars.registerHelper('select', function( value, options ){
-            console.log(value,options);
             var $el = $('<select />').html( options.fn(this) );
             $el.find('[value="' + value + '"]').attr({'selected':'selected'});
             return $el.html();
