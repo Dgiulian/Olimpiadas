@@ -25,6 +25,11 @@ var URLS = {
     EQUIPO_LIST:'EquipoList',
     EQUIPO_EDIT:'EquipoEdit',
     EQUIPO_DEL:'EquipoDel',
+
+    JUGADOR:'Jugador',
+    JUGADOR_LIST:'JugadorList',
+    JUGADOR_EDIT:'JugadorEdit',
+    JUGADOR_DEL:'JugadorDel',
     
     PARAMETRO:'Parametro',
     PARAMETRO_LIST:'ParametroList',

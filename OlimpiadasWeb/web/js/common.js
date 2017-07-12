@@ -24,6 +24,7 @@
              return str;
          }
 function convertirFecha(fecha) { 
+    if(!fecha) return "";
     return moment(fecha,'YYYY-MM-DD').format("DD/MM/YYYY");
 }
 function convertirFechayHora(fecha){
@@ -72,6 +73,7 @@ function movePage(side){
     loadData(data);
 }
 function exportar(tipo,formato){
+    var data = {};
     data.type=tipo;
     data.format = formato;
     var location = "Excel?";
@@ -228,6 +230,7 @@ $(document).ready(function(){
             $el.find('[value="' + value + '"]').attr({'selected':'selected'});
             return $el.html();
         });
+        window.Handlebars.registerHelper('convertirFecha', convertirFecha);
     }
 });
 
@@ -262,4 +265,21 @@ function escapeHTML(mystring){
 function setLoader($tabla){
     var cant_cols = $tabla.find('thead th').length;
     $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
+}
+
+function initDialog(){
+//    if($().mask) {       
+//        $('.date-picker').mask('99/99/9999');
+//        $('.hora').mask('99:99:99');
+//    }
+    if($().datepicker) {
+        $('.date-picker').datepicker({
+             language: 'es',
+             locale:'es-AR',
+             format:'dd/mm/yyyy',
+             dateFormat:'dd/mm/yyyy',
+             autoclose: true
+         });
+     }
+    
 }
