@@ -27,15 +27,12 @@ function loadDataDeporte(data){
                 var cant_cols = $tabla.find('thead th').length;
                 $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
            },
-           success: function(data) {
-               if(data.Result === "OK") {
-                   deportes = data.Records;
-                   $tabla.find('tbody').html(createTable(deportes));
-                   $('.btn-del').click(borrarDeporte);
-                   $('.btn-edit').click(editarDeporte);
-               }
-           }
-       });
+       }).done(function(data) {
+            if(data.Result === "OK") {
+                deportes = data.Records;
+                createTable($tabla,deportes)
+            }
+        });
     }
     function borrarDeporte(){
         var index = $(this).data('index');
@@ -46,9 +43,11 @@ function loadDataDeporte(data){
                 } else if (result.Message) bootbox.alert(result.Message);
         });
     }
-    function createTable(data){
+    function createTable($tabla,data){
         var template = Handlebars.compile($("#deporte_list").html());
-        return template({records:data});    
+        $tabla.find('tbody').html(template({records:data}));
+        $('.btn-del').click(borrarDeporte);
+        $('.btn-edit').click(editarDeporte);
     }
     function editarDeporte(){
         var data = {};
@@ -60,32 +59,35 @@ function loadDataDeporte(data){
     function agregarDeporte(data){
         var template = Handlebars.compile($('#deporte_edit').html());
         bootbox.dialog({
-                title: "Configuraci&oacute;n de delegaci&oacute;n",
-                message: template(data), 
-                buttons: {
-                    success: {
-                        label: "Guardar",
-                        className: "btn-success",
-                        callback: function () {
-                            var data = recuperarCampos();
-                            $.ajax({
-                                url:URLS.DEPORTE_EDIT,
-                                data: data,
-                                method:'POST',
-                                dataType:'json',
-                                success:function(){
-                                    filtrarDeporte();
-                                }
-                            });                            
-                        }
-                    },
-                    cancel: {
-                        label: "Cancelar",
-                        callback: function () {
-                        }
+            title: "Configuraci&oacute;n de delegaci&oacute;n",
+            message: template(data), 
+            buttons: {
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                    callback: function () {
+                        var campos = recuperarCampos();
+                        guardarDeporte(campos);
+                    }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    callback: function () {
                     }
                 }
-            });
+            }
+        });
+    }
+    function guardarDeporte(data){
+        $.ajax({
+            url:URLS.DEPORTE_EDIT,
+            data: data,
+            method:'POST',
+            dataType:'json',
+            success: function(){
+                filtrarDeporte();
+            }
+        });  
     }
     function recuperarCampos(){
         var data = {};

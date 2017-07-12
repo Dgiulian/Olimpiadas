@@ -17,7 +17,6 @@ function filtrarSede(){
 }
 function loadDataSede(data){
     var $tabla = $('#tblSede');
-    //$tabla.DataTable().destroy();
     $.ajax({
            url: URLS.SEDE_LIST,
            data: data,
@@ -26,28 +25,13 @@ function loadDataSede(data){
            beforeSend:function(){
                 var cant_cols = $tabla.find('thead th').length;
                 $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
-           },
-           success: function(data) {
-               if(data.Result === "OK") {
-                   sedes = data.Records;
-                   $tabla.find('tbody').html(createTable(data.Records));
-                    $('.btn-del').click(borrarSede);
-                    $('.btn-edit').click(editarSede);
-//                    $tabla.DataTable({
-//                            responsive: true,
-//                            retrieve: true,
-//                            paging: false,
-//                            ordering: true,
-//                            searching: false,
-//                            lengthChange:false,
-//                            bInfo: false,
-//                            language: {
-//                                url:'vendor/datatables-plugins/i18n/Spanish.json',
-//                            }
-//                    });
-               }
            }
-       });
+        }).done(function(data) {
+            if(data.Result === "OK") {
+                 sedes = data.Records;
+                 createTable($tabla,data.Records)
+            }
+        });
     }
     function borrarSede(){
         var index = $(this).data('index');
@@ -58,9 +42,11 @@ function loadDataSede(data){
                 } else if (result.Message) bootbox.alert(result.Message);
         });
     }
-    function createTable(data){
+    function createTable($tabla,data){
         var template = Handlebars.compile($("#sede_list").html());
-        return template({records:data});    
+        $tabla.find('tbody').html(template({records:data}));
+        $('.btn-del').click(borrarSede);
+        $('.btn-edit').click(editarSede);
     }
     function editarSede(){
         var data = {};
@@ -68,36 +54,37 @@ function loadDataSede(data){
         data = sedes[id];
         agregarSede(data);
     }
-    
     function agregarSede(data){
         var template = Handlebars.compile($('#sede_edit').html());
         bootbox.dialog({
-                title: "Configuraci&oacute;n de sede",
-                message: template(data), 
-                buttons: {
-                    success: {
-                        label: "Guardar",
-                        className: "btn-success",
-                        callback: function () {
-                            var data = recuperarCampos();
-                            $.ajax({
-                                url:URLS.SEDE_EDIT,
-                                data: data,
-                                method:'POST',
-                                dataType:'json',
-                                success:function(){
-                                    filtrarSede();
-                                }
-                            });                            
-                        }
-                    },
-                    cancel: {
-                        label: "Cancelar",
-                        callback: function () {
-                        }
+            title: "Configuraci&oacute;n de sede",
+            message: template(data), 
+            buttons: {
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                    callback: function(){
+                        var campos = recuperarCampos();
+                        guardarSede(campos);
                     }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    callback: function () {}
                 }
-            });
+            }
+        });
+    }
+    function guardarSede(data){
+        $.ajax({
+            url:URLS.SEDE_EDIT,
+            data: data,
+            method:'POST',
+            dataType:'json',
+            success:function(){
+                filtrarSede();
+            }
+        });
     }
     function recuperarCampos(){
         var data = {};

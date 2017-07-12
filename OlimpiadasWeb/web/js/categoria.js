@@ -17,13 +17,12 @@ function loadDeportes(data){
         url: URLS.DEPORTE_LIST,
         data: data,
         method:"POST",
-        dataType: "json",           
-        success: function(data) {
-            if(data.Result === "OK") {
-                deportes = data.Records;
-            }
+        dataType: "json",
+     }).done(function(data) {
+        if(data.Result === "OK") {
+            deportes = data.Records;
         }
-     });
+    });
 }
 function loadDataCategoria(data){
     var $tabla = $('#tblCategoria');
@@ -36,15 +35,12 @@ function loadDataCategoria(data){
                 var cant_cols = $tabla.find('thead th').length;
                 $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
            },
-           success: function(data) {
-               if(data.Result === "OK") {
-                   categorias = data.Records;
-                   $tabla.find('tbody').html(createTable(categorias));
-                    $('.btn-del').click(borrarCategoria);
-                    $('.btn-edit').click(editarCategoria);
-               }
-           }
-       });
+       }).done(function(data) {
+            if(data.Result === "OK") {
+                categorias = data.Records;
+                createTable($tabla,categorias)                   
+            }
+        });
     }
     function borrarCategoria(){
         var index = $(this).data('index');
@@ -55,9 +51,11 @@ function loadDataCategoria(data){
             } else if (result.Message) bootbox.alert(result.Message);
         });
     }
-    function createTable(data){
+    function createTable($tabla,data){
         var template = Handlebars.compile($("#categoria_list").html());
-        return template({records:data});    
+        $tabla.find('tbody').html(template({records:data}));
+        $('.btn-del').click(borrarCategoria);
+        $('.btn-edit').click(editarCategoria);
     }
     function editarCategoria(){
         var data = {};
@@ -70,32 +68,34 @@ function loadDataCategoria(data){
         var template = Handlebars.compile($('#categoria_edit').html());
         data.deportes = deportes;
         bootbox.dialog({
-                title: "Configuraci&oacute;n de delegaci&oacute;n",
-                message: template(data), 
-                buttons: {
-                    success: {
-                        label: "Guardar",
-                        className: "btn-success",
-                        callback: function () {
-                            var data = recuperarCampos();
-                            $.ajax({
-                                url:URLS.CATEGORIA_EDIT,
-                                data: data,
-                                method:'POST',
-                                dataType:'json',
-                                success:function(){
-                                    filtrarCategoria();
-                                }
-                            });                            
-                        }
-                    },
-                    cancel: {
-                        label: "Cancelar",
-                        callback: function () {
-                        }
+            title: "Configuraci&oacute;n de delegaci&oacute;n",
+            message: template(data), 
+            buttons: {
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                    callback: function () {
+                        var campos = recuperarCampos();
+                        guardarCategoria(campos);
                     }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    callback: function () {}
                 }
-            });
+            }
+        });
+    }
+    function guardarCategoria(data){
+        $.ajax({
+            url:URLS.CATEGORIA_EDIT,
+            data: data,
+            method:'POST',
+            dataType:'json',
+            success:function(){
+                filtrarCategoria();
+            }
+        });   
     }
     function recuperarCampos(){
         var data = {};
