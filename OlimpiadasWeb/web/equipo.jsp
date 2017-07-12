@@ -68,7 +68,7 @@
             <td class="">{{id}}</td>
             <td class="">{{nombre}}</td>
             <td class="">{{delegacion.nombre}}</td>
-            <td class="">{{detalle}}</td>
+            <td class="">{{observaciones}}</td>
             <td class="">
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
@@ -104,9 +104,9 @@
                       
                    </div>
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="detalle">Detalle:</label>
+                      <label class="col-md-4 control-label" for="observaciones">Detalle:</label>
                       <div class="col-md-8">                      
-                      <textarea id="detalle" name="detalle" type="text" class="form-control input-md" >{{detalle}}</textarea>
+                      <textarea id="observaciones" name="observaciones" type="text" class="form-control input-md" >{{detalle}}</textarea>
                       </div>    
                    </div>                  
                 </form>

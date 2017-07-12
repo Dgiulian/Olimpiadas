@@ -14,44 +14,12 @@
     </filter>
     <filter-mapping>
         <filter-name>DeleteFilter</filter-name>
-        <url-pattern>/ActivoDel</url-pattern>
-        <url-pattern>/ClienteDel</url-pattern>
-        <url-pattern>/RemitoDel</url-pattern>
-        <url-pattern>/ContratoDel</url-pattern>
-        <url-pattern>/RubroDel</url-pattern>
-        <url-pattern>/SububroDel</url-pattern>
-        <url-pattern>/CertificadoDel</url-pattern>
-        <url-pattern>/CompraDel</url-pattern>
-        <url-pattern>/SiteDel</url-pattern>
-        <url-pattern>/PreticketDel</url-pattern>
-        <url-pattern>/ProveedorDel</url-pattern>
-        <url-pattern>/UsuarioDel</url-pattern>
-        <url-pattern>/CorrectivoDel</url-pattern>
-        <url-pattern>/KitDel</url-pattern>
-        <url-pattern>/TransportistaDel</url-pattern>
-        <url-pattern>/PozoDel</url-pattern>
-        <url-pattern>/EquipoDel</url-pattern>
+        <url-pattern>/EquipoDel_</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthorizationEdit</filter-name>
-        <url-pattern>/ActivoEdit</url-pattern>
-        <url-pattern>/ClienteEdit</url-pattern>
-        <url-pattern>/RemitoAlta</url-pattern>
-        <url-pattern>/ContratoEdit</url-pattern>
-        <url-pattern>/RubroEdit</url-pattern>
-        <url-pattern>/SububroEdit</url-pattern>
-        <url-pattern>/CertificadoEdit</url-pattern>
-        <url-pattern>/CompraEdit</url-pattern>
-        <url-pattern>/SiteEdit</url-pattern>
-        <url-pattern>/PreticketCreate</url-pattern>
-        <url-pattern>/ProveedorEdit</url-pattern>
-        <url-pattern>/UsuarioEdit</url-pattern>
-        <url-pattern>/CorrectivoEdit</url-pattern>
-        <url-pattern>/KitEdit</url-pattern>
-        <url-pattern>/TransportistaEdit</url-pattern>
-        <url-pattern>/PozoEdit</url-pattern>
-        <url-pattern>/EquipoEdit</url-pattern>
+        <url-pattern>/EquipoEdit_</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>

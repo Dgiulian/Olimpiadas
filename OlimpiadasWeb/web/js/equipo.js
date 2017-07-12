@@ -27,22 +27,18 @@ function loadDelegaciones(data){
 }
 function loadDataEquipo(filter){
     var $tabla = $('#tblEquipo');
+    setLoader($tabla);
     $.ajax({
            url: URLS.EQUIPO_LIST,
            data: filter,
            method:"POST",
            dataType: "json",
-           beforeSend:function(){
-                var cant_cols = $tabla.find('thead th').length;
-                $tabla.find('tbody').html("<tr><td colspan='" + cant_cols + "'><center><img src='images/ajax-loader.gif'/></center></td></tr>");
-           },
-           success: function(result) {
-               if(result.Result === "OK") {
-                   equipos = result.Records;
-                   createTable($tabla,equipos)
-               }
-           }
-       });
+       }).done(function(result) {
+            if(result.Result === "OK") {
+                equipos = result.Records;
+                createTable($tabla,equipos)
+            }
+        });
     }
     function borrarEquipo(){
         var index = $(this).data('index');
@@ -53,7 +49,7 @@ function loadDataEquipo(filter){
             } else if (result.Message) bootbox.alert(result.Message);
         });
     }
-    function createTable(data){
+    function createTable($tabla,data){
         var template = Handlebars.compile($("#equipo_list").html());        
         $tabla.find('tbody').html(template({records:data}));
         $('.btn-del').click(borrarEquipo);
@@ -77,16 +73,8 @@ function loadDataEquipo(filter){
                         label: "Guardar",
                         className: "btn-success",
                         callback: function () {
-                            var data = recuperarCampos();
-                            $.ajax({
-                                url:URLS.EQUIPO_EDIT,
-                                data: data,
-                                method:'POST',
-                                dataType:'json',
-                                success:function(){
-                                    filtrarEquipo();
-                                }
-                            });                            
+                            var campos = recuperarCampos();
+                            guardarEquipo(campos);
                         }
                     },
                     cancel: {
@@ -97,11 +85,22 @@ function loadDataEquipo(filter){
                 }
             });
     }
-    function recuperarCampos(){
-        var data = {};
-        data.id = $('#id').val();
-        data.id_delegacion = $('#id_delegacion').val();
-        data.nombre = $('#nombre').val();
-        data.detalle  = $('#detalle').val();
-        return data;   
-    }
+function guardarEquipo(data){
+    $.ajax({
+        url:URLS.EQUIPO_EDIT,
+        data: data,
+        method:'POST',
+        dataType:'json',
+        success: function(){
+            filtrarEquipo();
+        }
+    });      
+}
+function recuperarCampos(){
+    var data = {};
+    data.id = $('#id').val();
+    data.id_delegacion = $('#id_delegacion').val();
+    data.nombre = $('#nombre').val();
+    data.observaciones  = $('#observaciones').val();
+    return data;   
+}
