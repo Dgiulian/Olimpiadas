@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Categoria;
+package EquipoDetalle;
 
-import bd.Categoria;
-import com.google.gson.Gson;
+import bd.Equipo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
+import transaccion.TEquipo;
 import utils.BaseException;
-import utils.JsonRespuesta;
 import utils.Parser;
 
 /**
  *
  * @author Diego
  */
-public class CategoriaEdit extends HttpServlet {
+public class EquipoDetalleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +33,19 @@ public class CategoriaEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
+        try{
+            Equipo equipo = new TEquipo().getById(id_equipo);
+            if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
+            request.setAttribute("equipo", equipo);
+            request.getRequestDispatcher("equipo_detalle.jsp").forward(request, response);
+        } catch(BaseException ex) {
+            request.setAttribute("titulo", ex.getResult());
+            request.setAttribute("mensaje", ex.getMessage());
+        }
     }
 
-    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -64,45 +71,7 @@ public class CategoriaEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");                       
-        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        Integer id = Parser.parseInt(request.getParameter("id"));
-        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
-        String nombre = request.getParameter("nombre");
-        String detalle = request.getParameter("detalle");
-        TCategoria tcategoria = new TCategoria();
-        Categoria categoria;
-        boolean nuevo = false;
-        JsonRespuesta jr = new JsonRespuesta();
-        try {
-            categoria = tcategoria.getById(id);
-            if(categoria==null){
-                categoria = new Categoria();
-                nuevo = true;
-            }
-            categoria.setNombre(nombre);
-            categoria.setDetalle(detalle);
-            categoria.setId_deporte(id_deporte);            
-            boolean todoOk;
-            if(nuevo) {
-                id = tcategoria.alta(categoria);
-                todoOk = id!=0; 
-            } else todoOk = tcategoria.actualizar(categoria);
-            
-            
-            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
-            jr.setResult("OK");
-            jr.setRecord(categoria);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
-        } catch(BaseException ex){
-            jr.setResult(ex.getResult());
-            jr.setMessage(ex.getMessage());
-        }finally {            
-            out.close();
-        }
+        processRequest(request, response);
     }
 
     /**

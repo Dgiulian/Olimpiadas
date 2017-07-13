@@ -80,6 +80,13 @@ function loadDataEquipo(filter){
                     cancel: {
                         label: "Cancelar",
                         callback: function () {}
+                    },
+                    detalle: {
+                        label: "Detalle",
+                        className: 'btn-primary',
+                        callback: function(){
+                            window.location = URLS.EQUIPO_DETALLE+"?id_equipo="+data.id;
+                        }
                     }
                 }
             });

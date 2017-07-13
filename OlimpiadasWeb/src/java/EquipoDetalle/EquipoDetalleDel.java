@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Categoria;
+package EquipoDetalle;
 
-import bd.Categoria;
+import bd.Equipo_detalle;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
+import transaccion.TEquipo_detalle;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -22,7 +22,7 @@ import utils.Parser;
  *
  * @author Diego
  */
-public class CategoriaEdit extends HttpServlet {
+public class EquipoDetalleDel extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +35,21 @@ public class CategoriaEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EquipoDetalleDel</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EquipoDetalleDel at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
-    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -66,41 +77,22 @@ public class CategoriaEdit extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");                       
-        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        Integer id = Parser.parseInt(request.getParameter("id"));
-        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
-        String nombre = request.getParameter("nombre");
-        String detalle = request.getParameter("detalle");
-        TCategoria tcategoria = new TCategoria();
-        Categoria categoria;
-        boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
-        try {
-            categoria = tcategoria.getById(id);
-            if(categoria==null){
-                categoria = new Categoria();
-                nuevo = true;
-            }
-            categoria.setNombre(nombre);
-            categoria.setDetalle(detalle);
-            categoria.setId_deporte(id_deporte);            
-            boolean todoOk;
-            if(nuevo) {
-                id = tcategoria.alta(categoria);
-                todoOk = id!=0; 
-            } else todoOk = tcategoria.actualizar(categoria);
-            
-            
-            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
-            jr.setResult("OK");
-            jr.setRecord(categoria);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
-        } catch(BaseException ex){
+        try {           
+           Integer id = Parser.parseInt(request.getParameter("id"));
+           Equipo_detalle parametro = new TEquipo_detalle().getById(id);            
+           if (parametro==null) throw new BaseException("ERROR","No existe el registro");
+           
+           boolean baja = new TEquipo_detalle().baja(parametro);
+           if ( baja){
+               jr.setResult("OK");
+           } else throw new BaseException("ERROR","Ocurrio un error al eliminar el registro");                     
+        }  catch (BaseException ex) {
             jr.setResult(ex.getResult());
-            jr.setMessage(ex.getMessage());
-        }finally {            
+            jr.setMessage(ex.getMessage());            
+        }
+        finally {
+            out.print(new Gson().toJson(jr));
             out.close();
         }
     }

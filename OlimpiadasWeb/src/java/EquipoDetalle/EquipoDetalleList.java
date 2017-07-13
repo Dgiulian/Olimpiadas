@@ -3,18 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Categoria;
+package EquipoDetalle;
 
-import bd.Categoria;
+import bd.Equipo_detalle;
+import bd.Jugadores;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
-import utils.BaseException;
+import transaccion.TEquipo_detalle;
+import transaccion.TJugadores;
 import utils.JsonRespuesta;
 import utils.Parser;
 
@@ -22,7 +26,9 @@ import utils.Parser;
  *
  * @author Diego
  */
-public class CategoriaEdit extends HttpServlet {
+public class EquipoDetalleList extends HttpServlet {
+
+    public HashMap<Integer, Jugadores> mapJugadores;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +41,37 @@ public class CategoriaEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");       
+        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
+                
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        mapJugadores = new TJugadores().getMap();
         
+        try {
+            JsonRespuesta jr = new JsonRespuesta();
+            HashMap<String,String> filtro = new HashMap<String,String>();
+            filtro.put("id_equipo", id_equipo.toString());
+            List<Equipo_detalle> lista = new TEquipo_detalle().getListFiltro(filtro);
+            List<Equipo_detalleDet> listaDet = new ArrayList();            
+                        
+            if (lista != null) {
+                for(Equipo_detalle c:lista) listaDet.add(new Equipo_detalleDet(c));
+                jr.setTotalRecordCount(listaDet.size());
+            } else {
+                jr.setTotalRecordCount(0);
+            }            
+            jr.setResult("OK");
+            jr.setRecords(listaDet);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } finally {            
+            out.close();
+        }
     }
 
-    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -64,45 +97,7 @@ public class CategoriaEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");                       
-        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        Integer id = Parser.parseInt(request.getParameter("id"));
-        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
-        String nombre = request.getParameter("nombre");
-        String detalle = request.getParameter("detalle");
-        TCategoria tcategoria = new TCategoria();
-        Categoria categoria;
-        boolean nuevo = false;
-        JsonRespuesta jr = new JsonRespuesta();
-        try {
-            categoria = tcategoria.getById(id);
-            if(categoria==null){
-                categoria = new Categoria();
-                nuevo = true;
-            }
-            categoria.setNombre(nombre);
-            categoria.setDetalle(detalle);
-            categoria.setId_deporte(id_deporte);            
-            boolean todoOk;
-            if(nuevo) {
-                id = tcategoria.alta(categoria);
-                todoOk = id!=0; 
-            } else todoOk = tcategoria.actualizar(categoria);
-            
-            
-            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
-            jr.setResult("OK");
-            jr.setRecord(categoria);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
-        } catch(BaseException ex){
-            jr.setResult(ex.getResult());
-            jr.setMessage(ex.getMessage());
-        }finally {            
-            out.close();
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -114,5 +109,13 @@ public class CategoriaEdit extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private class Equipo_detalleDet extends Equipo_detalle {
+        Jugadores jugador;
+        public Equipo_detalleDet(Equipo_detalle c) {
+            super(c);
+            jugador = mapJugadores.get(c.getId_jugador());
+        }
+    }
 
 }

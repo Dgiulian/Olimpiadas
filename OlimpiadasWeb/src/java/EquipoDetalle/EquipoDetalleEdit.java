@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Categoria;
+package EquipoDetalle;
 
-import bd.Categoria;
+import bd.Equipo;
+import bd.Equipo_detalle;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
+import transaccion.TEquipo;
+import transaccion.TEquipo_detalle;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -22,7 +24,7 @@ import utils.Parser;
  *
  * @author Diego
  */
-public class CategoriaEdit extends HttpServlet {
+public class EquipoDetalleEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +37,21 @@ public class CategoriaEdit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EquipoDetalleEdit</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EquipoDetalleEdit at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
-    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -69,32 +82,33 @@ public class CategoriaEdit extends HttpServlet {
         String pagNro = request.getParameter("pagNro");                       
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         Integer id = Parser.parseInt(request.getParameter("id"));
-        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
-        String nombre = request.getParameter("nombre");
-        String detalle = request.getParameter("detalle");
-        TCategoria tcategoria = new TCategoria();
-        Categoria categoria;
+        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));        
+        Integer id_jugador = Parser.parseInt(request.getParameter("id_jugador"));        
+        TEquipo_detalle tequipo_detalle = new TEquipo_detalle();
+        Equipo_detalle equipo_detalle;
         boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
         try {
-            categoria = tcategoria.getById(id);
-            if(categoria==null){
-                categoria = new Categoria();
+            Equipo equipo = new TEquipo().getById(id_equipo);
+            if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
+            
+            equipo_detalle = tequipo_detalle.getById(id);
+            if(equipo_detalle==null){
+                equipo_detalle = new Equipo_detalle();
                 nuevo = true;
             }
-            categoria.setNombre(nombre);
-            categoria.setDetalle(detalle);
-            categoria.setId_deporte(id_deporte);            
+            equipo_detalle.setId_equipo(id_equipo);
+            equipo_detalle.setId_jugador(id_jugador);            
             boolean todoOk;
             if(nuevo) {
-                id = tcategoria.alta(categoria);
+                id = tequipo_detalle.alta(equipo_detalle);
                 todoOk = id!=0; 
-            } else todoOk = tcategoria.actualizar(categoria);
+            } else todoOk = tequipo_detalle.actualizar(equipo_detalle);
             
             
             if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
             jr.setResult("OK");
-            jr.setRecord(categoria);
+            jr.setRecord(equipo_detalle);
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
         } catch(BaseException ex){

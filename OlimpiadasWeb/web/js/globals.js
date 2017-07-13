@@ -26,6 +26,11 @@ var URLS = {
     EQUIPO_EDIT:'EquipoEdit',
     EQUIPO_DEL:'EquipoDel',
 
+    EQUIPO_DETALLE:'EquipoDetalle',
+    EQUIPO_DETALLE_LIST:'EquipoDetalleList',
+    EQUIPO_DETALLE_EDIT:'EquipoDetalleEdit',
+    EQUIPO_DETALLE_DEL:'EquipoDetalleDel',
+
     JUGADOR:'Jugador',
     JUGADOR_LIST:'JugadorList',
     JUGADOR_EDIT:'JugadorEdit',

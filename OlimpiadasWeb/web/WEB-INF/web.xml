@@ -184,6 +184,22 @@
         <servlet-name>JugadorDel</servlet-name>
         <servlet-class>Jugador.JugadorDel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EquipoDetalleServlet</servlet-name>
+        <servlet-class>EquipoDetalle.EquipoDetalleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EquipoDetalleList</servlet-name>
+        <servlet-class>EquipoDetalle.EquipoDetalleList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EquipoDetalleEdit</servlet-name>
+        <servlet-class>EquipoDetalle.EquipoDetalleEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EquipoDetalleDel</servlet-name>
+        <servlet-class>EquipoDetalle.EquipoDetalleDel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/Categoria</url-pattern>
@@ -335,6 +351,22 @@
     <servlet-mapping>
         <servlet-name>JugadorDel</servlet-name>
         <url-pattern>/JugadorDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoDetalleServlet</servlet-name>
+        <url-pattern>/EquipoDetalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoDetalleList</servlet-name>
+        <url-pattern>/EquipoDetalleList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoDetalleEdit</servlet-name>
+        <url-pattern>/EquipoDetalleEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EquipoDetalleDel</servlet-name>
+        <url-pattern>/EquipoDetalleDel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
