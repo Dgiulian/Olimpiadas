@@ -6,6 +6,7 @@ public class SedeBase {
 	public String direccion = "";
 	public String telefono = "";
 	public String observaciones = "";
+	public String imagen = "";
 
 	public SedeBase() {
 	}
@@ -16,6 +17,7 @@ public class SedeBase {
 		this.direccion = sedebase.getDireccion();
 		this.telefono = sedebase.getTelefono();
 		this.observaciones = sedebase.getObservaciones();
+		this.imagen = sedebase.getImagen();
 	}
 
 	public Integer getId() {
@@ -60,6 +62,15 @@ public class SedeBase {
 
 	public SedeBase setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+		return this;
+	}
+
+	public String getImagen() {
+		return this.imagen;
+	}
+
+	public SedeBase setImagen(String imagen) {
+		this.imagen = imagen;
 		return this;
 	}
 

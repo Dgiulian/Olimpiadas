@@ -6,6 +6,7 @@ public class DeporteBase {
 	public Integer tipo = 0;
 	public Integer cantidad_jugadores = 0;
 	public String reglamento = "";
+	public String imagen = "";
 
 	public DeporteBase() {
 	}
@@ -16,6 +17,7 @@ public class DeporteBase {
 		this.tipo = deportebase.getTipo();
 		this.cantidad_jugadores = deportebase.getCantidad_jugadores();
 		this.reglamento = deportebase.getReglamento();
+		this.imagen = deportebase.getImagen();
 	}
 
 	public Integer getId() {
@@ -60,6 +62,15 @@ public class DeporteBase {
 
 	public DeporteBase setReglamento(String reglamento) {
 		this.reglamento = reglamento;
+		return this;
+	}
+
+	public String getImagen() {
+		return this.imagen;
+	}
+
+	public DeporteBase setImagen(String imagen) {
+		this.imagen = imagen;
 		return this;
 	}
 

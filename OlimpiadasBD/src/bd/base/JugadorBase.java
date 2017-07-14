@@ -1,5 +1,5 @@
 package bd.base;
-public class JugadoresBase {
+public class JugadorBase {
 
 	public Integer id = 0;
 	public String nombre_apellido = "";
@@ -8,23 +8,23 @@ public class JugadoresBase {
 	public String matricula = "";
 	public Integer id_delegacion = 0;
 
-	public JugadoresBase() {
+	public JugadorBase() {
 	}
 
-	public JugadoresBase(JugadoresBase jugadoresbase) {
-		this.id = jugadoresbase.getId();
-		this.nombre_apellido = jugadoresbase.getNombre_apellido();
-		this.dni = jugadoresbase.getDni();
-		this.fecha_nacimiento = jugadoresbase.getFecha_nacimiento();
-		this.matricula = jugadoresbase.getMatricula();
-		this.id_delegacion = jugadoresbase.getId_delegacion();
+	public JugadorBase(JugadorBase jugadorbase) {
+		this.id = jugadorbase.getId();
+		this.nombre_apellido = jugadorbase.getNombre_apellido();
+		this.dni = jugadorbase.getDni();
+		this.fecha_nacimiento = jugadorbase.getFecha_nacimiento();
+		this.matricula = jugadorbase.getMatricula();
+		this.id_delegacion = jugadorbase.getId_delegacion();
 	}
 
 	public Integer getId() {
 		return this.id;
 	}
 
-	public JugadoresBase setId(Integer id) {
+	public JugadorBase setId(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -33,7 +33,7 @@ public class JugadoresBase {
 		return this.nombre_apellido;
 	}
 
-	public JugadoresBase setNombre_apellido(String nombre_apellido) {
+	public JugadorBase setNombre_apellido(String nombre_apellido) {
 		this.nombre_apellido = nombre_apellido;
 		return this;
 	}
@@ -42,7 +42,7 @@ public class JugadoresBase {
 		return this.dni;
 	}
 
-	public JugadoresBase setDni(String dni) {
+	public JugadorBase setDni(String dni) {
 		this.dni = dni;
 		return this;
 	}
@@ -51,7 +51,7 @@ public class JugadoresBase {
 		return this.fecha_nacimiento;
 	}
 
-	public JugadoresBase setFecha_nacimiento(String fecha_nacimiento) {
+	public JugadorBase setFecha_nacimiento(String fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
 		return this;
 	}
@@ -60,7 +60,7 @@ public class JugadoresBase {
 		return this.matricula;
 	}
 
-	public JugadoresBase setMatricula(String matricula) {
+	public JugadorBase setMatricula(String matricula) {
 		this.matricula = matricula;
 		return this;
 	}
@@ -69,7 +69,7 @@ public class JugadoresBase {
 		return this.id_delegacion;
 	}
 
-	public JugadoresBase setId_delegacion(Integer id_delegacion) {
+	public JugadorBase setId_delegacion(Integer id_delegacion) {
 		this.id_delegacion = id_delegacion;
 		return this;
 	}
@@ -80,9 +80,9 @@ public class JugadoresBase {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof bd.base.JugadoresBase))
+		if (!(obj instanceof bd.base.JugadorBase))
 			return false;
-		return ((bd.base.JugadoresBase) obj).getId().equals(this.getId());
+		return ((bd.base.JugadorBase) obj).getId().equals(this.getId());
 	}
 
 	@Override

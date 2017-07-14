@@ -5,6 +5,7 @@ public class CategoriaBase {
 	public String nombre = "";
 	public String detalle = "";
 	public Integer id_deporte = 0;
+	public String observacion = "";
 
 	public CategoriaBase() {
 	}
@@ -14,6 +15,7 @@ public class CategoriaBase {
 		this.nombre = categoriabase.getNombre();
 		this.detalle = categoriabase.getDetalle();
 		this.id_deporte = categoriabase.getId_deporte();
+		this.observacion = categoriabase.getObservacion();
 	}
 
 	public Integer getId() {
@@ -49,6 +51,15 @@ public class CategoriaBase {
 
 	public CategoriaBase setId_deporte(Integer id_deporte) {
 		this.id_deporte = id_deporte;
+		return this;
+	}
+
+	public String getObservacion() {
+		return this.observacion;
+	}
+
+	public CategoriaBase setObservacion(String observacion) {
+		this.observacion = observacion;
 		return this;
 	}
 

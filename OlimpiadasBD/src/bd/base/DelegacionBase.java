@@ -4,6 +4,8 @@ public class DelegacionBase {
 	public Integer id = 0;
 	public String nombre = "";
 	public String observaciones = "";
+	public String imagen = "";
+	public String color = "";
 
 	public DelegacionBase() {
 	}
@@ -12,6 +14,8 @@ public class DelegacionBase {
 		this.id = delegacionbase.getId();
 		this.nombre = delegacionbase.getNombre();
 		this.observaciones = delegacionbase.getObservaciones();
+		this.imagen = delegacionbase.getImagen();
+		this.color = delegacionbase.getColor();
 	}
 
 	public Integer getId() {
@@ -38,6 +42,24 @@ public class DelegacionBase {
 
 	public DelegacionBase setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+		return this;
+	}
+
+	public String getImagen() {
+		return this.imagen;
+	}
+
+	public DelegacionBase setImagen(String imagen) {
+		this.imagen = imagen;
+		return this;
+	}
+
+	public String getColor() {
+		return this.color;
+	}
+
+	public DelegacionBase setColor(String color) {
+		this.color = color;
 		return this;
 	}
 
