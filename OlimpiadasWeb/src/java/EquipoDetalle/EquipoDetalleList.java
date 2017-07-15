@@ -6,7 +6,7 @@
 package EquipoDetalle;
 
 import bd.Equipo_detalle;
-import bd.Jugadores;
+import bd.Jugador;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TEquipo_detalle;
-import transaccion.TJugadores;
+import transaccion.TJugador;
 import utils.JsonRespuesta;
 import utils.Parser;
 
@@ -28,7 +28,7 @@ import utils.Parser;
  */
 public class EquipoDetalleList extends HttpServlet {
 
-    public HashMap<Integer, Jugadores> mapJugadores;
+    public HashMap<Integer, Jugador> mapJugador;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,7 +47,7 @@ public class EquipoDetalleList extends HttpServlet {
         Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        mapJugadores = new TJugadores().getMap();
+        mapJugador = new TJugador().getMap();
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
@@ -111,10 +111,10 @@ public class EquipoDetalleList extends HttpServlet {
     }// </editor-fold>
 
     private class Equipo_detalleDet extends Equipo_detalle {
-        Jugadores jugador;
+        Jugador jugador;
         public Equipo_detalleDet(Equipo_detalle c) {
             super(c);
-            jugador = mapJugadores.get(c.getId_jugador());
+            jugador = mapJugador.get(c.getId_jugador());
         }
     }
 
