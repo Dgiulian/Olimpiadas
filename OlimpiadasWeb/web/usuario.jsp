@@ -13,19 +13,19 @@
         <%@include file="tpl_navbar.jsp" %>
 
         <div id="page-wrapper">
-            <div class="row">
+<!--            <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Usuarios <a href="<%= PathCfg.USUARIO_EDIT%>" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nuevo</a></h1>
+                    <h1 class="page-header">Usuarios </h1>
                     
                 </div>
 
-            </div>
+            </div>-->
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Listado de Usuarios
+                            Listado de Usuarios <a href="<%= PathCfg.USUARIO_EDIT%>" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nuevo</a>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -65,27 +65,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- DataTables JavaScript -->
-    <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-    
-    <script src="bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
-    
-    <script src="js/bootbox.min.js"></script>        
-    <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
-    <script src="js/moment-with-locales.min.js"></script>
-    <script src="js/common.js"></script>
-
+    <%@include file="tpl_scripts.jsp" %>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
@@ -106,20 +86,9 @@
                success: function(data) {
                    $tabla.find('tbody').html("");
                    if(data.Result === "OK") {
-                       $tabla.find('tbody').html(createTable(data.Records));
-                       $('.btn-del').click(borrarUsuario);
-                       $tabla.DataTable({
-                            responsive: true,
-                            retrieve: true,
-                            paging: false,
-                            ordering: true,
-                            searching: false,
-                            lengthChange: false,
-                            bInfo: false,
-                            language: {
-                                url:'bower_components/datatables-plugins/i18n/Spanish.json',
-                            }
-                        });
+                       createTable($tabla,data.Records)
+                       
+
                    }
                }
            });
@@ -133,7 +102,7 @@
                 } else if (result.Message) bootbox.alert(result.Message);
         });
     }
-    function createTable(data){
+    function createTable($tabla,data){
         var html = "";
         for(var i = 0;i< data.length;i++){
            html +="<tr class=''>";
@@ -150,7 +119,8 @@
             html +=wrapTag('td',htmlEdit + htmlDel,'');
            html +="</tr>";
        }
-       return html;
+       $tabla.find('tbody').html(html);
+       $('.btn-del').click(borrarUsuario);
     }
    
         </script>

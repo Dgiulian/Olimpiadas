@@ -145,30 +145,14 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    <script src="js/bootbox.min.js"></script>
-    <script src="bower_components/jquery-mask/jquery.mask.min.js"></script>    
-    <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>    
-    <script src="bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.min.js"></script>        
-
-    <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
-    <script src="js/moment-with-locales.min.js"></script>
-    <script src="js/invesoft.js"></script>
+    <%@include file="tpl_scripts.jsp" %>
     <script>
-        $(document).ready(function(){ 
-            $('form').submit(function(e){
-                $(e).preventDefault();
-                
-            });
-        });
+//        $(document).ready(function(){ 
+//            $('form').submit(function(e){
+//                //e.preventDefault();
+//                
+//            });
+//        });
     </script>
     <%@include file="tpl_footer.jsp"%>
 </body>
