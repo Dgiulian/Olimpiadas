@@ -5,7 +5,7 @@
  */
 package Jugador;
 
-import bd.Jugadores;
+import bd.Jugador;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TJugadores;
+import transaccion.TJugador;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -86,14 +86,14 @@ public class JugadorEdit extends HttpServlet {
         String matricula = request.getParameter("matricula");
         String dni = request.getParameter("dni");
         String fecha_nacimiento = TFecha.formatearFechaVistaBd(request.getParameter("fecha_nacimiento"));
-        TJugadores tjugadores = new TJugadores();
-        Jugadores jugador;
+        TJugador tjugadores = new TJugador();
+        Jugador jugador;
         boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
         try {
             jugador = tjugadores.getById(id);
             if(jugador==null){
-                jugador = new Jugadores();
+                jugador = new Jugador();
                 nuevo = true;
             }
             jugador.setNombre_apellido(nombre_apellido);

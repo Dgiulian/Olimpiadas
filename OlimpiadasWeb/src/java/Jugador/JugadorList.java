@@ -6,7 +6,7 @@
 package Jugador;
 
 import bd.Delegacion;
-import bd.Jugadores;
+import bd.Jugador;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TDelegacion;
-import transaccion.TJugadores;
+import transaccion.TJugador;
 import utils.JsonRespuesta;
 
 /**
@@ -47,11 +47,11 @@ public class JugadorList extends HttpServlet {
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Jugadores> lista = new TJugadores().getList();
-            List<JugadoresDet> listaDet = new ArrayList();            
+            List<Jugador> lista = new TJugador().getList();
+            List<JugadorDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
-                for(Jugadores c:lista) listaDet.add(new JugadoresDet(c));
+                for(Jugador c:lista) listaDet.add(new JugadorDet(c));
                 jr.setTotalRecordCount(listaDet.size());
             } else {
                 jr.setTotalRecordCount(0);
@@ -104,9 +104,9 @@ public class JugadorList extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private class JugadoresDet extends Jugadores {
+    private class JugadorDet extends Jugador {
         Delegacion delegacion;
-        public JugadoresDet(Jugadores c) {
+        public JugadorDet(Jugador c) {
             super(c);
             delegacion = mapDelegaciones.get(c.getId_delegacion());
         }

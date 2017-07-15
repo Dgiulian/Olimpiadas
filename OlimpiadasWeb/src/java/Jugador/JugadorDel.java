@@ -5,7 +5,7 @@
  */
 package Jugador;
 
-import bd.Jugadores;
+import bd.Jugador;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TJugadores;
+import transaccion.TJugador;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -80,10 +80,10 @@ public class JugadorDel extends HttpServlet {
         JsonRespuesta jr = new JsonRespuesta();
         try {           
            Integer id = Parser.parseInt(request.getParameter("id"));
-           Jugadores jugador = new TJugadores().getById(id);            
+           Jugador jugador = new TJugador().getById(id);            
            if (jugador==null) throw new BaseException("ERROR","No existe el registro");
            
-           boolean baja = new TJugadores().baja(jugador);
+           boolean baja = new TJugador().baja(jugador);
            if ( baja){
                jr.setResult("OK");
            } else throw new BaseException("ERROR","Ocurrio un error al eliminar el registro");                     
