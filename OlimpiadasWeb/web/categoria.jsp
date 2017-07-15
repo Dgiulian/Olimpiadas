@@ -27,8 +27,8 @@
                                 <table class="table table-striped table-bordered table-condensed" id="tblCategoria">
                                     <colgroup>
                                         <col style="width:5%"></col>                                        
-                                        <col style="width:10%"></col>
-                                        <col style="width:25%"></col>
+                                        <col style="width:30%"></col>
+                                        <col style="width:15%"></col>
                                         <col style=""></col>
                                         <col style="width:10%"></col>
                                     </colgroup>
