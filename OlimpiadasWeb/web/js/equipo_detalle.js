@@ -5,7 +5,7 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarEquipo_detalle({});
     });
-    loadJugadores();
+    loadJugadores({id_delegacion:$('#id_delegacion').val()});
     filtrarEquipo_detalle();
 });
 function filtrarEquipo_detalle(){
@@ -13,10 +13,10 @@ function filtrarEquipo_detalle(){
     data.id_equipo = $('#id_equipo').val();
     loadDataEquipo_detalle(data);
 }
-function loadJugadores(data){
+function loadJugadores(filtro){
     $.ajax({
         url: URLS.JUGADOR_LIST,
-        data: data,
+        data: filtro,
         method:"POST",
         dataType: "json",           
         success: function(data) {

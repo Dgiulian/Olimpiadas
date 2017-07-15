@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import transaccion.TDelegacion;
 import transaccion.TJugador;
 import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
@@ -41,13 +42,17 @@ public class JugadorList extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
+        Integer id_delegacion = Parser.parseInt(request.getParameter("id_delegacion"));
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         mapDelegaciones = new TDelegacion().getMap();
         
         try {
+            HashMap<String,String>filtroJugador = new HashMap<>();
+            if(id_delegacion!=0) filtroJugador.put("id_delegacion",id_delegacion.toString());
+            
             JsonRespuesta jr = new JsonRespuesta();
-            List<Jugador> lista = new TJugador().getList();
+            List<Jugador> lista = new TJugador().getListFiltro(filtroJugador);
             List<JugadorDet> listaDet = new ArrayList();            
                         
             if (lista != null) {

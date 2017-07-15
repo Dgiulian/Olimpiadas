@@ -27,6 +27,7 @@ Equipo equipo = (Equipo) request.getAttribute("equipo");
                         <div class="panel-heading">
                             Listado de Jugadores <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nuevo</span>
                             <input id="id_equipo" name="id_equipo" type="hidden" value="<%=equipo.getId()%>">
+                            <input id="id_delegacion" name="id_delegacion" type="hidden" value="<%=equipo.getId_delegacion()%>">
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
