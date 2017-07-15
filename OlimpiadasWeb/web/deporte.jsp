@@ -31,6 +31,7 @@
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
+                                        <col style="width:10%"></col>
                                     </colgroup>
                                     <thead>
                                         <tr>
@@ -38,6 +39,7 @@
                                             <th>Nombre</th>
                                             <th>Tipo</th>
                                             <th>Cantidad</th>
+                                            <th>Reglamento</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -71,6 +73,11 @@
             <td class="">{{tipoDeporte tipo}}</td>
             <td class="">{{cantidad_jugadores}}</td>
             <td class="">
+                {{#if reglamento}}
+                    <a href="Download?type=reglamento&id={{id}}">{{reglamento}}</a>
+                {{/if}}                    
+            </td>
+            <td class="">
               <span data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
               <span data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>
@@ -82,7 +89,7 @@
         {{/each}}
         
     </script>   
-     <script id="deporte_edit" type="text/x-handlebars-template">
+     <script id="deporte_edit" type="text/x-handlebars-template" method="POST" enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-12">
               <form class="form-vertical">
@@ -107,7 +114,18 @@
                       <label class="col-md-4 control-label" for="cantidad_jugadores">Cantidad Jugadores</label>
                       <div class="col-md-8">
                       <input id="cantidad_jugadores" name="cantidad_jugadores" type="text" class="form-control input-md" value="{{cantidad_jugadores}}">
-                   </div>           
+                      </div>
+                   </div>
+                  
+                   
+                   <div class="form-group">
+                      <label class="col-md-4 control-label" for="reglamento">Reglamento</label>
+                      <div class="col-md-8">
+                        {{#if reglamento}}                           
+                        {{/if}}
+                        <input id="reglamento" name="reglamento" type="file" class="" value="">
+                      </div>
+                   </div>   
                 </form>
           </div>
         </div>                     

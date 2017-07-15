@@ -80,17 +80,20 @@ function guardarDeporte(data){
         url:URLS.DEPORTE_EDIT,
         data: data,
         method:'POST',
-        dataType:'json'        
+        processData:false,        
+        dataType:'json',
+        contentType:false,
     }).done(function(){
         filtrarDeporte();
     });  
 }
 function recuperarCampos(){
-    var data = {};
-    data.id = $('#id').val();
-    data.nombre = $('#nombre').val();
-    data.tipo = $('#tipo').val();
-    data.cantidad_jugadores = $('#cantidad_jugadores').val();
-    data.detalle  = $('#detalle').val();
+    var data = new FormData();
+    data.append('id', $('#id').val());
+    data.append('nombre', $('#nombre').val());
+    data.append('tipo', $('#tipo').val());
+    data.append('cantidad_jugadores', $('#cantidad_jugadores').val());
+    data.append('detalle', $('#detalle').val());
+    data.append('reglamento', $('#reglamento')[0].files[0]);
     return data;   
 }

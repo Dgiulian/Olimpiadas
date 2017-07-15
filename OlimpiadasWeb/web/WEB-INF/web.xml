@@ -64,6 +64,10 @@
         <servlet-name>DelegacionDel</servlet-name>
         <servlet-class>Delegacion.DelegacionDel</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>utils.DownloadServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>SedeServlet</servlet-name>
         <servlet-class>Sede.SedeServlet</servlet-class>
@@ -319,6 +323,10 @@
     <servlet-mapping>
         <servlet-name>DeporteDel</servlet-name>
         <url-pattern>/DeporteDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/Download</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EquipoServlet</servlet-name>
