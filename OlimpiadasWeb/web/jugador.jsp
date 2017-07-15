@@ -1,6 +1,11 @@
+<%@page import="bd.Delegacion"%>
+<%@page import="java.util.List"%>
+<%@page import="transaccion.TDelegacion"%>
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+    List<Delegacion> delegaciones = new TDelegacion().getList();
+%>
 <head>
     <%@include file="tpl_head.jsp" %>
 </head>
@@ -24,12 +29,26 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
+                                    <div class="col-lg-5">
+                                         <div class="form-group">
+                                             <label class="col-md-2 control-label" for="id_delegacion">Delegaci&oacute;n</label>
+                                            <div class="col-md-8">
+                                                <select id="id_delegacion" name="id_delegacion" type="text" class="form-control input-md">
+                                                    <option value="0">Seleccione la delegaci&oacute;n</option>
+                                                    <% for(Delegacion delegacion: delegaciones) {%>
+                                                        <option value="<%=delegacion.getId()%>"><%=delegacion.getNombre()%></option>
+                                                    <% }%>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
                                 <table class="table table-striped table-bordered table-condensed" id="tblJugador">
-                                    <colgroup>
+                                    <colgroup width="">
                                         <col style="width:5%"></col>
                                         <col style=""></col>
-                                        <col style="width:10%"></col>
-                                        <col style="width:10%"></col>
+                                        <col style="width:20%"></col>
+                                        <col style="width:20%"></col>
                                         <col style="width:10%"></col>
                                     </colgroup>
                                     <thead>

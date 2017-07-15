@@ -5,6 +5,7 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarJugador({});
     });
+    $('#id_delegacion').change(filtrarJugador);
     loadDelegaciones();
     filtrarJugador();
 });
@@ -23,6 +24,7 @@ function loadDelegaciones(data){
 }
 function filtrarJugador(){
     var data = {};
+    data.id_delegacion = $('#id_delegacion').val();
     loadDataJugador(data);
 }
 function loadDataJugador(filter){
