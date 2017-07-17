@@ -33,7 +33,7 @@
                                          <div class="form-group">
                                              <label class="col-md-2 control-label" for="id_delegacion">Delegaci&oacute;n</label>
                                             <div class="col-md-8">
-                                                <select id="id_delegacion" name="id_delegacion" type="text" class="form-control input-md">
+                                                <select id="id_delegacion_filtro" name="id_delegacion" type="text" class="form-control input-md">
                                                     <option value="0">Seleccione la delegaci&oacute;n</option>
                                                     <% for(Delegacion delegacion: delegaciones) {%>
                                                         <option value="<%=delegacion.getId()%>"><%=delegacion.getNombre()%></option>
