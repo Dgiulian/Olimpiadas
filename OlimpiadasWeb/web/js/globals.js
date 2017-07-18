@@ -36,6 +36,14 @@ var URLS = {
     JUGADOR_EDIT:'JugadorEdit',
     JUGADOR_DEL:'JugadorDel',
     
+    NOVEDAD:{
+        BASE:'Novedad',
+        LIST:'NovedadList',
+        EDIT:'NovedadEdit',
+        DEL:'NovedadDel',
+    },
+    
+    
     PARAMETRO:'Parametro',
     PARAMETRO_LIST:'ParametroList',
     PARAMETRO_EDIT:'ParametroEdit',
