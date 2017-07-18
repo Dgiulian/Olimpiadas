@@ -54,6 +54,7 @@
                         <li><a href="<%=PathCfg.EQUIPO%>"><i class="fa fa-dashboard fa-fw"></i> Equipos</a></li>
                         <li><a href="<%=PathCfg.JUGADOR%>"><i class="fa fa-users fa-fw"></i> Jugadores</a></li>
                         <li><a href="<%=PathCfg.PRUEBA%>"><i class="fa fa-clock-o fa-fw"></i> Pruebas</a></li>
+                        <li><a href="<%=PathCfg.NOVEDAD%>"><i class="fa fa-comments-o fa-fw"></i> Novedades</a></li>
                         <li><a href="<%=PathCfg.SEDE%>"><i class="fa fa-home fa-fw"></i> Sedes</a></li>     
                         <li>
                             <a href="<%=PathCfg.USUARIO%>"><i class="fa fa-user fa-fw"></i> Usuarios</a>

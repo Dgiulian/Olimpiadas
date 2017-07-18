@@ -40,12 +40,24 @@ public class PathCfg {
     public static final String EQUIPO_EDIT = EQUIPO + "Edit";
     public static final String EQUIPO_DEL  = EQUIPO + "Del";
     public static final String EQUIPO_SEARCH  = EQUIPO + "Search";
-
+    
+    public static final String EQUIPO_DETALLE         = EQUIPO         + "Detalle";
+    public static final String EQUIPO_DETALLE_LIST    = EQUIPO_DETALLE + "List";
+    public static final String EQUIPO_DETALLE_EDIT    = EQUIPO_DETALLE + "Edit";
+    public static final String EQUIPO_DETALLE_DEL     = EQUIPO_DETALLE + "Del";
+    public static final String EQUIPO_DETALLE_SEARCH  = EQUIPO_DETALLE + "Search";
+    
     public static final String JUGADOR ="Jugador";
     public static final String JUGADOR_LIST = JUGADOR + "List";
     public static final String JUGADOR_EDIT = JUGADOR + "Edit";
     public static final String JUGADOR_DEL  = JUGADOR + "Del";
     public static final String JUGADOR_SEARCH  = JUGADOR + "Search";
+    
+    public static final String NOVEDAD ="Novedad";
+    public static final String NOVEDAD_LIST = NOVEDAD + "List";
+    public static final String NOVEDAD_EDIT = NOVEDAD + "Edit";
+    public static final String NOVEDAD_DEL  = NOVEDAD + "Del";
+    public static final String NOVEDAD_SEARCH  = NOVEDAD + "Search";
     
     public static final String PARAMETRO = "Parametro";
     public static final String PARAMETRO_LIST   = PARAMETRO + "List";

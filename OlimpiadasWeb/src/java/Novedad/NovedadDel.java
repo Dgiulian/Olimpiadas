@@ -3,31 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EquipoDetalle;
+package Novedad;
 
-import bd.Delegacion;
-import bd.Equipo;
-import bd.Equipo_detalle;
-import bd.Jugador;
+import bd.Novedad;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TDelegacion;
-import transaccion.TEquipo;
-import transaccion.TEquipo_detalle;
-import transaccion.TJugador;
+import transaccion.TNovedad;
 import utils.BaseException;
+import utils.JsonRespuesta;
 import utils.Parser;
 
 /**
  *
  * @author Diego
  */
-public class EquipoDetalleServlet extends HttpServlet {
+public class NovedadDel extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,29 +35,21 @@ public class EquipoDetalleServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
-        try{
-            Equipo equipo = new TEquipo().getById(id_equipo);            
-            if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
-            
-            List<Jugador> lstJugadores = new TJugador().getById_delegacion(equipo.getId_delegacion());
-            List<Equipo_detalle> lstEquipo_detalle = new TEquipo_detalle().getById_equipo(equipo.getId());
-            Delegacion delegacion = new TDelegacion().getById(equipo.getId_delegacion());
-            if(delegacion==null) throw new BaseException("ERROR","No se encontr&oacute; la delegaci&oacute;n");
-            
-            request.setAttribute("equipo", equipo);
-            request.setAttribute("delegacion", delegacion);
-            request.setAttribute("lstJugadores", lstJugadores);
-            request.setAttribute("lstEquipo_detalle", lstEquipo_detalle);
-            
-            request.getRequestDispatcher("equipo_detalle.jsp").forward(request, response);
-        } catch(BaseException ex) {
-            request.setAttribute("titulo", ex.getResult());
-            request.setAttribute("mensaje", ex.getMessage());
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NovedadDel</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet NovedadDel at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -88,7 +75,26 @@ public class EquipoDetalleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JsonRespuesta jr = new JsonRespuesta();
+        try {           
+           Integer id = Parser.parseInt(request.getParameter("id"));
+           Novedad parametro = new TNovedad().getById(id);            
+           if (parametro==null) throw new BaseException("ERROR","No existe el registro");
+           
+           boolean baja = new TNovedad().baja(parametro);
+           if ( baja){
+               jr.setResult("OK");
+           } else throw new BaseException("ERROR","Ocurrio un error al eliminar el registro");                     
+        }  catch (BaseException ex) {
+            jr.setResult(ex.getResult());
+            jr.setMessage(ex.getMessage());            
+        }
+        finally {
+            out.print(new Gson().toJson(jr));
+            out.close();
+        }
     }
 
     /**

@@ -82,10 +82,14 @@ function loadDataEquipo(filter){
                         callback: function () {}
                     },
                     detalle: {
-                        label: "Detalle",
+                        label: "Integrantes",
                         className: 'btn-primary',
                         callback: function(){
-                            window.location = URLS.EQUIPO_DETALLE+"?id_equipo="+data.id;
+                            if(data.id)
+                                window.location = URLS.EQUIPO_DETALLE+"?id_equipo="+data.id;
+                            else{
+                                bootbox.alert("Debe guardar el equipo antes de editar los participantes");
+                            }
                         }
                     }
                 }

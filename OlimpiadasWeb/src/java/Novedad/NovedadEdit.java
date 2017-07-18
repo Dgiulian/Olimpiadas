@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EquipoDetalle;
+package Novedad;
 
-import bd.Equipo;
-import bd.Equipo_detalle;
+import bd.Novedad;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,18 +13,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TEquipo;
-import transaccion.TEquipo_detalle;
+import transaccion.TNovedad;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
-import utils.PathCfg;
+import utils.TFecha;
 
 /**
  *
  * @author Diego
  */
-public class EquipoDetalleEdit extends HttpServlet {
+public class NovedadEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +42,10 @@ public class EquipoDetalleEdit extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EquipoDetalleEdit</title>");            
+            out.println("<title>Servlet NovedadEdit</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EquipoDetalleEdit at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet NovedadEdit at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,30 +80,38 @@ public class EquipoDetalleEdit extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");                       
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        Integer id = Parser.parseInt(request.getParameter("id"));
-        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
-        String[] arrJugadores = request.getParameterValues("id_jugador");
+        Integer id       = Parser.parseInt(request.getParameter("id"));        
+        String titulo    = request.getParameter("titulo");
+        String fecha     = TFecha.formatearFechaVistaBd(request.getParameter("fecha"));
+        String subtitulo = request.getParameter("subtitulo");
+        String youtube = request.getParameter("youtube");
+        String detalle   = request.getParameter("detalle");
         
-        TEquipo_detalle tequipo_detalle = new TEquipo_detalle();
-        Equipo_detalle equipo_detalle;
+        TNovedad tnovedad = new TNovedad();
+        Novedad novedad;
         boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
         try {
-            Equipo equipo = new TEquipo().getById(id_equipo);
-            if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
-            boolean todoOk = tequipo_detalle.eliminar(equipo.getId());
-            
-            for (String jugador : arrJugadores) {
-                System.out.println(jugador);
-                Integer id_jugador = Parser.parseInt(jugador);                
-                equipo_detalle = new Equipo_detalle();
-                equipo_detalle.setId_equipo(id_equipo);
-                equipo_detalle.setId_jugador(id_jugador);
-                id = tequipo_detalle.alta(equipo_detalle);                
+            novedad = tnovedad.getById(id);
+            if(novedad==null){
+                novedad = new Novedad();
+                nuevo = true;
             }
-            response.sendRedirect(PathCfg.EQUIPO);
-            //if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
-            //jr.setResult("OK");            
+            novedad.setFecha(fecha);
+            novedad.setTitulo(titulo);
+            novedad.setSubtitulo(subtitulo);
+            novedad.setYoutube(youtube);
+            novedad.setDetalle(detalle);
+            boolean todoOk;
+            if(nuevo) {
+                id = tnovedad.alta(novedad);
+                todoOk = id!=0; 
+            } else todoOk = tnovedad.actualizar(novedad);
+            
+            
+            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
+            jr.setResult("OK");
+            jr.setRecord(novedad);
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
         } catch(BaseException ex){

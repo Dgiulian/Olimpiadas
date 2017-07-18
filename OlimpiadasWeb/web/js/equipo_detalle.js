@@ -2,11 +2,16 @@
 var equipo_detalles = [];
 var jugadores   = [];
 $(document).ready(function(){
-    $('#btnNuevo').click(function(){
-        agregarEquipo_detalle({});
-    });
-    loadJugadores({id_delegacion:$('#id_delegacion').val()});
-    filtrarEquipo_detalle();
+    $('#id_jugador').multiSelect({        
+        selectableHeader:"<h4 class='muliselect_headder'>Jugadores</h4>",
+        selectionHeader:"<h4 class='muliselect_headder'>Incluidos</h4>"
+    });    
+    
+//    $('#btnNuevo').click(function(){
+//        agregarEquipo_detalle({});
+//    });
+//    loadJugadores({id_delegacion:$('#id_delegacion').val()});
+//    filtrarEquipo_detalle();
 });
 function filtrarEquipo_detalle(){
     var data = {};
@@ -67,23 +72,23 @@ function loadDataEquipo_detalle(filter){
         var template = Handlebars.compile($('#equipo_detalle_edit').html());
         data.jugadores = jugadores;
         bootbox.dialog({
-                title: "Configuraci&oacute;n de equipo_detalle",
-                message: template(data), 
-                buttons: {
-                    success: {
-                        label: "Guardar",
-                        className: "btn-success",
-                        callback: function () {
-                            var campos = recuperarCampos();
-                            guardarEquipo_detalle(campos);
-                        }
-                    },
-                    cancel: {
-                        label: "Cancelar",
-                        callback: function () {}
+            title: "Configuraci&oacute;n de equipo_detalle",
+            message: template(data), 
+            buttons: {
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                    callback: function () {
+                        var campos = recuperarCampos();
+                        guardarEquipo_detalle(campos);
                     }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    callback: function () {}
                 }
-            });
+            }
+        });
     }
 function guardarEquipo_detalle(data){
     $.ajax({

@@ -64,7 +64,7 @@
         <servlet-name>DelegacionDel</servlet-name>
         <servlet-class>Delegacion.DelegacionDel</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>DownloadServlet</servlet-name>
         <servlet-class>utils.DownloadServlet</servlet-class>
     </servlet>
@@ -203,6 +203,22 @@
     <servlet>
         <servlet-name>EquipoDetalleDel</servlet-name>
         <servlet-class>EquipoDetalle.EquipoDetalleDel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovedadServlet</servlet-name>
+        <servlet-class>Novedad.NovedadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovedadList</servlet-name>
+        <servlet-class>Novedad.NovedadList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovedadEdit</servlet-name>
+        <servlet-class>Novedad.NovedadEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NovedadDel</servlet-name>
+        <servlet-class>Novedad.NovedadDel</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
@@ -375,6 +391,22 @@
     <servlet-mapping>
         <servlet-name>EquipoDetalleDel</servlet-name>
         <url-pattern>/EquipoDetalleDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovedadServlet</servlet-name>
+        <url-pattern>/Novedad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovedadList</servlet-name>
+        <url-pattern>/NovedadList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovedadEdit</servlet-name>
+        <url-pattern>/NovedadEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NovedadDel</servlet-name>
+        <url-pattern>/NovedadDel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
