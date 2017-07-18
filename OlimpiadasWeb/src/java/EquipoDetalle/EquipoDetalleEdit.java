@@ -19,6 +19,7 @@ import transaccion.TEquipo_detalle;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
+import utils.PathCfg;
 
 /**
  *
@@ -82,8 +83,9 @@ public class EquipoDetalleEdit extends HttpServlet {
         String pagNro = request.getParameter("pagNro");                       
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         Integer id = Parser.parseInt(request.getParameter("id"));
-        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));        
-        Integer id_jugador = Parser.parseInt(request.getParameter("id_jugador"));        
+        Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
+        String[] arrJugadores = request.getParameterValues("id_jugador");
+        
         TEquipo_detalle tequipo_detalle = new TEquipo_detalle();
         Equipo_detalle equipo_detalle;
         boolean nuevo = false;
@@ -91,24 +93,19 @@ public class EquipoDetalleEdit extends HttpServlet {
         try {
             Equipo equipo = new TEquipo().getById(id_equipo);
             if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
+            boolean todoOk = tequipo_detalle.eliminar(equipo.getId());
             
-            equipo_detalle = tequipo_detalle.getById(id);
-            if(equipo_detalle==null){
+            for (String jugador : arrJugadores) {
+                System.out.println(jugador);
+                Integer id_jugador = Parser.parseInt(jugador);                
                 equipo_detalle = new Equipo_detalle();
-                nuevo = true;
+                equipo_detalle.setId_equipo(id_equipo);
+                equipo_detalle.setId_jugador(id_jugador);
+                id = tequipo_detalle.alta(equipo_detalle);                
             }
-            equipo_detalle.setId_equipo(id_equipo);
-            equipo_detalle.setId_jugador(id_jugador);            
-            boolean todoOk;
-            if(nuevo) {
-                id = tequipo_detalle.alta(equipo_detalle);
-                todoOk = id!=0; 
-            } else todoOk = tequipo_detalle.actualizar(equipo_detalle);
-            
-            
-            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
-            jr.setResult("OK");
-            jr.setRecord(equipo_detalle);
+            response.sendRedirect(PathCfg.EQUIPO);
+            //if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
+            //jr.setResult("OK");            
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
         } catch(BaseException ex){

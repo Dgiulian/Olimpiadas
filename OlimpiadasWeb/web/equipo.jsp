@@ -26,8 +26,8 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-condensed" id="tblEquipo">
                                     <colgroup>
-                                        <col style=""></col>                                        
-                                        <col style="width:65%"></col>
+                                        <col style="width:10%"></col>                                        
+                                        <col style="width:55%"></col>
                                         <col style="width:15%"></col>                                        
                                         <col style="width:10%"></col>
                                     </colgroup>

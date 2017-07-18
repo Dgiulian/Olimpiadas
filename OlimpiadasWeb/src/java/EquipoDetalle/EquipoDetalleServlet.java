@@ -5,14 +5,21 @@
  */
 package EquipoDetalle;
 
+import bd.Delegacion;
 import bd.Equipo;
+import bd.Equipo_detalle;
+import bd.Jugador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TDelegacion;
 import transaccion.TEquipo;
+import transaccion.TEquipo_detalle;
+import transaccion.TJugador;
 import utils.BaseException;
 import utils.Parser;
 
@@ -35,9 +42,19 @@ public class EquipoDetalleServlet extends HttpServlet {
             throws ServletException, IOException {
         Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
         try{
-            Equipo equipo = new TEquipo().getById(id_equipo);
+            Equipo equipo = new TEquipo().getById(id_equipo);            
             if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
+            
+            List<Jugador> lstJugadores = new TJugador().getById_delegacion(equipo.getId_delegacion());
+            List<Equipo_detalle> lstEquipo_detalle = new TEquipo_detalle().getById_equipo(equipo.getId());
+            Delegacion delegacion = new TDelegacion().getById(equipo.getId_delegacion());
+            if(delegacion==null) throw new BaseException("ERROR","No se encontr&oacute; la delegaci&oacute;n");
+            
             request.setAttribute("equipo", equipo);
+            request.setAttribute("delegacion", delegacion);
+            request.setAttribute("lstJugadores", lstJugadores);
+            request.setAttribute("lstEquipo_detalle", lstEquipo_detalle);
+            
             request.getRequestDispatcher("equipo_detalle.jsp").forward(request, response);
         } catch(BaseException ex) {
             request.setAttribute("titulo", ex.getResult());

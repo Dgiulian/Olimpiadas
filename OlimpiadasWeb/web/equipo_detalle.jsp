@@ -1,12 +1,23 @@
+<%@page import="transaccion.TEquipo_detalle"%>
+<%@page import="bd.Delegacion"%>
+<%@page import="bd.Jugador"%>
+<%@page import="bd.Jugador"%>
+<%@page import="bd.Equipo_detalle"%>
+<%@page import="java.util.List"%>
+
 <%@page import="bd.Equipo"%>
 <%
 Equipo equipo = (Equipo) request.getAttribute("equipo");
+Delegacion delegacion = (Delegacion) request.getAttribute("delegacion");
+List<Jugador> lstJugadores = (List<Jugador>) request.getAttribute("lstJugadores");
+List<Equipo_detalle> lstDetalle = (List<Equipo_detalle>) request.getAttribute("lstEquipo_detalle");
 %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <%@include file="tpl_head.jsp" %>
+    
 </head>
 
 <body>
@@ -21,37 +32,38 @@ Equipo equipo = (Equipo) request.getAttribute("equipo");
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3>Equipo: <%=equipo.getNombre()%> <a href="<%=PathCfg.EQUIPO%>" class="btn btn-default">Volver</a></h3>                        
+                    <div class="">
+                        <h3>Equipo: <%=equipo.getNombre()%></h3>                        
+                        <h3>Delegaci&oacute;n: <%=delegacion.getNombre()%> </h3>
+                    </div>
                     <div class="panel panel-default">
                         
                         <div class="panel-heading">
-                            Listado de Jugadores <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nuevo</span>
-                            <input id="id_equipo" name="id_equipo" type="hidden" value="<%=equipo.getId()%>">
-                            <input id="id_delegacion" name="id_delegacion" type="hidden" value="<%=equipo.getId_delegacion()%>">
+                            Jugadores del equipo <!-- <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nuevo</span>-->
+
                         </div>
                         <!-- /.panel-heading -->
+                        
                         <div class="panel-body">
-                            <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-condensed" id="tblEquipo_detalle">
-                                    <colgroup>
-                                        <col style=""></col>                                        
-                                        <col style="width:65%"></col>
-                                        <col style="width:15%"></col>                                        
-                                        <col style="width:10%"></col>
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Nombre</th>
-                                            <th>Matricula</th>                                            
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
+                            <form action="<%=PathCfg.EQUIPO_DETALLE_EDIT%>" method="POST">
+                                <input id="id_equipo" name="id_equipo" type="hidden" value="<%=equipo.getId()%>">
+                                <input id="id_delegacion" name="id_delegacion" type="hidden" value="<%=equipo.getId_delegacion()%>">
+                                <div class="dataTable_wrapper">                                
+                                    <select id="id_jugador" name="id_jugador" multiple>
+                                        <% for(Jugador jugador: lstJugadores)  { 
+                                            String selected = TEquipo_detalle.contiene(lstDetalle,jugador.getId())?"selected":"";                                        
+                                        %>
+                                            <option value="<%=jugador.getId()%>" <%=selected%>><%=jugador.getNombre_apellido()%></option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                   <div class="col-lg-12">
+                                       <button type="submit" class="btn btn-success">Guardar</button>
+                                       <a type="reset" class="btn btn-default" href="<%=PathCfg.EQUIPO%>">Cancelar</a>
+                                   </div>
+                               </div>
+                            </form>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -69,7 +81,7 @@ Equipo equipo = (Equipo) request.getAttribute("equipo");
     <!-- /#wrapper -->
 
     <%@include file="tpl_scripts.jsp" %>
-    <script id="equipo_detalle_list" type="text/x-handlebars-template">
+<!--    <script id="equipo_detalle_list" type="text/x-handlebars-template">
         {{#each records}}
           <tr class="">
             <td class="">{{id}}</td>
@@ -107,7 +119,7 @@ Equipo equipo = (Equipo) request.getAttribute("equipo");
                 </form>
           </div>
         </div>                     
-    </script>    
+    </script>    -->
     <script src="js/equipo_detalle.js"></script>
 </body>
 
