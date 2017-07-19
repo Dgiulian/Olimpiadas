@@ -13,7 +13,7 @@ function loadDataDelegacion(filter){
     var $tabla = $('#tblDelegacion');
     setLoader($tabla);
     $.ajax({
-           url: URLS.DELEGACION_LIST,
+           url: URLS.DELEGACION.LIST,
            data: filter,
            method:"POST",
            dataType: "json"
@@ -27,7 +27,7 @@ function loadDataDelegacion(filter){
 function borrarDelegacion(){
     var index = $(this).data('index');
     var id = delegaciones[index].id;
-    deleteData(URLS.DELEGACION_DEL,{id:id},function(result) {     
+    deleteData(URLS.DELEGACION.DEL,{id:id},function(result) {     
             if(result.Result === "OK") {
                 filtrarDelegacion();
             } else if (result.Message) bootbox.alert(result.Message);
@@ -69,7 +69,7 @@ function agregarDelegacion(data){
 }
 function guardarDelegacion(data){
     $.ajax({
-        url:URLS.DELEGACION_EDIT,
+        url:URLS.DELEGACION.EDIT,
         data: data,
         method:'POST',
         dataType:'json'        

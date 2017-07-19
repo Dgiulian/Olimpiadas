@@ -11,7 +11,7 @@ $(document).ready(function(){
 });
 function loadDelegaciones(data){
     $.ajax({
-        url: URLS.DELEGACION_LIST,
+        url: URLS.DELEGACION.LIST,
         data: data,
         method:"POST",
         dataType: "json",           
@@ -31,7 +31,7 @@ function loadDataJugador(filter){
     var $tabla = $('#tblJugador');
     setLoader($tabla);    
     $.ajax({
-           url: URLS.JUGADOR_LIST,
+           url: URLS.JUGADOR.LIST,
            data: filter,
            method:"POST",
            dataType: "json"
@@ -45,7 +45,7 @@ function loadDataJugador(filter){
 function borrarJugador(){
     var index = $(this).data('index');
     var id = jugadores[index].id;
-    deleteData(URLS.JUGADOR_DEL,{id:id},function(result) {     
+    deleteData(URLS.JUGADOR.DEL,{id:id},function(result) {     
             if(result.Result === "OK") {
                 filtrarJugador();
             } else if (result.Message) bootbox.alert(result.Message);
@@ -89,7 +89,7 @@ function agregarJugador(data){
 }
 function guardarJugador(data){
     $.ajax({
-        url:URLS.JUGADOR_EDIT,
+        url:URLS.JUGADOR.EDIT,
         data: data,
         method:'POST',
         dataType:'json'        

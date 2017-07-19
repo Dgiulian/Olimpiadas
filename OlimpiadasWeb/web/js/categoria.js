@@ -14,7 +14,7 @@ function filtrarCategoria(){
 }
 function loadDeportes(data){
     $.ajax({
-        url: URLS.DEPORTE_LIST,
+        url: URLS.DEPORTE.LIST,
         data: data,
         method:"POST",
         dataType: "json",
@@ -28,7 +28,7 @@ function loadDataCategoria(filter){
     var $tabla = $('#tblCategoria');
     setLoader($tabla);
     $.ajax({
-        url: URLS.CATEGORIA_LIST,
+        url: URLS.CATEGORIA.LIST,
         data: filter,
         method:"POST",
         dataType: "json"
@@ -42,7 +42,7 @@ function loadDataCategoria(filter){
 function borrarCategoria(){
     var index = $(this).data('index');
     var id = categorias[index].id;        
-    deleteData(URLS.CATEGORIA_DEL,{id:id},function(result) {     
+    deleteData(URLS.CATEGORIA.DEL,{id:id},function(result) {     
         if(result.Result === "OK") {
             filtrarCategoria();
         } else if (result.Message) bootbox.alert(result.Message);
@@ -79,13 +79,24 @@ function agregarCategoria(data){
             cancel: {
                 label: "Cancelar",
                 callback: function () {}
+            },
+            grupo: {
+                label: "Grupos",
+                className:'btn-primary',
+                callback: function () {
+                    if(data.id){
+                        window.location = URLS.GRUPO.BASE + "?id_categoria=" + data.id;
+                    }else{
+                        bootbox.alert("Debe guardar la categor&iacute; antes de editar los grupos");
+                    }
+                }
             }
         }
     });
 }
 function guardarCategoria(data){
     $.ajax({
-        url:URLS.CATEGORIA_EDIT,
+        url:URLS.CATEGORIA.EDIT,
         data: data,
         method:'POST',
         dataType:'json'        

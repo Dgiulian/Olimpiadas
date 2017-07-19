@@ -225,10 +225,17 @@ $(document).ready(function(){
     });
     
     if(window.Handlebars) {
-        window.Handlebars.registerHelper('select', function( value, options ){
-            var $el = $('<select />').html( options.fn(this) );
-            $el.find('[value="' + value + '"]').attr({'selected':'selected'});
-            return $el.html();
+        window.Handlebars.registerHelper('select', function( selected, options ){
+            var html = options.fn(this);
+            if (selected) {
+                selected +="";
+                var values = selected.split(',');
+                for (var i = 0; i < values.length; i++) {
+                    html = html.replace( new RegExp(' value=\"' + values[i] + '\"'), '$& selected="selected"');
+                }
+            }
+
+            return html;
         });
         window.Handlebars.registerHelper('convertirFecha', convertirFecha);
     }
@@ -284,13 +291,19 @@ function initDialog(){
     
 }
 
-
 function getFormData($form){
     var unindexed_array = $form.serializeArray();
     var indexed_array = {};
 
     $.map(unindexed_array, function(n, i){
-        indexed_array[n['name']] = n['value'];
+        if(indexed_array[n['name']]){ // Si ya existe el item
+            if( !Array.isArray(indexed_array[n['name']])){                            
+                indexed_array[n['name']] = [indexed_array[n['name']] ];
+            }
+            indexed_array[n['name']].push(n['value']);
+        } else {
+            indexed_array[n['name']] = n['value'];
+        }
     });
 
     return indexed_array;

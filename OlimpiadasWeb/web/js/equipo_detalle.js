@@ -20,7 +20,7 @@ function filtrarEquipo_detalle(){
 }
 function loadJugadores(filtro){
     $.ajax({
-        url: URLS.JUGADOR_LIST,
+        url: URLS.JUGADOR.LIST,
         data: filtro,
         method:"POST",
         dataType: "json",           
@@ -35,7 +35,7 @@ function loadDataEquipo_detalle(filter){
     var $tabla = $('#tblEquipo_detalle');
     setLoader($tabla);
     $.ajax({
-           url: URLS.EQUIPO_DETALLE_LIST,
+           url: URLS.EQUIPO_DETALLE.LIST,
            data: filter,
            method:"POST",
            dataType: "json",
@@ -49,7 +49,7 @@ function loadDataEquipo_detalle(filter){
     function borrarEquipo_detalle(){
         var index = $(this).data('index');
         var id = equipo_detalles[index].id;        
-        deleteData(URLS.EQUIPO_DETALLE_DEL,{id:id},function(result) {     
+        deleteData(URLS.EQUIPO_DETALLE.DEL,{id:id},function(result) {     
             if(result.Result === "OK") {
                 filtrarEquipo_detalle();
             } else if (result.Message) bootbox.alert(result.Message);
@@ -92,7 +92,7 @@ function loadDataEquipo_detalle(filter){
     }
 function guardarEquipo_detalle(data){
     $.ajax({
-        url:URLS.EQUIPO_DETALLE_EDIT,
+        url:URLS.EQUIPO_DETALLE.EDIT,
         data: data,
         method:'POST',
         dataType:'json',

@@ -16,7 +16,7 @@ function filtrarPrueba(){
 }
 function loadDeportes(data){
     $.ajax({
-        url: URLS.DEPORTE_LIST,
+        url: URLS.DEPORTE.LIST,
         data: data,
         method:"POST",
         dataType: "json",
@@ -28,7 +28,7 @@ function loadDeportes(data){
 }
 function loadCategorias(data){
     $.ajax({
-        url: URLS.CATEGORIA_LIST,
+        url: URLS.CATEGORIA.LIST,
         data: data,
         method:"POST",
         dataType: "json",
@@ -42,7 +42,7 @@ function loadDataPrueba(filter){
     var $tabla = $('#tblPrueba');
     setLoader($tabla);
     $.ajax({
-           url: URLS.PRUEBA_LIST,
+           url: URLS.PRUEBA.LIST,
            data: filter,
            method:"POST",
            dataType: "json"
@@ -56,7 +56,7 @@ function loadDataPrueba(filter){
 function borrarPrueba(){
     var index = $(this).data('index');
     var id = pruebas[index].id;        
-    deleteData(URLS.PRUEBA_DEL,{id:id},function(result) {     
+    deleteData(URLS.PRUEBA.DEL,{id:id},function(result) {     
         if(result.Result === "OK") {
             filtrarPrueba();
         } else if (result.Message) bootbox.alert(result.Message);
@@ -100,7 +100,7 @@ function agregarPrueba(data){
 }
 function guardarPrueba(data){
     $.ajax({
-        url:URLS.PRUEBA_EDIT,
+        url:URLS.PRUEBA.EDIT,
         data: data,
         method:'POST',
         dataType:'json'

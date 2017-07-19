@@ -20,7 +20,7 @@ function loadDataDeporte(filter){
     var $tabla = $('#tblDeporte');
     setLoader($tabla);    
     $.ajax({
-           url: URLS.DEPORTE_LIST,
+           url: URLS.DEPORTE.LIST,
            data: filter,
            method:"POST",
            dataType: "json"
@@ -34,7 +34,7 @@ function loadDataDeporte(filter){
 function borrarDeporte(){
     var index = $(this).data('index');
     var id = deportes[index].id;
-    deleteData(URLS.DEPORTE_DEL,{id:id},function(result) {     
+    deleteData(URLS.DEPORTE.DEL,{id:id},function(result) {     
             if(result.Result === "OK") {
                 filtrarDeporte();
             } else if (result.Message) bootbox.alert(result.Message);
@@ -77,7 +77,7 @@ function agregarDeporte(data){
 }
 function guardarDeporte(data){
     $.ajax({
-        url:URLS.DEPORTE_EDIT,
+        url:URLS.DEPORTE.EDIT,
         data: data,
         method:'POST',
         processData:false,        
