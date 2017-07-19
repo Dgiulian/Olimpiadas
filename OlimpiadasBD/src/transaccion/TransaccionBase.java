@@ -53,7 +53,7 @@ public abstract class TransaccionBase<E> {
         List<E> lista = null;
         try {            
             conexion.conectarse();
-            ResultSet rs = conexion.ejecutarSQLSelect(query);
+            ResultSet rs = conexion.ejecutarSQLSelect(query);            
             lista = new TransaccionRS().recuperarLista(this.clase.getCanonicalName(), rs);
             rs.close();            
         } catch (SQLException ex) {

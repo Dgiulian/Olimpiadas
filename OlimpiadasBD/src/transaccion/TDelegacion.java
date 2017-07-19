@@ -6,7 +6,7 @@ public class TDelegacion extends TransaccionBase<Delegacion> {
 
 	@Override
 	public List<Delegacion> getList() {
-		return super.getList("select * from delegacion ");
+		return super.getList("select * from delegacion");
 	}
 
 	public Boolean actualizar(Delegacion delegacion) {

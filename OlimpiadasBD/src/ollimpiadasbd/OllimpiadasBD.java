@@ -5,6 +5,12 @@
  */
 package ollimpiadasbd;
 
+import bd.Delegacion;
+import conexion.Conexion;
+import java.util.List;
+import transaccion.TDelegacion;
+import transaccion.TUsuario;
+
 /**
  *
  * @author Diego
@@ -16,6 +22,13 @@ public class OllimpiadasBD {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Conexion conexion = new Conexion();
+        conexion.conectarse();
+        conexion.desconectarse();
+
+        TDelegacion tdelegacion = new TDelegacion();
+        List<Delegacion> lista = tdelegacion.getList();
+        System.out.println(lista.size());
     }
-    
+
 }

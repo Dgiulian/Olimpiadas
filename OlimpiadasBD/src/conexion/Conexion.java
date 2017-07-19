@@ -57,8 +57,8 @@ public class Conexion {
             String host = "127.0.0.1";
             String port = ":3306";
             String nombrebd = "/olimpiadas_kinesiologia";
-            String usr = "root";
-            String password = "root";
+            String usr = "olimpiadas";
+            String password = "Olimpiada**2017";
 
             Class.forName(driver).newInstance();
             try {
