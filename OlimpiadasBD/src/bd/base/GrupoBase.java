@@ -3,7 +3,7 @@ public class GrupoBase {
 
 	public Integer id = 0;
 	public Integer id_categoria = 0;
-	public String nombre_grupo = "";
+	public String nombre = "";
 	public String observacion = "";
 
 	public GrupoBase() {
@@ -12,7 +12,7 @@ public class GrupoBase {
 	public GrupoBase(GrupoBase grupobase) {
 		this.id = grupobase.getId();
 		this.id_categoria = grupobase.getId_categoria();
-		this.nombre_grupo = grupobase.getNombre_grupo();
+		this.nombre = grupobase.getNombre();
 		this.observacion = grupobase.getObservacion();
 	}
 
@@ -34,12 +34,12 @@ public class GrupoBase {
 		return this;
 	}
 
-	public String getNombre_grupo() {
-		return this.nombre_grupo;
+	public String getNombre() {
+		return this.nombre;
 	}
 
-	public GrupoBase setNombre_grupo(String nombre_grupo) {
-		this.nombre_grupo = nombre_grupo;
+	public GrupoBase setNombre(String nombre) {
+		this.nombre = nombre;
 		return this;
 	}
 

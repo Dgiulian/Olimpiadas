@@ -12,7 +12,7 @@ function loadData(filter){
     var $tabla = $('#tblParametro');
     setLoader($tabla);    
     $.ajax({
-        url: URLS.PARAMETRO_LIST,
+        url: URLS.PARAMETRO.LIST,
         data: filter,
         method:"POST",
         dataType: "json"
@@ -24,7 +24,7 @@ function loadData(filter){
 }
 function borrarParametro(){
     var id = $(this).data('index');
-    deleteData(URLS.PARAMETRO_DEL,{id:id},function(result) {
+    deleteData(URLS.PARAMETRO.DEL,{id:id},function(result) {
         if(result.Result === "OK") {
             filtrarParametros();    
         } else if (result.Message) bootbox.alert(result.Message);
@@ -69,7 +69,7 @@ function agregarParametro(data){
 }
 function guardarParametro(data){
     $.ajax({
-        url: URLS.PARAMETRO_EDIT,
+        url: URLS.PARAMETRO.EDIT,
         data: data,
         method:'POST',
         dataType:'json',

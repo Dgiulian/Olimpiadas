@@ -5,25 +5,13 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarNovedad({});
     });
-    loadDeportes();
     filtrarNovedad();
 });
 function filtrarNovedad(){
     var data = {};
     loadDataNovedad(data);
 }
-function loadDeportes(data){
-    $.ajax({
-        url: URLS.DEPORTE_LIST,
-        data: data,
-        method:"POST",
-        dataType: "json",
-    }).done(function(data) {
-        if(data.Result === "OK") {
-            deportes = data.Records;
-        }
-    });
-}
+
 function loadDataNovedad(filter){
     var $tabla = $('#tblNovedad');
     setLoader($tabla);
@@ -63,7 +51,6 @@ function editarNovedad(){
 
 function agregarNovedad(data){
     var template = Handlebars.compile($('#novedad_edit').html());
-    data.deportes = deportes;
     bootbox.dialog({
         title: "Configuraci&oacute;n de delegaci&oacute;n",
         message: template(data), 

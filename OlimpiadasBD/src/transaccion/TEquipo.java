@@ -18,4 +18,11 @@ public class TEquipo extends TransaccionBase<Equipo> {
 				"select * from equipo where equipo.id = %d ", id);
 		return super.getById(query);
 	}
+
+    public List<Equipo> getById_grupo(Integer id_grupo) {
+        String query = String.format("select equipo.* from equipo,grupo_detalle " +
+                                     " where grupo_detalle.id_equipo = equipo.id " +
+                                     "   and grupo_detalle.id_grupo = %d;",id_grupo);
+        return this.getList(query);
+    }
 }

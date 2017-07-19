@@ -220,6 +220,22 @@
         <servlet-name>NovedadDel</servlet-name>
         <servlet-class>Novedad.NovedadDel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GrupoServlet</servlet-name>
+        <servlet-class>Grupo.GrupoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GrupoList</servlet-name>
+        <servlet-class>Grupo.GrupoList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GrupoEdit</servlet-name>
+        <servlet-class>Grupo.GrupoEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GrupoDel</servlet-name>
+        <servlet-class>Grupo.GrupoDel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/Categoria</url-pattern>
@@ -407,6 +423,22 @@
     <servlet-mapping>
         <servlet-name>NovedadDel</servlet-name>
         <url-pattern>/NovedadDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GrupoServlet</servlet-name>
+        <url-pattern>/Grupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GrupoList</servlet-name>
+        <url-pattern>/GrupoList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GrupoEdit</servlet-name>
+        <url-pattern>/GrupoEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GrupoDel</servlet-name>
+        <url-pattern>/GrupoDel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

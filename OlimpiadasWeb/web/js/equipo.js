@@ -14,7 +14,7 @@ function filtrarEquipo(){
 }
 function loadDelegaciones(data){
     $.ajax({
-        url: URLS.DELEGACION_LIST,
+        url: URLS.DELEGACION.LIST,
         data: data,
         method:"POST",
         dataType: "json",           
@@ -29,7 +29,7 @@ function loadDataEquipo(filter){
     var $tabla = $('#tblEquipo');
     setLoader($tabla);
     $.ajax({
-           url: URLS.EQUIPO_LIST,
+           url: URLS.EQUIPO.LIST,
            data: filter,
            method:"POST",
            dataType: "json",
@@ -43,7 +43,7 @@ function loadDataEquipo(filter){
     function borrarEquipo(){
         var index = $(this).data('index');
         var id = equipos[index].id;        
-        deleteData(URLS.EQUIPO_DEL,{id:id},function(result) {     
+        deleteData(URLS.EQUIPO.DEL,{id:id},function(result) {     
             if(result.Result === "OK") {
                 filtrarEquipo();
             } else if (result.Message) bootbox.alert(result.Message);
@@ -97,7 +97,7 @@ function loadDataEquipo(filter){
     }
 function guardarEquipo(data){
     $.ajax({
-        url:URLS.EQUIPO_EDIT,
+        url:URLS.EQUIPO.EDIT,
         data: data,
         method:'POST',
         dataType:'json',

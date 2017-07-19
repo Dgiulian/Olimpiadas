@@ -19,7 +19,7 @@ function loadDataSede(filter){
     var $tabla = $('#tblSede');
     setLoader($tabla);
     $.ajax({
-           url: URLS.SEDE_LIST,
+           url: URLS.SEDE.LIST,
            data: filter,
            method:"POST",
            dataType: "json"
@@ -33,7 +33,7 @@ function loadDataSede(filter){
 function borrarSede(){
     var index = $(this).data('index');
     var id = sedes[index].id;        
-    deleteData(URLS.SEDE_DEL,{id:id},function(result) {     
+    deleteData(URLS.SEDE.DEL,{id:id},function(result) {     
             if(result.Result === "OK") {
                 filtrarSede();
             } else if (result.Message) bootbox.alert(result.Message);
@@ -74,7 +74,7 @@ function agregarSede(data){
 }
 function guardarSede(data){
     $.ajax({
-        url:URLS.SEDE_EDIT,
+        url:URLS.SEDE.EDIT,
         data: data,
         method:'POST',
         dataType:'json'        
