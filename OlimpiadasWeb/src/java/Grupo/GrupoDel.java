@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TGrupo;
+import transaccion.TGrupo_detalle;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -40,10 +41,12 @@ public class GrupoDel extends HttpServlet {
         JsonRespuesta jr = new JsonRespuesta();
         try {           
            Integer id = Parser.parseInt(request.getParameter("id"));
-           Grupo parametro = new TGrupo().getById(id);            
-           if (parametro==null) throw new BaseException("ERROR","No existe el registro");
+           Grupo grupo = new TGrupo().getById(id);            
+           if (grupo==null) throw new BaseException("ERROR","No existe el registro");
+           TGrupo_detalle tgrupo_detalle = new TGrupo_detalle();
+           tgrupo_detalle.eliminar(grupo.getId());
            
-           boolean baja = new TGrupo().baja(parametro);
+           boolean baja = new TGrupo().baja(grupo);
            if ( baja){
                jr.setResult("OK");
            } else throw new BaseException("ERROR","Ocurrio un error al eliminar el registro");                     

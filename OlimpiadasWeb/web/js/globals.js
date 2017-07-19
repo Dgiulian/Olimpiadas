@@ -34,10 +34,12 @@ var URLS = {
         DEL:'EquipoDel',
     },    
 
-    EQUIPO_DETALLE:'EquipoDetalle',
-    EQUIPO_DETALLE_LIST:'EquipoDetalleList',
-    EQUIPO_DETALLE_EDIT:'EquipoDetalleEdit',
-    EQUIPO_DETALLE_DEL:'EquipoDetalleDel',
+    EQUIPO_DETALLE:{
+        BASE:'EquipoDetalle',    
+        LIST:'EquipoDetalleList',
+        EDIT:'EquipoDetalleEdit',
+        DEL:'EquipoDetalleDel',
+    },
     GRUPO:{
         BASE:'Grupo',
         LIST:'GrupoList',
