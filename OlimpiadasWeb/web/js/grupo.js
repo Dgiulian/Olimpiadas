@@ -64,7 +64,7 @@ function editarGrupo(){
 function agregarGrupo(data){
     var template = Handlebars.compile($('#grupo_edit').html());
     data.equipos = equipos;
-    if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).toString();
+    if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).join(",");
     else data.selected = "";
     
     bootbox.dialog({
