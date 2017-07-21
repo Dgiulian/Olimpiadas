@@ -2,6 +2,7 @@ package bd.base;
 public class Prueba_deportiva_detalleBase {
 
 	public Integer id = 0;
+	public Integer id_prueba = 0;
 	public Integer id_equipo = 0;
 	public String resultado = "";
 
@@ -11,6 +12,7 @@ public class Prueba_deportiva_detalleBase {
 	public Prueba_deportiva_detalleBase(
 			Prueba_deportiva_detalleBase prueba_deportiva_detallebase) {
 		this.id = prueba_deportiva_detallebase.getId();
+		this.id_prueba = prueba_deportiva_detallebase.getId_prueba();
 		this.id_equipo = prueba_deportiva_detallebase.getId_equipo();
 		this.resultado = prueba_deportiva_detallebase.getResultado();
 	}
@@ -21,6 +23,15 @@ public class Prueba_deportiva_detalleBase {
 
 	public Prueba_deportiva_detalleBase setId(Integer id) {
 		this.id = id;
+		return this;
+	}
+
+	public Integer getId_prueba() {
+		return this.id_prueba;
+	}
+
+	public Prueba_deportiva_detalleBase setId_prueba(Integer id_prueba) {
+		this.id_prueba = id_prueba;
 		return this;
 	}
 

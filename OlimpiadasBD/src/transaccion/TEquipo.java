@@ -25,4 +25,12 @@ public class TEquipo extends TransaccionBase<Equipo> {
                                      "   and grupo_detalle.id_grupo = %d;",id_grupo);
         return this.getList(query);
     }
+
+    public List<Equipo> getById_prueba(Integer id_prueba) {
+        String query = String.format("select equipo.* from equipo,prueba_deportiva_detalle " +
+                                     " where prueba_deportiva_detalle.id_equipo = equipo.id " +
+                                     "   and prueba_deportiva_detalle.id_prueba = %d;",id_prueba);
+        System.out.println(query);
+        return this.getList(query);
+    }
 }

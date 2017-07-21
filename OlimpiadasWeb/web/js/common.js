@@ -275,10 +275,10 @@ function setLoader($tabla){
 }
 
 function initDialog(){
-//    if($().mask) {       
-//        $('.date-picker').mask('99/99/9999');
-//        $('.hora').mask('99:99:99');
-//    }
+    if($().mask) {       
+        $('.date-picker > input').mask('99/99/9999');
+        $('.hora').mask('99:99:99');
+    }
     if($().datepicker) {
         $('.date-picker').datepicker({
              language: 'es',

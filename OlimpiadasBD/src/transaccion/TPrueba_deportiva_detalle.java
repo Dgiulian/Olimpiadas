@@ -21,4 +21,13 @@ public class TPrueba_deportiva_detalle
 						id);
 		return super.getById(query);
 	}
+
+    public boolean eliminar(Integer id_prueba) {
+        String query = String.format("delete from prueba_deportiva_detalle where id_prueba = %d",id_prueba);
+        boolean todoOk;
+        conexion.conectarse();
+        todoOk = conexion.ejecutarSQL(query);        
+        conexion.desconectarse();
+        return todoOk;
+    }
 }

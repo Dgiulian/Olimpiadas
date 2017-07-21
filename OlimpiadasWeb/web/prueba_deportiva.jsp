@@ -28,17 +28,21 @@
                                     <colgroup>
                                         <col style="width:5%"></col>                                        
                                         <col style="width:10%"></col>
-                                        <col style="width:25%"></col>
-                                        <col style=""></col>
+                                        <col style="width:10%"></col>
+                                        <col style="width:10%"></col>
+                                        <col style="width:10%"></col>
+                                        <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                     </colgroup>
                                     <thead>
                                         <tr>
                                             <th>Id</th>
+                                            <th>Fecha</th>
                                             <th>Deporte</th>
                                             <th>Categor&iacute;a</th>
-                                            <th>Observaciones</th>
-                                            <th></th>
+                                            <th>Estado</th>
+                                            <th>Puntaje</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,10 +72,12 @@
         {{#each records}}
           <tr class="">
             <td class="">{{id}}</td>
+            <td class="">{{convertirFecha fecha}} {{hora}}</td>
             <td class="">{{deporte.nombre}}</td>
             <td class="">{{categoria.nombre}}</td>
-            <td class="">{{observaciones}}</td>
-            <td class="">
+             <td class="">{{estado}}</td>
+             <td class=""> {{descPuntaje tipo_puntaje orden_puntaje }}</td>             
+            <td class="acciones">
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
               </td>
@@ -86,17 +92,64 @@
         <div class="row">
           <div class="col-md-12">
               <form class="form-vertical">
-                  <input id="id" name="id" type="hidden" class="" value="{{id}}" >
+                   <input id="id" name="id" type="hidden" class="" value="{{id}}" >
+                       <div class="form-group">
+                            <label class="col-md-4 control-label" for="id_estado">Fecha y Hora</label>
+                            <div class="col-md-4">
+                                <div class="controls">
+                                    <div class="input-group date date-picker">
+                                      <input type="text" id="fecha" name="fecha" class="form-control date-input "  value="{{convertirFecha fecha}}">
+                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>  
+                                    </div>
+                                </div>           
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="hora" id="hora" class="form-control input-md hora" value="{{hora}}">
+                            </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="id_estado">Estado</label>
+                        <div class="col-md-8">
+                          <select id="id_estado" name="id_estado" type="text" class="form-control input-md">
+                            {{#select id_estado}}
+                                <option value="1">En Agenda</option>
+                                <option value="2">En Curso</option>
+                                <option value="3">Finalizada</option>
+                                <option value="4">Suspendida</option>
+                            {{/select}}
+                          </select>                      
+                         </div>
+                     </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="tipo_puntaje">Puntaje </label>
+                        <div class="col-md-4">
+                          <select id="tipo_puntaje" name="tipo_puntaje" type="text" class="form-control input-md">
+                          {{#select tipo_puntaje}}                            
+                              <option value="1" >Puntos</option>
+                              <option value="2" >Tiempo</option>
+                          {{/select}}
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <select id="orden_puntaje" name="orden_puntaje" type="text" class="form-control input-md">
+                          {{#select orden_puntaje}}                            
+                              <option value="1" >Ascendente</option>
+                              <option value="2" >Descendente</option>
+                          {{/select}}
+                          </select>
+                        </div>
+                    </div>
                    <div class="form-group">
                       <label class="col-md-4 control-label" for="id_deporte">Deporte</label>
                       <div class="col-md-8">
-                      <select id="id_deporte" name="id_deporte" type="text" class="form-control input-md">
-                      {{#select id_deporte}}
-                      {{#each deportes}}
-                          <option value={{id}} >{{nombre}}</option>
-                      {{/each}}
-                      {{/select}}
-                      </select>                      
+                        <select id="id_deporte" name="id_deporte" type="text" class="form-control input-md">
+                        {{#select id_deporte}}
+                        {{#each deportes}}
+                            <option value="{{id}}" >{{nombre}}</option>
+                        {{/each}}
+                        {{/select}}
+                        </select>
+                      </div>
                    </div>
                    <div class="form-group">
                       <label class="col-md-4 control-label" for="id_deporte">Categor&iacute;a</label>
@@ -104,15 +157,28 @@
                       <select id="id_categoria" name="id_categoria" type="text" class="form-control input-md">
                       {{#select id_categoria}}
                         {{#each categorias}}
-                            <option value={{id}} >{{nombre}}</option>
+                            <option value="{{id}}" >{{nombre}}</option>
                         {{/each}}
                       {{/select}}
                       </select>                      
                    </div>
+                   </div>
+                   <div class="form-group">
+                        <label class="col-md-4 control-label" for="id_estado">Estado</label>
+                        <div class="col-md-8">
+                          <select id="equipos" name="equipos" type="text" class="form-control input-md" multiple {{#if disabled }} disabled {{/if}} >
+                            {{#select selected}}
+                                {{#each equipos}}
+                                    <option value="{{id}}">{{nombre}}</option>
+                                {{/each}}
+                            {{/select}}
+                          </select>                      
+                         </div>
+                     </div>
                    <div class="form-group">
                       <label class="col-md-4 control-label" for="observaciones">Observaciones</label>
                       <div class="col-md-8">                      
-                      <textarea id="observaciones" name="observaciones" type="text" class="form-control input-md" >{{detalle}}</textarea>
+                      <textarea id="observaciones" name="observaciones" type="text" class="form-control input-md" >{{observaciones}}</textarea>
                       </div>    
                    </div>                  
                 </form>
