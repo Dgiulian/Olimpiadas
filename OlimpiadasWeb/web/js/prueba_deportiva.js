@@ -1,15 +1,25 @@
 
 var pruebas    = [];
 var deportes   = [];
+var equipos    = [];
 var categorias = [];
-$(document).ready(function(){
+$(document).ready(init);
+function init(){
     $('#btnNuevo').click(function(){
         agregarPrueba({});
     });
+    window.Handlebars.registerHelper('descPuntaje',function(tipo_puntaje,orden_puntaje){
+        var puntajes = ["","Puntos","Tiempo"];
+        var ordenes = ["","Ascendente","Descendente"];
+        
+        return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
+    });
     loadDeportes();
     loadCategorias();
+    loadEquipos();
     filtrarPrueba();
-});
+    
+}
 function filtrarPrueba(){
     var data = {};
     loadDataPrueba(data);
@@ -23,6 +33,18 @@ function loadDeportes(data){
     }).done(function(data) {
         if(data.Result === "OK") {
             deportes = data.Records;
+        }
+    });
+}
+function loadEquipos(data){
+    $.ajax({
+        url: URLS.EQUIPO.LIST,
+        data: data,
+        method:"POST",
+        dataType: "json",
+    }).done(function(data) {
+        if(data.Result === "OK") {
+            equipos = data.Records;
         }
     });
 }
@@ -64,6 +86,7 @@ function borrarPrueba(){
 }
 function createTable($tabla,data){
     var template = Handlebars.compile($("#prueba_list").html());
+    console.log(data.deporte);
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarPrueba);
     $('.btn-edit').click(editarPrueba);
@@ -76,12 +99,17 @@ function editarPrueba(){
 }
 
 function agregarPrueba(data){
-    var template = Handlebars.compile($('#prueba_edit').html());
-    data.deportes  = deportes;
+    
+    var template = Handlebars.compile($('#prueba_edit').html());    
+    data.deportes   = deportes;
     data.categorias = categorias;
+    data.equipos    = equipos;
+    data.disabled = data.id_estado > 1;
+    if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).join(",");
     bootbox.dialog({
         title: "Configuraci&oacute;n de prueba deportiva",
-        message: template(data), 
+        message: template(data),
+        //size:"large",
         buttons: {
             success: {
                 label: "Guardar",
@@ -96,6 +124,9 @@ function agregarPrueba(data){
                 callback: function () {}
             }
         }
+    }).init(function(){
+        initDialog();
+        $('#equipos').multiSelect();
     });
 }
 function guardarPrueba(data){
@@ -109,10 +140,6 @@ function guardarPrueba(data){
     });
 }
 function recuperarCampos(){
-    var data = {};
-    data.id = $('#id').val();
-    data.id_deporte    = $('#id_deporte').val();
-    data.id_categoria  = $('#id_categoria').val();        
-    data.observaciones = $('#observaciones').val();
+    var data = getFormData($('form'));
     return data;   
 }

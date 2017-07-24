@@ -5,8 +5,9 @@ public class Prueba_deportivaBase {
 	public Integer id_deporte = 0;
 	public Integer id_categoria = 0;
 	public Integer id_grupo = 0;
-	public Integer fecha = 0;
-	public Integer hora = 0;
+	public Integer id_estado = 0;
+	public String fecha = "";
+	public String hora = "";
 	public Integer tipo_puntaje = 0;
 	public Integer orden_puntaje = 0;
 	public Integer id_sede = 0;
@@ -20,6 +21,7 @@ public class Prueba_deportivaBase {
 		this.id_deporte = prueba_deportivabase.getId_deporte();
 		this.id_categoria = prueba_deportivabase.getId_categoria();
 		this.id_grupo = prueba_deportivabase.getId_grupo();
+		this.id_estado = prueba_deportivabase.getId_estado();
 		this.fecha = prueba_deportivabase.getFecha();
 		this.hora = prueba_deportivabase.getHora();
 		this.tipo_puntaje = prueba_deportivabase.getTipo_puntaje();
@@ -64,20 +66,29 @@ public class Prueba_deportivaBase {
 		return this;
 	}
 
-	public Integer getFecha() {
+	public Integer getId_estado() {
+		return this.id_estado;
+	}
+
+	public Prueba_deportivaBase setId_estado(Integer id_estado) {
+		this.id_estado = id_estado;
+		return this;
+	}
+
+	public String getFecha() {
 		return this.fecha;
 	}
 
-	public Prueba_deportivaBase setFecha(Integer fecha) {
+	public Prueba_deportivaBase setFecha(String fecha) {
 		this.fecha = fecha;
 		return this;
 	}
 
-	public Integer getHora() {
+	public String getHora() {
 		return this.hora;
 	}
 
-	public Prueba_deportivaBase setHora(Integer hora) {
+	public Prueba_deportivaBase setHora(String hora) {
 		this.hora = hora;
 		return this;
 	}

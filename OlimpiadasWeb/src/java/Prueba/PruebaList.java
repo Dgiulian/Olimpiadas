@@ -8,6 +8,7 @@ package Prueba;
 import bd.Categoria;
 import bd.Delegacion;
 import bd.Deporte;
+import bd.Equipo;
 import bd.Prueba_deportiva;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TCategoria;
 import transaccion.TDeporte;
+import transaccion.TEquipo;
 import transaccion.TPrueba_deportiva;
 import utils.JsonRespuesta;
 
@@ -31,6 +33,7 @@ import utils.JsonRespuesta;
 public class PruebaList extends HttpServlet {
     HashMap<Integer, Categoria> mapCategorias;
     HashMap<Integer, Deporte> mapDeportes ;
+    public static final String[] estados = {"","En Agenda","En Curso","Finalizada","Suspendida"};
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
@@ -62,10 +65,14 @@ public class PruebaList extends HttpServlet {
     private class Prueba_deportivaDet extends Prueba_deportiva {
         Deporte deporte;
         Categoria categoria;
+        String estado = "";
+        List<Equipo> detalle;
         public Prueba_deportivaDet(Prueba_deportiva prueba_deportiva) {
             super(prueba_deportiva);
-            deporte = mapDeportes.get(prueba_deportiva.getId_deporte());            
-            categoria = mapCategorias.get(prueba_deportiva.getId_categoria());            
+            detalle = new TEquipo().getById_prueba(prueba_deportiva.getId());
+            deporte   = mapDeportes.get(prueba_deportiva.getId_deporte());            
+            categoria = mapCategorias.get(prueba_deportiva.getId_categoria()); 
+            estado    = estados[prueba_deportiva.getId_estado()];
         }
     }
 
