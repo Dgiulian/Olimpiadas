@@ -86,7 +86,7 @@ function loadDataEquipo(filter){
                         className: 'btn-primary',
                         callback: function(){
                             if(data.id)
-                                window.location = URLS.EQUIPO_DETALLE+"?id_equipo="+data.id;
+                                window.location = URLS.EQUIPO_DETALLE.BASE +"?id_equipo="+data.id;
                             else{
                                 bootbox.alert("Debe guardar el equipo antes de editar los participantes");
                             }

@@ -30,10 +30,16 @@ public class TEquipo_detalle extends TransaccionBase<Equipo_detalle> {
     public static boolean contiene(List<Equipo_detalle> lista,Integer id_jugador){
         boolean existe = false;
         if(lista==null) return false;
-        if (lista.stream().anyMatch((equipo_detalle) -> (equipo_detalle.getId_jugador().equals(id_jugador)))) {
-            return true;
+        for(Equipo_detalle equipo_detalle:lista){
+            if (equipo_detalle.getId_jugador().equals(id_jugador)) {
+                existe =  true; 
+                break;
+            }
         }
-        return false;
+        /*if (lista.stream().anyMatch((equipo_detalle) -> (equipo_detalle.getId_jugador().equals(id_jugador)))) {
+            return true;
+        }*/
+        return existe;
     }
     public boolean eliminar(Integer id_equipo){
         boolean todoOk;
