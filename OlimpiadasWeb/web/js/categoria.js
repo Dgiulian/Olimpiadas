@@ -53,6 +53,7 @@ function createTable($tabla,data){
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarCategoria);
     $('.btn-edit').click(editarCategoria);
+    $('.btn-grupo').click(redirigir_grupo);
 }
 function editarCategoria(){
     var data = {};
@@ -65,7 +66,7 @@ function agregarCategoria(data){
     var template = Handlebars.compile($('#categoria_edit').html());
     data.deportes = deportes;
     bootbox.dialog({
-        title: "Configuraci&oacute;n de delegaci&oacute;n",
+        title: "Configuraci&oacute;n de categoria",
         message: template(data), 
         buttons: {
             success: {
@@ -111,4 +112,10 @@ function recuperarCampos(){
     data.nombre = $('#nombre').val();
     data.detalle  = $('#detalle').val();
     return data;   
+}
+
+function redirigir_grupo(){
+    var index = $(this).data('index');
+    var id = categorias[index].id;        
+    window.location = URLS.GRUPO.BASE + "?id_categoria=" + id;
 }

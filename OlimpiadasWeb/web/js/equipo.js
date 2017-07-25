@@ -54,6 +54,7 @@ function loadDataEquipo(filter){
         $tabla.find('tbody').html(template({records:data}));
         $('.btn-del').click(borrarEquipo);
         $('.btn-edit').click(editarEquipo);
+        $('.btn-integrante').click(redirigir_integrante);
     }
     function editarEquipo(){
         var data = {};
@@ -112,4 +113,10 @@ function recuperarCampos(){
     data.nombre = $('#nombre').val();
     data.observaciones  = $('#observaciones').val();
     return data;   
+}
+
+function redirigir_integrante(){
+    var index = $(this).data('index');    
+    var id = equipos[index].id;        
+    window.location = URLS.EQUIPO_DETALLE.BASE +"?id_equipo="+id;    
 }
