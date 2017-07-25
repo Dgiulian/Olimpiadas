@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,7 @@ import transaccion.TGrupo;
 import transaccion.TDeporte;
 import transaccion.TEquipo;
 import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
@@ -41,13 +43,16 @@ public class GrupoList extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
         String pagNro = request.getParameter("pagNro");       
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Grupo> lista = new TGrupo().getList();
+            HashMap<String,String> filtro = new HashMap<String,String>();
+            if(id_categoria!=0) filtro.put("id_categoria", id_categoria.toString());
+            List<Grupo> lista = new TGrupo().getListFiltro(filtro);
             List<GrupoList.GrupoDet> listaDet = new ArrayList();                        
             if (lista != null) {
                 for(Grupo c:lista) listaDet.add(new GrupoList.GrupoDet(c));
