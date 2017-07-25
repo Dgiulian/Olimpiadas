@@ -4,6 +4,8 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
 .form-search{
     margin-bottom: 15px;
 }
@@ -193,17 +195,17 @@ table.dataTable thead .sorting_desc_disabled {
 table.dataTable thead .sorting_asc:after {
     content: "\f0de";
     float: right;
-    font-family: fontawesome;
+    font-family: 'Oswald', sans-serif;
 }
 table.dataTable thead .sorting_desc:after {
     content: "\f0dd";
     float: right;
-    font-family: fontawesome;
+    font-family: 'Oswald', sans-serif;
 }
 table.dataTable thead .sorting:after {
     content: "\f0dc";
     float: right;
-    font-family: fontawesome;
+    font-family: 'Oswald', sans-serif;
     color: rgba(50, 50, 50, 0.5);
 }
 .btn-circle {

@@ -49,9 +49,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
+                <div class="login-panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Ingreso al sistema <% if (entorno.getValor().equalsIgnoreCase("desarrollo"))  { %> <small><%=entorno.getValor()%></small> <% }%> </h3>
+                        <img class="img-responsive" src="images/logotipo-OLI.png"/>
+                        <h3 class="panel-title"><% if (entorno.getValor().equalsIgnoreCase("desarrollo"))  { %> <small><%=entorno.getValor()%></small> <% }%> </h3>
                     </div>
                     <div class="panel-body">
                         <% if (errores != null) {%>
