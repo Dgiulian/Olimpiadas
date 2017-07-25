@@ -19,4 +19,5 @@ public class TPrueba_deportiva extends TransaccionBase<Prueba_deportiva> {
 						id);
 		return super.getById(query);
 	}
+        
 }

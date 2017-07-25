@@ -95,13 +95,11 @@
               <form class="form-vertical">
                   <input id="id" name="id" type="hidden" class="" value="{{id}}" >
                   <div class="form-group">
-                      <label class="col-md-4 control-label" for="nombre">Nombre</label>
-                      <div class="col-md-8">
+                      <label for="nombre">Nombre</label>                      
                       <input id="nombre" name="nombre" type="text" class="form-control input-md" value="{{nombre}}">
                    </div>
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="tipo">Tipo</label>
-                      <div class="col-md-8">
+                      <label for="tipo">Tipo</label>                      
                       <select id="tipo" name="tipo" type="text" class="form-control input-md">
                       {{#select tipo}}
                         <option value="0">Seleccione el tipo de deporte</option>
@@ -110,21 +108,20 @@
                       {{/select}}
                       </select>
                    </div>
-                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="cantidad_jugadores">Cantidad Jugadores</label>
-                      <div class="col-md-8">
+                    <div class="form-group"> 
+                      <label for="cantidad_jugadores">Cantidad Jugadores</label>
+                      
                       <input id="cantidad_jugadores" name="cantidad_jugadores" type="text" class="form-control input-md" value="{{cantidad_jugadores}}">
-                      </div>
-                   </div>
+                                         </div>
                   
                    
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="reglamento">Reglamento</label>
-                      <div class="col-md-8">
+                      <label for="reglamento">Reglamento</label>
+                      
                         {{#if reglamento}}                           
                         {{/if}}
                         <input id="reglamento" name="reglamento" type="file" class="" value="">
-                      </div>
+                      
                    </div>   
                 </form>
           </div>

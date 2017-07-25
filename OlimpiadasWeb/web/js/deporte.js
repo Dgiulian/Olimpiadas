@@ -56,7 +56,7 @@ function editarDeporte(){
 function agregarDeporte(data){
     var template = Handlebars.compile($('#deporte_edit').html());
     bootbox.dialog({
-        title: "Configuraci&oacute;n de delegaci&oacute;n",
+        title: "Configuraci&oacute;n de deporte",
         message: template(data), 
         buttons: {
             success: {

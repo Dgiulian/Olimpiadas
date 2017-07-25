@@ -109,7 +109,7 @@ function agregarPrueba(data){
     bootbox.dialog({
         title: "Configuraci&oacute;n de prueba deportiva",
         message: template(data),
-        //size:"large",
+        size:"large",
         buttons: {
             success: {
                 label: "Guardar",
