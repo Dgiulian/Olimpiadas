@@ -10,12 +10,13 @@ $(document).ready(function(){
 });
 function filtrarGrupo(){
     var data = {};
+    data.id_categoria = $('#search_categoria').val();
     loadDataGrupo(data);
 }
-function loadEquipos(data){
+function loadEquipos(filter){
     $.ajax({
         url: URLS.EQUIPO.LIST,
-        data: data,
+        data: filter,
         method:"POST",
         dataType: "json",
     }).done(function(data) {
@@ -64,6 +65,7 @@ function editarGrupo(){
 function agregarGrupo(data){
     var template = Handlebars.compile($('#grupo_edit').html());
     data.equipos = equipos;
+    data.id_categoria = $('#search_categoria').val();
     if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).join(",");
     else data.selected = "";
     

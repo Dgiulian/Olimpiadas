@@ -31,6 +31,7 @@
                                 <div class="panel-heading text-right">
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
                                     <span id="btnNuevo" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
+                            <input type="hidden" id="search_categoria" name="search_categoria" value="<%=categoria.getId()%>">
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -95,6 +96,7 @@
             <div class="col-md-12">
             <form class="form-vertical">
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
+                  <input id="id_categoria" name="id_categoria" type="hidden" class="" value="{{id_categoria}}" >
             <div class="form-group">
             <label class="col-md-4 control-label" for="nombre">Nombre</label>
             <div class="col-md-8">

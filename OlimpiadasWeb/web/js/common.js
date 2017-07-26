@@ -308,3 +308,15 @@ function getFormData($form){
 
     return indexed_array;
 }
+
+function createOptionsFromArray(id_select,values){
+    var select = $(id_select);
+    select.empty();
+    values.forEach(function(d,i){
+        var option = $('<option>');
+            option.attr('value',d.id);
+            option.text(d.nombre);            
+            select.append(option);
+            
+    });
+}

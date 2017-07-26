@@ -49,8 +49,8 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">                       
-                        <li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Inicio</a></li>
-                        <li><a href="/"><i class="fa fa-calendar fa-fw"></i> Agenda</a></li>
+                        <li><a href="<%=request.getContextPath()%>"><i class="fa  fa-fw"></i> Inicio</a></li>
+<!--                        <li><a href="/"><i class="fa fa-calendar fa-fw"></i> Agenda</a></li>-->
                         <li><a href="<%=PathCfg.CATEGORIA%>"><i class="fa fa-dashboard fa-fw"></i> Categor&iacute;a</a></li>
                         <li><a href="<%=PathCfg.DELEGACION%>"><i class="fa fa-flag fa-fw"></i> Delegaci&oacute;n</a></li>
                         <li><a href="<%=PathCfg.DEPORTE%>"><i class="fa fa-dribbble fa-fw"></i> Deportes</a></li>

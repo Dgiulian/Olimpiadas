@@ -26,4 +26,23 @@ public class TGrupo_detalle extends TransaccionBase<Grupo_detalle> {
         conexion.desconectarse();
         return todoOk;
     }
+    public boolean contiene(List<Grupo_detalle> lista,Integer id_grupo){
+        boolean existe = false;
+        if(lista==null) return false;
+        for(Grupo_detalle equipo_detalle:lista){
+            if (equipo_detalle.getId_grupo().equals(id_grupo)) {
+                existe =  true; 
+                break;
+            }
+        }
+        /*if (lista.stream().anyMatch((equipo_detalle) -> (equipo_detalle.getId_grupo().equals(id_grupo)))) {
+            return true;
+        }*/
+        return existe;
+    }
+
+    public List<Grupo_detalle> getById_equipo(Integer id_equipo) {
+        String query = String.format("select * from grupo_detalle where id_equipo = %d",id_equipo);
+        return this.getList(query);
+    }
 }

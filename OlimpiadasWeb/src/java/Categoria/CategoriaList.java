@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import transaccion.TCategoria;
 import transaccion.TDeporte;
 import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
@@ -42,13 +43,17 @@ public class CategoriaList extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
+        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         mapDeportes = new TDeporte().getMap();
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Categoria> lista = new TCategoria().getList();
+            HashMap<String,String> filtro = new HashMap<String,String>();
+            if(id_deporte!=0) filtro.put("id_deporte",id_deporte.toString());
+            
+            List<Categoria> lista = new TCategoria().getListFiltro(filtro);
             List<CategoriaDet> listaDet = new ArrayList();            
                         
             if (lista != null) {

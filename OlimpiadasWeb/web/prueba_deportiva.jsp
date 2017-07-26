@@ -40,9 +40,10 @@
                                             <th>Fecha</th>
                                             <th>Deporte</th>
                                             <th>Categor&iacute;a</th>
+                                            <th>Grupo</th>
                                             <th>Estado</th>
                                             <th>Puntaje</th>
-                                            <th>Acciones</th>
+                                            <th class="acciones">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,12 +76,13 @@
             <td class="">{{convertirFecha fecha}} {{hora}}</td>
             <td class="">{{deporte.nombre}}</td>
             <td class="">{{categoria.nombre}}</td>
-             <td class="">{{estado}}</td>
-             <td class=""> {{descPuntaje tipo_puntaje orden_puntaje }}</td>             
+            <td class="">{{grupo.nombre}}</td>
+            <td class="">{{estado}}</td>
+            <td class="">{{descPuntaje tipo_puntaje orden_puntaje }}</td>             
             <td class="acciones">
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
-              </td>
+            </td>
           </tr>
         {{else}}
             <tr>
@@ -120,6 +122,7 @@
                           </select>                      
                          </div>
                      </div>
+                    
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="tipo_puntaje">Puntaje </label>
                         <div class="col-md-4">
@@ -139,10 +142,11 @@
                           </select>
                         </div>
                     </div>
+                    
                    <div class="form-group">
                       <label class="col-md-4 control-label" for="id_deporte">Deporte</label>
                       <div class="col-md-8">
-                        <select id="id_deporte" name="id_deporte" type="text" class="form-control input-md">
+                        <select id="id_deporte" name="id_deporte" type="text" class="form-control input-md" {{#if disabled }} disabled {{/if}} >
                         {{#select id_deporte}}
                         {{#each deportes}}
                             <option value="{{id}}" >{{nombre}}</option>
@@ -152,9 +156,9 @@
                       </div>
                    </div>
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="id_deporte">Categor&iacute;a</label>
+                      <label class="col-md-4 control-label" for="id_categoria">Categor&iacute;a</label>
                       <div class="col-md-8">
-                      <select id="id_categoria" name="id_categoria" type="text" class="form-control input-md">
+                      <select id="id_categoria" name="id_categoria" type="text" class="form-control input-md" {{#if disabled }} disabled {{/if}} >
                       {{#select id_categoria}}
                         {{#each categorias}}
                             <option value="{{id}}" >{{nombre}}</option>
@@ -163,8 +167,20 @@
                       </select>                      
                    </div>
                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="id_grupo">Grupo</label>
+                        <div class="col-md-8">
+                          <select id="id_grupo" name="id_grupo" type="text" class="form-control input-md" {{#if disabled }} disabled {{/if}} >
+                            {{#select id_grupo}}
+                                {{#each grupos}}
+                                <option value="{{id}}">{{nombre}}</option>
+                                {{/each}}                                
+                            {{/select}}
+                          </select>                      
+                         </div>
+                     </div>
                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="id_estado">Estado</label>
+                        <label class="col-md-4 control-label" for="id_estado">Equipos</label>
                         <div class="col-md-8">
                           <select id="equipos" name="equipos" type="text" class="form-control input-md" multiple {{#if disabled }} disabled {{/if}} >
                             {{#select selected}}

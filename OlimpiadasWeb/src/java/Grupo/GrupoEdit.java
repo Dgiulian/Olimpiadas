@@ -111,11 +111,10 @@ public class GrupoEdit extends HttpServlet {
                 TGrupo_detalle tgrupo_detalle = new TGrupo_detalle();
                 tgrupo_detalle.eliminar(grupo.getId());
                 for(String eq:arrEquipos){
-                    System.out.println(eq);
                     Integer id_equipo = Parser.parseInt(eq);
                     Grupo_detalle grupo_detalle = new Grupo_detalle();
                     grupo_detalle.setId_grupo(grupo.getId());
-                    grupo_detalle.setId_equipo(id_equipo);
+                    grupo_detalle.setId_equipo(id_equipo);                    
                     tgrupo_detalle.alta(grupo_detalle);
                 }
             }
