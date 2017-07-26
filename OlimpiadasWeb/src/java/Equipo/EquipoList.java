@@ -8,6 +8,7 @@ package Equipo;
 import bd.Equipo;
 import bd.Delegacion;
 import bd.Equipo;
+import bd.detalle.EquipoDet;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +28,7 @@ import utils.JsonRespuesta;
  * @author Diego
  */
 public class EquipoList extends HttpServlet {
-    HashMap<Integer, Delegacion> mapDelegaciones;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +45,7 @@ public class EquipoList extends HttpServlet {
         String pagNro = request.getParameter("pagNro");       
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        mapDelegaciones = new TDelegacion().getMap();
+        
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
@@ -52,7 +53,7 @@ public class EquipoList extends HttpServlet {
             List<EquipoDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
-                for(Equipo c:lista) listaDet.add(new EquipoList.EquipoDet(c));
+                for(Equipo c:lista) listaDet.add(new EquipoDet(c));
                 jr.setTotalRecordCount(listaDet.size());
             } else {
                 jr.setTotalRecordCount(0);
@@ -65,13 +66,7 @@ public class EquipoList extends HttpServlet {
             out.close();
         }
     }
-    private class EquipoDet extends Equipo {
-        Delegacion delegacion;
-        public EquipoDet(Equipo equipo) {
-            super(equipo);
-            delegacion = mapDelegaciones.get(equipo.getId_delegacion());            
-        }
-    }
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
