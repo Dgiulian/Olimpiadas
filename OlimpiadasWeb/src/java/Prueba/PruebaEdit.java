@@ -85,6 +85,7 @@ public class PruebaEdit extends HttpServlet {
         Integer id = Parser.parseInt(request.getParameter("id"));
         Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
         Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
+        Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));
         Integer id_estado = Parser.parseInt(request.getParameter("id_estado"));
         Integer tipo_puntaje = Parser.parseInt(request.getParameter("tipo_puntaje"));
         Integer orden_puntaje = Parser.parseInt(request.getParameter("orden_puntaje"));
@@ -103,6 +104,7 @@ public class PruebaEdit extends HttpServlet {
                 nuevo = true;
             }
             prueba_deportiva.setId_categoria(id_categoria);
+            prueba_deportiva.setId_grupo(id_grupo);
             prueba_deportiva.setObservaciones(observaciones);
             prueba_deportiva.setId_deporte(id_deporte);
             prueba_deportiva.setId_estado(id_estado);
