@@ -2,7 +2,9 @@
 var pruebas    = [];
 var deportes   = [];
 var equipos    = [];
+var grupos     = [];
 var categorias = [];
+var ms;
 $(document).ready(init);
 function init(){
     $('#btnNuevo').click(function(){
@@ -14,9 +16,10 @@ function init(){
         
         return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
     });
-    loadDeportes();
-    loadCategorias();
-    loadEquipos();
+    loadDeportes({});
+//    loadCategorias({});
+//    loadGrupos({});
+//    loadEquipos({});
     filtrarPrueba();
     
 }
@@ -24,51 +27,45 @@ function filtrarPrueba(){
     var data = {};
     loadDataPrueba(data);
 }
-function loadDeportes(data){
-    $.ajax({
-        url: URLS.DEPORTE.LIST,
-        data: data,
-        method:"POST",
-        dataType: "json",
-    }).done(function(data) {
+
+function loadDeportes(filtro){
+    return getDataDeportes(filtro).done(function(data) {
         if(data.Result === "OK") {
             deportes = data.Records;
         }
     });
 }
-function loadEquipos(data){
-    $.ajax({
-        url: URLS.EQUIPO.LIST,
-        data: data,
-        method:"POST",
-        dataType: "json",
-    }).done(function(data) {
+
+
+function loadCategorias(filtro){
+    filtro.id_deporte = $('#id_deporte').val();
+    return getDataCategorias(filtro).done(function(data) {
         if(data.Result === "OK") {
-            equipos = data.Records;
+            categorias = data.Records;
         }
     });
 }
-function loadCategorias(data){
-    $.ajax({
-        url: URLS.CATEGORIA.LIST,
-        data: data,
-        method:"POST",
-        dataType: "json",
-     }).done(function(data) {
+function loadGrupos(filtro){
+    filtro.id_categoria = $('#id_categoria').val();
+    return getDataGrupos(filtro).done(function(data) {
         if(data.Result === "OK") {
-            categorias = data.Records;
+            grupos = data.Records;
+        }
+    });
+}
+
+function loadEquipos(filtro){
+    filtro.id_grupo = $('#id_grupo').val();
+    return getDataEquipos(filtro).done(function(data) {
+        if(data.Result === "OK") {
+            equipos = data.Records;
         }
     });
 }
 function loadDataPrueba(filter){
     var $tabla = $('#tblPrueba');
     setLoader($tabla);
-    $.ajax({
-           url: URLS.PRUEBA.LIST,
-           data: filter,
-           method:"POST",
-           dataType: "json"
-    }).done(function(result) {
+    getDataPruebas(filter).done(function(result) {
         if(result.Result === "OK") {
             pruebas = result.Records;
             createTable($tabla,pruebas)                   
@@ -99,36 +96,44 @@ function editarPrueba(){
 }
 
 function agregarPrueba(data){
-    
-    var template = Handlebars.compile($('#prueba_edit').html());    
-    data.deportes   = deportes;
-    data.categorias = categorias;
-    data.equipos    = equipos;
-    data.disabled = data.id_estado > 1;
-    if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).join(",");
-    bootbox.dialog({
-        title: "Configuraci&oacute;n de prueba deportiva",
-        message: template(data),
-        size:"large",
-        buttons: {
-            success: {
-                label: "Guardar",
-                className: "btn-success",
-                callback: function () {
-                    var campos = recuperarCampos();
-                    guardarPrueba(campos);
+    Promise.all([loadDeportes,loadCategorias]).then(function(resolve,reject){
+        var template = Handlebars.compile($('#prueba_edit').html());    
+        data.deportes   = deportes;
+        data.categorias = categorias;
+        data.equipos    = equipos;
+        data.grupos     = grupos;
+        data.disabled = data.id_estado > 1;
+        if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).join(",");
+        bootbox.dialog({
+            title: "Configuraci&oacute;n de prueba deportiva",
+            message: template(data),
+            size:"large",
+            buttons: {
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                    callback: function () {
+                        var campos = recuperarCampos();
+                        guardarPrueba(campos);
+                    }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    callback: function () {}
                 }
-            },
-            cancel: {
-                label: "Cancelar",
-                callback: function () {}
             }
-        }
-    }).init(function(){
-        initDialog();
-        $('#equipos').multiSelect();
+        }).init(function(){
+            initDialog();
+            $('#equipos').multiSelect();
+            $('#id_deporte').change(changeDeporte);
+            $('#id_deporte').trigger('change');
+            $('#id_categoria').change(changeCategoria);
+            $('#id_grupo').change(changeGrupo);
+
+        });
     });
 }
+
 function guardarPrueba(data){
     $.ajax({
         url:URLS.PRUEBA.EDIT,
@@ -139,7 +144,79 @@ function guardarPrueba(data){
         filtrarPrueba();
     });
 }
+function changeDeporte(e){
+    var id_deporte = $('#id_deporte').val();
+    getDataCategorias({id_deporte:id_deporte}).done(function(result){
+        if(result.Result === "OK") {
+            categorias = result.Records;
+            createOptionsFromArray('#id_categoria',categorias);
+            $('#id_categoria').trigger('change');
+        }
+    });
+}
+function changeCategoria(e){
+    var id_categoria = $('#id_categoria').val();
+    getDataGrupos({id_categoria:id_categoria}).done(function(result){
+        if(result.Result === "OK") {
+            pruebas = result.Records;
+            createOptionsFromArray('#id_grupo',pruebas);
+            $('#id_grupo').trigger('change');
+        }
+    });
+}
+
+function changeGrupo(e){
+    var id_grupo = $('#id_grupo').val();
+    getDataEquipos({id_grupo}).done(function(result){
+        if(result.Result === "OK") {
+            equipos = result.Records;
+            createOptionsFromArray('#equipos',equipos);
+            $('#equipos').multiSelect('refresh');
+        }
+    });
+}
 function recuperarCampos(){
     var data = getFormData($('form'));
     return data;   
+}
+
+function getDataDeportes(filtro){
+    return $.ajax({
+        url: URLS.DEPORTE.LIST,
+        data: filtro,
+        method:"POST",
+        dataType: "json",
+    });
+}
+function getDataEquipos(filtro){
+    return $.ajax({
+        url: URLS.EQUIPO.LIST,
+        data: filtro,
+        method:"POST",
+        dataType: "json",
+    });
+}
+function getDataCategorias(filtro){
+    return $.ajax({
+        url: URLS.CATEGORIA.LIST,
+        data: filtro,
+        method:"POST",
+        dataType: "json",
+    });
+}
+function getDataPruebas(filtro){
+    return $.ajax({
+           url: URLS.PRUEBA.LIST,
+           data: filtro,
+           method:"POST",
+           dataType: "json"
+    });
+}
+function getDataGrupos(filtro){
+    return $.ajax({
+        url: URLS.GRUPO.LIST,
+        data: filtro,
+        method:"POST",
+        dataType: "json",
+    });
 }

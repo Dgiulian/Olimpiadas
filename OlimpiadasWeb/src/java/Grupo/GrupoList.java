@@ -51,7 +51,8 @@ public class GrupoList extends HttpServlet {
         try {
             JsonRespuesta jr = new JsonRespuesta();
             HashMap<String,String> filtro = new HashMap<String,String>();
-            if(id_categoria!=0) filtro.put("id_categoria", id_categoria.toString());
+            //if(id_categoria!=0) 
+                filtro.put("id_categoria", id_categoria.toString());
             List<Grupo> lista = new TGrupo().getListFiltro(filtro);
             List<GrupoList.GrupoDet> listaDet = new ArrayList();                        
             if (lista != null) {

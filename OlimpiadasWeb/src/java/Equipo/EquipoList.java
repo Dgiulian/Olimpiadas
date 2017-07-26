@@ -8,6 +8,7 @@ package Equipo;
 import bd.Equipo;
 import bd.Delegacion;
 import bd.Equipo;
+import bd.Grupo_detalle;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TEquipo;
 import transaccion.TDelegacion;
+import transaccion.TGrupo_detalle;
 import utils.JsonRespuesta;
+import utils.Parser;
 
 /**
  *
@@ -42,17 +45,27 @@ public class EquipoList extends HttpServlet {
          response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
-                
+        Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         mapDelegaciones = new TDelegacion().getMap();
         
+        TGrupo_detalle tgrupo_detalle = new TGrupo_detalle();
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Equipo> lista = new TEquipo().getList();
+            HashMap<String,String> filtro = new HashMap<String,String>();
+            
+            List<Equipo> lista = new TEquipo().getListFiltro(filtro);
             List<EquipoDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
-                for(Equipo c:lista) listaDet.add(new EquipoList.EquipoDet(c));
+                
+                for(Equipo equipo:lista) {
+                    if(id_grupo!=0){
+                        List<Grupo_detalle> lstGruposEquipo = tgrupo_detalle.getById_equipo(equipo.getId());
+                        if(!tgrupo_detalle.contiene(lstGruposEquipo,id_grupo)) continue;
+                    }
+                    listaDet.add(new EquipoList.EquipoDet(equipo));
+                }
                 jr.setTotalRecordCount(listaDet.size());
             } else {
                 jr.setTotalRecordCount(0);

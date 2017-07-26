@@ -23,10 +23,10 @@ import transaccion.TGrupo;
  */
 public class Prueba_deportivaDet extends Prueba_deportiva {
 
-    public static final HashMap<Integer, Deporte> mapDeportes = new TDeporte().getMap();
-    public static final HashMap<Integer, Categoria> mapCategorias = new TCategoria().getMap();
-    public static final HashMap<Integer, Grupo> mapGrupos = new TGrupo().getMap();
-    public static final String[] estados = {"", "En Agenda", "En Curso", "Finalizada", "Suspendida"};
+    public  final HashMap<Integer, Deporte> mapDeportes = new TDeporte().getMap();
+    public  final HashMap<Integer, Categoria> mapCategorias = new TCategoria().getMap();
+    public  final HashMap<Integer, Grupo> mapGrupos = new TGrupo().getMap();
+    public  final String[] estados = {"", "En Agenda", "En Curso", "Finalizada", "Suspendida"};
 
     Deporte deporte;
     Categoria categoria;

@@ -180,9 +180,12 @@ public abstract class TransaccionBase<E> {
         try {
             Method getterId = this.clase.getMethod("getId");
             Object id = null;
-            for (E e : this.getList()) {
-                id = getterId.invoke(e, new Object[0]);
-                mapa.put(Integer.valueOf(String.valueOf(id)),e);
+            List<E> lista = this.getList();
+            if(lista!=null){
+                for (E e : lista) {
+                    id = getterId.invoke(e, new Object[0]);
+                    mapa.put(Integer.valueOf(String.valueOf(id)),e);
+                }
             }
         } catch (IllegalAccessException ex) {
             Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
