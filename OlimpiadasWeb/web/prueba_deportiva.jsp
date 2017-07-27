@@ -19,7 +19,7 @@
                     <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Listado de pruebas deportivas <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
+                            Listado de pruebas deportivas <a href="<%=PathCfg.PRUEBA_EDIT%>" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</a>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -80,8 +80,7 @@
             <td class="">{{estado}}</td>
             <td class="">{{descPuntaje tipo_puntaje orden_puntaje }}</td>             
             <td class="acciones">
-            <a  href="PruebaEdit?id={{id}}" class="btn btn-xs btn-circle  btn-warning  "><span class="fa fa-edit fw"></span></a>
-              <!-- <span data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span> -->
+              <a  href="PruebaEdit?id={{id}}" class="btn btn-xs btn-circle  btn-warning  "><span class="fa fa-edit fw"></span></a>              
               <span  data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>
           </tr>

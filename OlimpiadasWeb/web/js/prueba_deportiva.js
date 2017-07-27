@@ -11,8 +11,8 @@ function init(){
         agregarPrueba({});
     });
     window.Handlebars.registerHelper('descPuntaje',function(tipo_puntaje,orden_puntaje){
-        var puntajes = ["","Puntos","Tiempo"];
-        var ordenes = ["","Ascendente","Descendente"];
+        var puntajes = ["Puntos","Tiempo"];
+        var ordenes = ["Ascendente","Descendente"];
         
         return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
     });
