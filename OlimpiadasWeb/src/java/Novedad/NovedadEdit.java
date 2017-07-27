@@ -176,11 +176,7 @@ public class NovedadEdit extends HttpServlet {
             novedad.setSubtitulo(subtitulo);
             novedad.setYoutube(youtube);
             novedad.setDetalle(detalle);
-            boolean todoOk;
-            if(nuevo) {
-                id = tnovedad.alta(novedad);
-                todoOk = id!=0; 
-            } else todoOk = tnovedad.actualizar(novedad);
+
             
             if(archivo1!=null && !"".equals(imagen)) {
                 String filePath = uploadFolder + File.separator + imagen;
@@ -193,6 +189,11 @@ public class NovedadEdit extends HttpServlet {
                     throw new BaseException("ERROR","Ocurri&oacute; un error al cargar la imagen");
                 }                            
             }
+            boolean todoOk;
+            if(nuevo) {
+                id = tnovedad.alta(novedad);
+                todoOk = id!=0; 
+            } else todoOk = tnovedad.actualizar(novedad);
             if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la Novedad");
             jr.setResult("OK");
             jr.setRecord(novedad);

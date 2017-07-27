@@ -78,18 +78,18 @@ function guardarNovedad(data){
         processData:false,                
         contentType:false,
         dataType:'json'        
-    }).done(function(){
+    }).done(function(response){
+        if(response.Result !=="OK") bootbox.alert(response.Message);
         filtrarNovedad();
     });   
 }
 function recuperarCampos(){
     var data = new FormData();
     var campos = getFormData($('form'));
-    for( let d in campos){
-        console.log(d);
+    for( let d in campos){    
         data.append(d,campos[d]);
     }
     data.append('imagen', $('#imagen')[0].files[0]);    
-    console.log(data);
+    
     return data;
 }

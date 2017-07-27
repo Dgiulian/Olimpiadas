@@ -38,6 +38,7 @@
                                             <th>Fecha</th>
                                             <th>T&iacute;tulo</th>
                                             <th>Subtitulo</th>                                            
+                                            <th>Imagen</th>                                            
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -69,7 +70,12 @@
             <td class="">{{id}}</td>
             <td class="">{{convertirFecha  fecha}}</td>
             <td class="">{{titulo}}</td>
-            <td class="">{{subtitulo}}</td>                        
+            <td class="">{{subtitulo}}</td>
+            <td>
+                {{#if imagen}}
+                    <a href="Download?type=novedad&id={{id}}">{{imagen}}</a>
+                {{/if}}  
+            </td>
             <td class="">
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
               <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
