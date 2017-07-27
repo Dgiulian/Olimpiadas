@@ -30,4 +30,20 @@ public class TPrueba_deportiva_detalle
         conexion.desconectarse();
         return todoOk;
     }
+//    public static boolean contiene(List<Equipo> lista,Integer id_equipo){
+//        boolean existe = false;
+//        if(lista==null) return false;
+//        for(Equipo equipo:lista){
+//            if (equipo.getId_equipo().equals(id_equipo)) {
+//                existe =  true; 
+//                break;
+//            }
+//        }
+//        /*if (lista.stream().anyMatch((equipo_detalle) -> (equipo_detalle.getId_jugador().equals(id_jugador)))) {
+//            return true;
+//        }*/
+//        return existe;
+//    }
+    
+    
 }

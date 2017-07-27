@@ -192,7 +192,7 @@ public class TFecha {
     public static String formatearFechaBdVista(String fecha){
         if (fecha!=null&&!fecha.equals(""))
             return TFecha.formatearFecha(fecha, TFecha.formatoBD, TFecha.formatoVista);
-        else return null;
+        else return "";
     }
      public static String formatearFechaVistaBd(String fecha){
         if (fecha!=null&&!fecha.equals(""))

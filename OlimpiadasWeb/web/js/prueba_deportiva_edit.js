@@ -7,25 +7,11 @@ var categorias = [];
 var ms;
 $(document).ready(init);
 function init(){
-    $('#btnNuevo').click(function(){
-        agregarPrueba({});
-    });
-    window.Handlebars.registerHelper('descPuntaje',function(tipo_puntaje,orden_puntaje){
-        var puntajes = ["","Puntos","Tiempo"];
-        var ordenes = ["","Ascendente","Descendente"];
-        
-        return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
-    });
-    loadDeportes({});
-//    loadCategorias({});
-//    loadGrupos({});
-//    loadEquipos({});
-    filtrarPrueba();
-    
-}
-function filtrarPrueba(){
-    var data = {};
-    loadDataPrueba(data);
+    $('#equipos').multiSelect();
+    $('#id_deporte').change(changeDeporte);
+    $('#id_categoria').change(changeCategoria);
+    $('#id_grupo').change(changeGrupo);
+   // $('#id_deporte').trigger('change');
 }
 
 function loadDeportes(filtro){
@@ -124,11 +110,7 @@ function agregarPrueba(data){
             }
         }).init(function(){
             initDialog();
-            $('#equipos').multiSelect();
-            $('#id_deporte').change(changeDeporte);
-            $('#id_deporte').trigger('change');
-            $('#id_categoria').change(changeCategoria);
-            $('#id_grupo').change(changeGrupo);
+ 
 
         });
     });

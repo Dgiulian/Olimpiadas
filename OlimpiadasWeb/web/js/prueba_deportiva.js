@@ -17,9 +17,6 @@ function init(){
         return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
     });
     loadDeportes({});
-//    loadCategorias({});
-//    loadGrupos({});
-//    loadEquipos({});
     filtrarPrueba();
     
 }
@@ -126,9 +123,9 @@ function agregarPrueba(data){
             initDialog();
             $('#equipos').multiSelect();
             $('#id_deporte').change(changeDeporte);
-            $('#id_deporte').trigger('change');
             $('#id_categoria').change(changeCategoria);
             $('#id_grupo').change(changeGrupo);
+            $('#id_deporte').trigger('change');
 
         });
     });
