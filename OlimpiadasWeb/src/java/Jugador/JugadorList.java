@@ -7,6 +7,7 @@ package Jugador;
 
 import bd.Delegacion;
 import bd.Jugador;
+import bd.detalle.JugadorDet;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +28,7 @@ import utils.Parser;
  * @author Diego
  */
 public class JugadorList extends HttpServlet {
-    HashMap<Integer, Delegacion> mapDelegaciones;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +46,7 @@ public class JugadorList extends HttpServlet {
         Integer id_delegacion = Parser.parseInt(request.getParameter("id_delegacion"));
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        mapDelegaciones = new TDelegacion().getMap();
+        
         
         try {
             HashMap<String,String>filtroJugador = new HashMap<>();
@@ -109,12 +110,6 @@ public class JugadorList extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private class JugadorDet extends Jugador {
-        Delegacion delegacion;
-        public JugadorDet(Jugador c) {
-            super(c);
-            delegacion = mapDelegaciones.get(c.getId_delegacion());
-        }
-    }
+    
 
 }
