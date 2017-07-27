@@ -107,10 +107,10 @@
             {{/each}}
 
         </script>   
-        <script id="deporte_edit" type="text/x-handlebars-template" method="POST" enctype="multipart/form-data">
+        <script id="deporte_edit" type="text/x-handlebars-template" method="POST" >
             <div class="row">
             <div class="col-md-12">
-            <form class="form-vertical">
+            <form class="form-vertical" enctype="multipart/form-data">
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
             <div class="form-group">
             <label for="nombre">Nombre</label>                      

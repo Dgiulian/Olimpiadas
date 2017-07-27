@@ -85,7 +85,7 @@
      <script id="novedad_edit" type="text/x-handlebars-template">
         <div class="row">
           <div class="col-md-12">
-              <form class="form-vertical">
+              <form class="form-vertical" enctype="multipart/form-data">
                   <input id="id" name="id" type="hidden" class="" value="{{id}}" >
                    <div class="form-group">
                       <label class="col-md-4 control-label" for="fecha">Fecha</label>
@@ -96,7 +96,8 @@
                               <span class="input-group-addon"><span class="fa fa-calendar"></span></span>  
                             </div>
                         </div>                      
-                   </div>   
+                   </div>
+                    
                   <div class="form-group">
                       <label class="col-md-4 control-label" for="titulo">T&iacute;tulo</label>
                       <div class="col-md-8">
@@ -106,7 +107,12 @@
                       <label class="col-md-4 control-label" for="subtitulo">Subt&iacute;tulo</label>
                       <div class="col-md-8">
                       <input id="subtitulo" name="subtitulo" type="text" class="form-control input-md" value="{{subtitulo}}">
-                   </div>  
+                   </div>
+                   <div class="form-group">
+                      <label class="col-md-4 control-label" for="no">Imagen</label>
+                      <div class="col-md-8">
+                      <input id="imagen" name="imagen" type="file" class="form-control input-md" value="">
+                   </div>
                    <div class="form-group">
                       <label class="col-md-4 control-label" for="subtitulo">Youtube</label>
                       <div class="col-md-8">

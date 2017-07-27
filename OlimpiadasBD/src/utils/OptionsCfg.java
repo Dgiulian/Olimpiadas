@@ -15,6 +15,7 @@ import java.util.List;
 public class OptionsCfg {
     
     public static final String  REGLAMENTO_PATH = "reglamento_path";
+    public static final String  NOVEDAD_PATH    = "novedad_path";
     public static final String  LOGO_IMAGE           = "logo_image";
     
     public static ArrayList<Option> getTipoRemitos(){
