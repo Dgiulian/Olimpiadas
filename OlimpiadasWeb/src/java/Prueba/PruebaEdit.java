@@ -63,7 +63,7 @@ public class PruebaEdit extends HttpServlet {
         List<Sede> sedes = (List<Sede>) new TSede().getList();
         
         List<Categoria> categorias = (List<Categoria>) new TCategoria().getById_deporte(prueba.getId_deporte());
-        List<Grupo> grupos = (List<Grupo>) new TGrupo().getById(prueba.getId_categoria());
+        List<Grupo> grupos = (List<Grupo>) new TGrupo().getById_categoria(prueba.getId_categoria());
         List<Equipo> equipos_sel = (List<Equipo>) new TEquipo().getById_prueba(prueba.getId());        
         List<Equipo> equipos = (List<Equipo>) new TEquipo().getById_grupo(prueba.getId_grupo());
         request.setAttribute("prueba",prueba);
