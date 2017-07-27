@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <%@include file="tpl_head.jsp" %>
-</head>
+    <head>
+        <%@include file="tpl_head.jsp" %>
+    </head>
 
-<body>
+    <body>
 
-    <div id="wrapper">
+        <div id="wrapper">
 
-        <!-- Navigation -->
-        <%@include file="tpl_navbar.jsp" %>
+            <!-- Navigation -->
+            <%@include file="tpl_navbar.jsp" %>
 
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
+            <!-- Page Content -->
+            <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -46,27 +45,23 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+                            <!-- /.panel -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.row -->
                 </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
+                <!-- /.container-fluid -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /#page-wrapper -->
+
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
-
-    <%@include file="tpl_scripts.jsp" %>
-    <script id="novedad_list" type="text/x-handlebars-template">
-        {{#each records}}
-          <tr class="">
+        <%@include file="tpl_scripts.jsp" %>
+        <script id="novedad_list" type="text/x-handlebars-template">
+            {{#each records}}
+            <tr class="">
             <td class="">{{id}}</td>
             <td class="">{{convertirFecha  fecha}}</td>
             <td class="">{{titulo}}</td>
@@ -77,11 +72,11 @@
                 {{/if}}  
             </td>
             <td class="">
-              <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
-              <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
-              </td>
-          </tr>
-        {{else}}
+            <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
+            <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+            </td>
+            </tr>
+            {{else}}
             <tr>
             <td colspan="5"><center><strong>No se encontraron resultados</strong></center></td>
             </tr>
