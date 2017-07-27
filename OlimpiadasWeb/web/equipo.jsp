@@ -121,7 +121,7 @@
             <select id="id_delegacion" name="id_delegacion" type="text" class="form-control input-md">
             {{#select id_delegacion}}
             {{#each delegaciones}}
-            <option value={{id}} >{{nombre}}</option>
+            <option value="{{id}}" >{{nombre}}</option>
             {{/each}}
             {{/select}}
             </select>
