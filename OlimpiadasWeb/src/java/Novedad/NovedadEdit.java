@@ -132,7 +132,6 @@ public class NovedadEdit extends HttpServlet {
             if (reglamento_path!=null) uploadFolder = reglamento_path.getValor();
             else uploadFolder = getServletContext().getRealPath("") + File.separator + DATA_DIRECTORY;
 
-            System.out.println(uploadFolder);
 
             // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -148,7 +147,7 @@ public class NovedadEdit extends HttpServlet {
                     // Process regular form field (input type="text|radio|checkbox|etc", select, etc).                        
                         String fieldValue = item.getString();
                          if(fieldName.equalsIgnoreCase("id"))           id = Parser.parseInt(fieldValue);
-                         if(fieldName.equalsIgnoreCase("fecha"))        fecha = TFecha.formatearFechaVistaBd(request.getParameter("fecha"));
+                         if(fieldName.equalsIgnoreCase("fecha"))        fecha = TFecha.formatearFechaVistaBd(fieldValue);
                          if(fieldName.equalsIgnoreCase("titulo"))       titulo = fieldValue;
                          if(fieldName.equalsIgnoreCase("subtitulo"))    subtitulo = fieldValue;
                          if(fieldName.equalsIgnoreCase("youtube"))      youtube = fieldValue;
