@@ -122,12 +122,12 @@ public class GrupoEdit extends HttpServlet {
             if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
             jr.setResult("OK");
             jr.setRecord(grupo);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
         } catch(BaseException ex){
             jr.setResult(ex.getResult());
             jr.setMessage(ex.getMessage());
         }finally {            
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
             out.close();
         }
     }

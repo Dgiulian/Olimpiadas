@@ -75,11 +75,21 @@ function guardarNovedad(data){
         url:URLS.NOVEDAD.EDIT,
         data: data,
         method:'POST',
+        processData:false,                
+        contentType:false,
         dataType:'json'        
-    }).done(function(){
+    }).done(function(response){
+        if(response.Result !=="OK") bootbox.alert(response.Message);
         filtrarNovedad();
     });   
 }
 function recuperarCampos(){
-    return data = getFormData($('form'));
+    var data = new FormData();
+    var campos = getFormData($('form'));
+    for( let d in campos){    
+        data.append(d,campos[d]);
+    }
+    data.append('imagen', $('#imagen')[0].files[0]);    
+    
+    return data;
 }

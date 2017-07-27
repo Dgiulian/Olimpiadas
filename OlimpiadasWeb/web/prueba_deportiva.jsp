@@ -80,8 +80,9 @@
             <td class="">{{estado}}</td>
             <td class="">{{descPuntaje tipo_puntaje orden_puntaje }}</td>             
             <td class="acciones">
-              <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
-              <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+            <a  href="PruebaEdit?id={{id}}" class="btn btn-xs btn-circle  btn-warning  "><span class="fa fa-edit fw"></span></a>
+              <!-- <span data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span> -->
+              <span  data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>
           </tr>
         {{else}}

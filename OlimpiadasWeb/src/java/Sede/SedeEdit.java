@@ -84,6 +84,7 @@ public class SedeEdit extends HttpServlet {
         String observaciones = request.getParameter("observaciones");
         TSede tsede = new TSede();
         Sede sede;
+        JsonRespuesta jr = new JsonRespuesta();
         boolean nuevo = false;
         try {
             sede = tsede.getById(id);
@@ -97,12 +98,13 @@ public class SedeEdit extends HttpServlet {
             if(nuevo) tsede.alta(sede);
             else tsede.actualizar(sede);
             
-            JsonRespuesta jr = new JsonRespuesta();
+            
             jr.setResult("OK");
             jr.setRecord(sede);
+            
+        } finally {
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
-        } finally {            
             out.close();
         }
     }

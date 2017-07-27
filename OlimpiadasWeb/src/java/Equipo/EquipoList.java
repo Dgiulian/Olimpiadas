@@ -47,6 +47,7 @@ public class EquipoList extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
         Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));
+        boolean fitroByGrupo = (request.getParameter("id_grupo")!=null);
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         
         
@@ -61,7 +62,7 @@ public class EquipoList extends HttpServlet {
             if (lista != null) {
                 
                 for(Equipo equipo:lista) {
-                    if(id_grupo!=0){
+                    if(fitroByGrupo){
                         List<Grupo_detalle> lstGruposEquipo = tgrupo_detalle.getById_equipo(equipo.getId());
                         if(!tgrupo_detalle.contiene(lstGruposEquipo,id_grupo)) continue;
                     }

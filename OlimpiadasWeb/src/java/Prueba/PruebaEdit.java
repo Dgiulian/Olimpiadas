@@ -5,20 +5,32 @@
  */
 package Prueba;
 
+import bd.Categoria;
+import bd.Deporte;
+import bd.Equipo;
+import bd.Grupo;
 import bd.Prueba_deportiva;
 import bd.Prueba_deportiva_detalle;
+import bd.Sede;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TCategoria;
+import transaccion.TDeporte;
+import transaccion.TEquipo;
+import transaccion.TGrupo;
 import transaccion.TPrueba_deportiva;
 import transaccion.TPrueba_deportiva_detalle;
+import transaccion.TSede;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
+import utils.PathCfg;
 import utils.TFecha;
 
 /**
@@ -39,18 +51,29 @@ public class PruebaEdit extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PruebaEdit</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PruebaEdit at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        Integer id = Parser.parseInt(request.getParameter("id"));
+        Prueba_deportiva prueba;
+        prueba = new TPrueba_deportiva().getById(id);
+        if(prueba==null){
+            prueba = new Prueba_deportiva();
         }
+        
+        List<Deporte> deportes = (List<Deporte>) new TDeporte().getList(); 
+        List<Sede> sedes = (List<Sede>) new TSede().getList();
+        
+        List<Categoria> categorias = (List<Categoria>) new TCategoria().getById_deporte(prueba.getId_deporte());
+        List<Grupo> grupos = (List<Grupo>) new TGrupo().getById(prueba.getId_categoria());
+        List<Equipo> equipos_sel = (List<Equipo>) new TEquipo().getById_prueba(prueba.getId());        
+        List<Equipo> equipos = (List<Equipo>) new TEquipo().getById_grupo(prueba.getId_grupo());
+        request.setAttribute("prueba",prueba);
+        request.setAttribute("deportes",deportes);
+        request.setAttribute("sedes",sedes);
+        request.setAttribute("equipos",equipos);
+        request.setAttribute("equipos_sel",equipos_sel);
+        request.setAttribute("categorias",categorias);
+        request.setAttribute("grupos",grupos);
+        request.getRequestDispatcher("prueba_deportiva_edit.jsp").forward(request,response);
     }
 
     /**
@@ -84,6 +107,7 @@ public class PruebaEdit extends HttpServlet {
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         Integer id = Parser.parseInt(request.getParameter("id"));
         Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
+        Integer id_sede = Parser.parseInt(request.getParameter("id_sede"));
         Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
         Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));
         Integer id_estado = Parser.parseInt(request.getParameter("id_estado"));
@@ -92,7 +116,12 @@ public class PruebaEdit extends HttpServlet {
         String fecha = TFecha.formatearFechaVistaBd(request.getParameter("fecha"));
         String hora = request.getParameter("hora");
         String[] equipos = request.getParameterValues("equipos[]");
+        
+        if(equipos==null)
+            equipos = request.getParameterValues("equipos");
+        
         String observaciones = request.getParameter("observaciones");
+        boolean byAjax = request.getParameter("ajax")!=null;
         TPrueba_deportiva tprueba_deportiva = new TPrueba_deportiva();
         Prueba_deportiva prueba_deportiva;
         boolean nuevo = false;
@@ -104,10 +133,11 @@ public class PruebaEdit extends HttpServlet {
                 nuevo = true;
             }
             prueba_deportiva.setId_categoria(id_categoria);
-            prueba_deportiva.setId_grupo(id_grupo);
+            prueba_deportiva.setId_sede(id_sede);
             prueba_deportiva.setObservaciones(observaciones);
             prueba_deportiva.setId_deporte(id_deporte);
             prueba_deportiva.setId_estado(id_estado);
+            prueba_deportiva.setId_grupo(id_grupo);
             prueba_deportiva.setTipo_puntaje(tipo_puntaje);
             prueba_deportiva.setOrden_puntaje(orden_puntaje);
             prueba_deportiva.setFecha(fecha);
@@ -133,14 +163,22 @@ public class PruebaEdit extends HttpServlet {
                     tprueba_detalle.alta(prueba_detalle);
                 }
             }
-            jr.setResult("OK");
-            jr.setRecord(prueba_deportiva);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
+            
+             if(byAjax){
+                jr.setResult("OK");
+                jr.setRecord(prueba_deportiva);
+            }            
+            else response.sendRedirect(PathCfg.PRUEBA);
+            
         } catch(BaseException ex){
             jr.setResult(ex.getResult());
             jr.setMessage(ex.getMessage());
-        }finally {            
+        }finally {
+           if(byAjax){
+                String jsonResult = new Gson().toJson(jr);
+                out.print(jsonResult);
+                
+            } 
             out.close();
         }
     }

@@ -191,12 +191,12 @@ public class DeporteEdit extends HttpServlet {
             if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
             jr.setResult("OK");
             jr.setRecord(deporte);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
         } catch(BaseException ex){
             jr.setResult(ex.getResult());
             jr.setMessage(ex.getMessage());
-        }finally {            
+        }finally {
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
             out.close();
         }
     }

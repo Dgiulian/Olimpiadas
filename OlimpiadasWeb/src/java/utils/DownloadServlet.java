@@ -5,6 +5,7 @@
 package utils;
 
 import bd.Deporte;
+import bd.Novedad;
 import bd.Parametro;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TDeporte;
+import transaccion.TNovedad;
 import transaccion.TParametro;
 
 /**
@@ -80,8 +82,7 @@ public class DownloadServlet extends HttpServlet {
             
             if (tipo.equalsIgnoreCase("reglamento")) {
                 parametro = tp.getByCodigo(OptionsCfg.REGLAMENTO_PATH);
-                String idCertif = request.getParameter("id");
-                Integer id_deporte = (idCertif!=null && !idCertif.equals(""))?Integer.parseInt(idCertif):0;
+                Integer id_deporte = Parser.parseInt(request.getParameter("id"));
                 Deporte deporte = new TDeporte().getById(id_deporte);
                 if(deporte == null) throw new BaseException("ERROR","No se encontr&oacute; el deporte");
                 
@@ -89,6 +90,18 @@ public class DownloadServlet extends HttpServlet {
                 filePath = parametro.getValor() + File.separator + fileName; 
                         
                 if (filePath==null || filePath.equals("")) throw new BaseException("ERROR", "El deporte no tiene ning&uacute;n archivo asociado");
+                
+                //filePath = "c:\\Users\\Diego\\Documents\\NetBeansProjects\\ActiSoft\\ActiSoftWeb\\data\\HaxLogs.log";
+            }
+            else  if (tipo.equalsIgnoreCase("novedad")) {
+                parametro = tp.getByCodigo(OptionsCfg.NOVEDAD_PATH);
+                Integer id_novedad = Parser.parseInt(request.getParameter("id"));                
+                Novedad novedad = new TNovedad().getById(id_novedad);
+                if(novedad == null) throw new BaseException("ERROR","No se encontr&oacute; la novedad");
+                
+                String fileName = novedad.getImagen().trim();
+                filePath = parametro.getValor() + File.separator + fileName; 
+                if (filePath==null || filePath.equals("")) throw new BaseException("ERROR", "La novedad no tiene ning&uacute;na  imagen asociada");
                 
                 //filePath = "c:\\Users\\Diego\\Documents\\NetBeansProjects\\ActiSoft\\ActiSoftWeb\\data\\HaxLogs.log";
             }
