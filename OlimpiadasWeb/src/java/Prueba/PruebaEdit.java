@@ -5,15 +5,24 @@
  */
 package Prueba;
 
+import bd.Categoria;
+import bd.Deporte;
+import bd.Equipo;
+import bd.Grupo;
 import bd.Prueba_deportiva;
 import bd.Prueba_deportiva_detalle;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TCategoria;
+import transaccion.TDeporte;
+import transaccion.TEquipo;
+import transaccion.TGrupo;
 import transaccion.TPrueba_deportiva;
 import transaccion.TPrueba_deportiva_detalle;
 import utils.BaseException;
@@ -39,18 +48,25 @@ public class PruebaEdit extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PruebaEdit</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PruebaEdit at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        Integer id = Parser.parseInt(request.getParameter("id"));
+        Prueba_deportiva prueba;
+        prueba = new TPrueba_deportiva().getById(id);
+        if(prueba==null){
+            prueba = new Prueba_deportiva();
         }
+        
+        List<Deporte> deportes = (List<Deporte>) new TDeporte().getList(); 
+
+        List<Categoria> categorias = (List<Categoria>) new TCategoria().getById_deporte(prueba.getId_deporte());
+        List<Grupo> grupos = (List<Grupo>) new TGrupo().getById_categoria(prueba.getId_categoria());
+        List<Equipo> equipos = (List<Equipo>) new TEquipo().getList(); 
+        request.setAttribute("prueba",prueba);
+        request.setAttribute("deportes",deportes);
+        request.setAttribute("equipos",equipos);
+        request.setAttribute("categorias",categorias);
+        request.setAttribute("grupos",grupos);
+        request.getRequestDispatcher("prueba_deportiva_edit.jsp").forward(request,response);
     }
 
     /**
@@ -133,12 +149,14 @@ public class PruebaEdit extends HttpServlet {
             }
             jr.setResult("OK");
             jr.setRecord(prueba_deportiva);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
+            
+            
         } catch(BaseException ex){
             jr.setResult(ex.getResult());
             jr.setMessage(ex.getMessage());
-        }finally {            
+        }finally {
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
             out.close();
         }
     }
