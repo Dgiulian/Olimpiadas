@@ -8,12 +8,12 @@ $(document).ready(function(){
        var tiposDeporte = ["","Individual","Colectivo"];
        return tiposDeporte[tipo];
     });
-  
+     $('#btnSearch').click(filtrarDeporte);
     filtrarDeporte();
     
 });
 function filtrarDeporte(){
-    var data = {};
+    var data = getSearchData();
     loadDataDeporte(data);
 }
 function loadDataDeporte(filter){
@@ -96,4 +96,9 @@ function recuperarCampos(){
     data.append('detalle', $('#detalle').val());
     data.append('reglamento', $('#reglamento')[0].files[0]);
     return data;   
+}
+function getSearchData(){
+    var data = {};
+    data.nombre = $('#search_nombre').val();
+    return data;
 }

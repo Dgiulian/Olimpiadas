@@ -5,10 +5,11 @@ $(document).ready(function() {
     $('#btnNuevo').click(function() {
         agregarJugador({});
     });
-    $('#btnImprimir').click(function() {
+    $('#btnPrint').click(function() {
         imprimir($('#id_delegacion_filtro').val());
     });
     $('#id_delegacion_filtro').change(filtrarJugador);
+    $('#btnSearch').click(filtrarJugador);
     loadDelegaciones();
     filtrarJugador();
 });
@@ -26,7 +27,7 @@ function loadDelegaciones(data) {
     });
 }
 function filtrarJugador() {
-    var data = {};
+    var data = getSearchData();
     data.id_delegacion = $('#id_delegacion_filtro').val();
     loadDataJugador(data);
 }
@@ -116,4 +117,11 @@ function recuperarCampos() {
 function imprimir(id) {
     var url = "http://179.43.127.107/reportes_olimpiadas/delegacion.php?id=" + id;
     window.open(url,'_blank'); 
+}
+
+function getSearchData(){
+    var data = {};
+    data.nombre = $('#search_nombre').val();
+    data.id_delegacion = $('#id_delegacion_filtro').val()
+    return data;
 }

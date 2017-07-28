@@ -5,7 +5,6 @@
  */
 package Jugador;
 
-import bd.Delegacion;
 import bd.Jugador;
 import bd.detalle.JugadorDet;
 import com.google.gson.Gson;
@@ -18,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TDelegacion;
 import transaccion.TJugador;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -44,16 +42,16 @@ public class JugadorList extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
         Integer id_delegacion = Parser.parseInt(request.getParameter("id_delegacion"));
-                
+        String nombre     = request.getParameter("nombre");           
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         
         
         try {
-            HashMap<String,String>filtroJugador = new HashMap<>();
-            if(id_delegacion!=0) filtroJugador.put("id_delegacion",id_delegacion.toString());
-            
+            HashMap<String,String>filtro = new HashMap<>();
+            if(id_delegacion!=0) filtro.put("id_delegacion",id_delegacion.toString());
+            if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             JsonRespuesta jr = new JsonRespuesta();
-            List<Jugador> lista = new TJugador().getListFiltro(filtroJugador);
+            List<Jugador> lista = new TJugador().getListFiltro(filtro);
             List<JugadorDet> listaDet = new ArrayList();            
                         
             if (lista != null) {

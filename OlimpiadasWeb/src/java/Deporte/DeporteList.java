@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +39,14 @@ public class DeporteList extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
-                
+        String nombre     = request.getParameter("nombre");        
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
          
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Deporte> lista = new TDeporte().getList();
+            HashMap<String,String> filtro = new HashMap<String,String>();
+            if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
+            List<Deporte> lista = new TDeporte().getListFiltro(filtro);
             List<DeporteList.DeporteDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
