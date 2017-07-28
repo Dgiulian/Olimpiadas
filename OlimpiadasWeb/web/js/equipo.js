@@ -5,11 +5,13 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarEquipo({});
     });
+    $('#id_delegacion_filtro').change(filtrarEquipo);
+    $('#btnSearch').click(filtrarEquipo);
     loadDelegaciones();
     filtrarEquipo();
 });
 function filtrarEquipo(){
-    var data = {};
+    var data = getSearchData();
     loadDataEquipo(data);
 }
 function loadDelegaciones(data){
@@ -119,4 +121,11 @@ function redirigir_integrante(){
     var index = $(this).data('index');    
     var id = equipos[index].id;        
     window.location = URLS.EQUIPO_DETALLE.BASE +"?id_equipo="+id;    
+}
+
+function getSearchData(){
+    var data = {};
+    data.nombre = $('#search_nombre').val();
+    data.id_delegacion = $('#id_delegacion_filtro').val()
+    return data;
 }

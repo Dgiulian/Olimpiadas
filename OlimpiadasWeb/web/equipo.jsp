@@ -1,3 +1,8 @@
+<%@page import="bd.Delegacion"%>
+<%@page import="java.util.List"%>
+<%    
+    List<Delegacion> delegaciones = (List<Delegacion>) request.getAttribute("delegaciones");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +31,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading text-right">
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
-                                    <span id="btnNuevo" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
+                                    <span id="btnPrint" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -37,10 +42,15 @@
                                                 <input type="text" class="form-control" id="search_nombre">
                                             </div>
                                             <div class="form-group">
-                                                <label for="search_delegacion">Delegacion:</label>
-                                                <input type="text" class="form-control" id="search_delegacion">
-                                            </div>
-                                            <button type="button" class="btn btn-default">Buscar</button>
+                                                    <label for="search_delegacion">Delegacion:</label>
+                                                    <select id="id_delegacion_filtro" name="id_delegacion" type="text" class="form-control input-md">
+                                                        <option value="0">Seleccione la delegaci&oacute;n</option>
+                                                        <% for (Delegacion delegacion : delegaciones) {%>
+                                                        <option value="<%=delegacion.getId()%>"><%=delegacion.getNombre()%></option>
+                                                        <% }%>
+                                                    </select>
+                                                </div>
+                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
                                         </form> 
                                     </div>
                                     <div class="dataTable_wrapper">

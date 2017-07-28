@@ -47,6 +47,8 @@ public class EquipoList extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
         Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));
+        Integer id_delegacion = Parser.parseInt(request.getParameter("id_delegacion"));
+        String nombre     = request.getParameter("nombre");
         boolean fitroByGrupo = (request.getParameter("id_grupo")!=null);
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         
@@ -55,6 +57,9 @@ public class EquipoList extends HttpServlet {
         try {
             JsonRespuesta jr = new JsonRespuesta();
             HashMap<String,String> filtro = new HashMap<String,String>();
+             
+            if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
+            if(id_delegacion!=0) filtro.put("id_delegacion",id_delegacion.toString());
             
             List<Equipo> lista = new TEquipo().getListFiltro(filtro);
             List<EquipoDet> listaDet = new ArrayList();            
