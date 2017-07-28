@@ -27,12 +27,21 @@
                                 <div class="panel-heading text-right">
 
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
-                                    <span id="btnNuevo" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
+                                    <span id="btnPrint" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
 
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <div class="dataTable_wrapper">
+                                        <div class="row form-search">
+                                            <form class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="search_nombre">Nombre:</label>
+                                                    <input type="text" class="form-control" id="search_nombre">
+                                                </div>                                               
+                                                <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                            </form> 
+                                        </div>
                                         <table class="table table-striped table-bordered table-condensed" id="tblSede">
                                             <colgroup>
                                                 <col style="width:5%"></col>

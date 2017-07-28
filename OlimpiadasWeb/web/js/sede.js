@@ -9,10 +9,11 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarSede({});
     });
+       $('#btnSearch').click(filtrarSede);
     filtrarSede();
 });
 function filtrarSede(){
-    var data = {};
+    var data = getSearchData();
     loadDataSede(data);
 }
 function loadDataSede(filter){
@@ -89,4 +90,10 @@ function recuperarCampos(){
     data.direccion = $('#direccion').val();
     data.observaciones  = $('#observaciones').val();
     return data;   
+}
+function getSearchData(){
+    var data = {};
+    data.nombre = $('#search_nombre').val();
+    data.id_delegacion = $('#id_delegacion_filtro').val()
+    return data;
 }
