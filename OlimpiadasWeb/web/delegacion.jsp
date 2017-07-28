@@ -27,7 +27,7 @@
                                 <div class="panel-heading text-right">
 
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
-                                    <span id="btnNuevo" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
+                                    <span id="btnPrint" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
 
                                 </div>
                                 <!-- /.panel-heading -->
@@ -39,7 +39,7 @@
                                                 <input type="text" class="form-control" id="search_nombre">
                                             </div>
                                             
-                                            <button type="button" class="btn btn-default">Buscar</button>
+                                            <button type="button" id="btnSearch" class="btn btn-default">Buscar</button>
                                         </form> 
                                     </div>
                                     <div class="dataTable_wrapper">

@@ -3,10 +3,11 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarDelegacion({});
     });
+    $('#btnSearch').click(filtrarDelegacion);
     filtrarDelegacion();
 });
 function filtrarDelegacion(){
-    var data = {};
+    var data = getSearchData();
     loadDataDelegacion(data);
 }
 function loadDataDelegacion(filter){
@@ -83,4 +84,10 @@ function recuperarCampos(){
     data.nombre = $('#nombre').val();
     data.observaciones  = $('#observaciones').val();
     return data;   
+}
+
+function getSearchData(){
+    var data = {};
+    data.search_nombre = $('#search_nombre').val();
+    return data;
 }

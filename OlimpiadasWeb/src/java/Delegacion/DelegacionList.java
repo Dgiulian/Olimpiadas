@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,13 +39,17 @@ public class DelegacionList extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");       
+        String pagNro = request.getParameter("pagNro");
+        String search_nombre = request.getParameter("search_nombre");
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
          
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Delegacion> lista = new TDelegacion().getList();
+            HashMap<String,String> filtro = new HashMap<>();
+            if(search_nombre!=null && !"".equals(search_nombre)) filtro.put("nombre",search_nombre);
+            
+            List<Delegacion> lista = new TDelegacion().getListFiltro(filtro);
             List<DelegacionDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
