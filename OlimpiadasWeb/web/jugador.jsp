@@ -1,10 +1,12 @@
+<%    
+    List<Delegacion> delegaciones = (List<Delegacion>) request.getAttribute("delegaciones");
+%>
 <%@page import="bd.Delegacion"%>
 <%@page import="java.util.List"%>
 <%@page import="transaccion.TDelegacion"%>
 <!DOCTYPE html>
 <html lang="en">
-    <%    List<Delegacion> delegaciones = new TDelegacion().getList();
-    %>
+    
     <head>
         <%@include file="tpl_head.jsp" %>
     </head>
