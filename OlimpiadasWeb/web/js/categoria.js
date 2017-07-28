@@ -5,11 +5,12 @@ $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarCategoria({});
     });
+    $('#btnSearch').click(filtrarCategoria);
     loadDeportes();
     filtrarCategoria();
 });
 function filtrarCategoria(){
-    var data = {};
+    var data = getSearchData();
     loadDataCategoria(data);
 }
 function loadDeportes(data){
@@ -118,4 +119,10 @@ function redirigir_grupo(){
     var index = $(this).data('index');
     var id = categorias[index].id;        
     window.location = URLS.GRUPO.BASE + "?id_categoria=" + id;
+}
+function getSearchData(){
+    var data = {};
+    data.nombre = $('#search_nombre').val();
+    data.id_deporte = $('#search_deporte').val();    
+    return data;
 }

@@ -5,12 +5,14 @@
  */
 package Categoria;
 
+import bd.Deporte;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TDeporte;
 
 /**
  *
@@ -29,6 +31,9 @@ public class CategoriaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<Deporte> deportes = (List<Deporte>) new TDeporte().getList();
+
+        request.setAttribute("deportes",deportes);
         request.getRequestDispatcher("categoria.jsp").forward(request, response);
     }
 

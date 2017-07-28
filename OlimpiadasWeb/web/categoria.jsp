@@ -1,4 +1,10 @@
+<%@page import="bd.Deporte"%>
+<%@page import="java.util.List"%>
+<%
+    List<Deporte> deportes = (List<Deporte>) request.getAttribute("deportes");
+%>
 <!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -27,7 +33,7 @@
                                  <div class="panel-heading text-right">
 
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
-                                    <span id="btnNuevo" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
+                                    <span id="btnPrint" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
 
                                 </div>
                                 <!-- /.panel-heading -->
@@ -40,9 +46,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="search_deportes">Deporte:</label>
-                                                <input type="text" class="form-control" id="search_deportes">
+                                                <select type="text" class="form-control" id="search_deporte">
+                                                    <option value="0"> Todos</option>
+                                                    <% for(Deporte deporte:deportes){%>
+                                                    <option value="<%=deporte.getId()%>"><%=deporte.getNombre()%></option>
+                                                    <% } %>
+                                                </select>
                                             </div>
-                                            <button type="button" class="btn btn-default">Buscar</button>
+                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
                                         </form> 
                                     </div>
                                     <div class="dataTable_wrapper">
