@@ -15,17 +15,17 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"> <center>Olimpiadas de Kinesiolog&iacute;a 2017</center></h1>
+                        <!--<h1 class="page-header"> <center>Olimpiadas de Kinesiolog&iacute;a 2017</center></h1>-->
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
+                    <div class="col-lg-offset-3 col-lg-6">
+<!--                        <div class="panel panel-default">
+                            <div class="panel-body">-->
                                 <img src="images/logotipo-OLI.png" class="img-responsive"/>
-                            </div>
-                        </div>
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                     <!-- /.row -->
                 </div>
