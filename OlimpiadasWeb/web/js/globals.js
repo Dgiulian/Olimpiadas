@@ -77,5 +77,11 @@ var URLS = {
         EDIT:'SedeEdit',
         DEL:'SedeDel',
     },
+    USUARIO:{
+        BASE:'Usuario',
+        LIST:'UsuarioList',
+        EDIT:'UsuarioEdit',
+        DEL:'UsuarioDel',
+    },
 
 }

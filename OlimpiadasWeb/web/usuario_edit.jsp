@@ -70,7 +70,7 @@
                                 <div class="tab-pane active" id="tab1">
                                    <div class="col-lg-6" >
                                         <div class="form-group">
-                                            <label for="nombre">Email</label>
+                                            <label for="nombre">Username</label>
                                             <% String disabled = !nuevo?"disabled":"";%>
                                             <input class="form-control" name="usu_mail" id="usu_mail"  <%= disabled%> value="<%= usuario.getUsu_mail() %>">
                                         </div>
@@ -104,24 +104,7 @@
                                             <input type="checkbox" name="usu_activo" id="usu_activo" <%=checked%> >
                                         </div>
                                 </div>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                                <div class="tab-pane" id="tab2" >
-                                    <div class="col-lg-6"></div>
-                                    <div class="col-lg-6"></div>
-                                </div>
-                                 <div class="tab-pane" id="tab3">
-                                   <div class="col-lg-6"></div>
-                                 </div>
-
-                                  <div class="tab-pane" id="tab5">
-                                      <div  class="col-lg-12">
-                                       <div class="form-group">
-                                            <label for="observaciones">Observaciones</label>
-                                            <textarea class="form-control" rows="3"  name="observaciones" id="observaciones" ></textarea>
-                                        </div>
-                                      </div>
-                                </div>
+                                </div>                                
                                 <!-- /.col-lg-6 (nested) -->
                                 
                             </div>

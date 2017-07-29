@@ -42,14 +42,17 @@ public class UsuarioList extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");
         
-        
+        String email = request.getParameter("email");
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
         mapTipos = new TTipo_usuario().getMap();
         try {
             JsonRespuesta jr = new JsonRespuesta();           
-            
-            List<Usuario> lista = new TUsuario().getList();
+            HashMap<String,String> filtro = new HashMap<>();
+            System.out.println(email);
+            if(email!=null && !"".equals(email)) filtro.put("usu_mail",email);
+            List<Usuario> lista = new TUsuario().getListFiltro(filtro);
             List<UsuarioDet> listaDet = new ArrayList();            
+            
             for(Usuario c:lista) listaDet.add(new UsuarioDet(c));
             
             if (lista != null) {
