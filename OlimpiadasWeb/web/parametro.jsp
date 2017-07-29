@@ -39,7 +39,7 @@
                                             <th>C&oacute;digo</th>
                                             <th>Nombre</th>
                                             <th>Valor</th>
-                                            <th></th>
+                                            <th class="acciones">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>

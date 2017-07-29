@@ -27,12 +27,13 @@
                                 <table class="table table-striped table-bordered table-condensed" id="tblPrueba">
                                     <colgroup>
                                         <col style="width:5%"></col>                                        
+                                        <col style=""></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
-                                        <col style="width:10%"></col>
+                                        <col class="acciones"></col>
                                     </colgroup>
                                     <thead>
                                         <tr>

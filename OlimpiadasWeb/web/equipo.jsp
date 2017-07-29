@@ -61,7 +61,7 @@
                                                 <col style="width:15%"></col>                                        
                                                 <col></col>  
                                                 <col style="width:10%"></col>
-                                                <col style="width:10%"></col>
+                                                <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
@@ -69,8 +69,8 @@
                                                     <th>Nombre</th>
                                                     <th>Delegacion</th>
                                                     <th>Observaciones</th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th>Integrantes</th>
+                                                    <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

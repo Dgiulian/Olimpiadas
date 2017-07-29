@@ -48,7 +48,7 @@
                                                 <col style="width:10%"></col>
                                                 <col style="width:10%"></col>
                                                 <col style=""></col>
-                                                <col style="width:10%"></col>
+                                                <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
@@ -56,7 +56,7 @@
                                                     <th>Nombre</th>
                                                     <th>Direcci&oacute;n</th>
                                                     <th>Observaciones</th>
-                                                    <th></th>
+                                                    <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

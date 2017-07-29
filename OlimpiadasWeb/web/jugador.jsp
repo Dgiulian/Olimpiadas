@@ -61,7 +61,7 @@
                                                 <col style=""></col>
                                                 <col style="width:20%"></col>
                                                 <col style="width:20%"></col>
-                                                <col style="width:10%"></col>
+                                                <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
@@ -71,7 +71,7 @@
                                                     <th>Dni</th>
                                                     <th>Fecha Nacimiento</th>                                            
                                                     <th>Delegacion</th>
-                                                    <th></th>
+                                                    <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

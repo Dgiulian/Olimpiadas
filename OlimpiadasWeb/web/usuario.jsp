@@ -47,7 +47,7 @@
                                                     <th>Tipo</th>
                                                     <th>Fecha Alta</th>
                                                     <th>Activo</th>
-                                                    <th></th>                                            
+                                                    <th class="acciones">Acciones</th>                                            
                                                 </tr>
                                             </thead>
                                             <tbody>

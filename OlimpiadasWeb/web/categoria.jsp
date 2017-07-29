@@ -64,7 +64,7 @@
                                                 <col style="width:15%"></col>
                                                 <col></col>                                                
                                                 <col style="width:5%"></col>
-                                                <col style="width:10%"></col>
+                                                <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
@@ -73,7 +73,7 @@
                                                     <th>Deporte</th>
                                                     <th>Detalle</th>
                                                     <th></th>                                                    
-                                                    <th></th>                                                    
+                                                    <th class="acciones">Acciones</th>                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>

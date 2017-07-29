@@ -49,7 +49,7 @@
                                                 <col style="width:10%"></col>
                                                 <col style="width:10%"></col>
                                                 <col></col>                                                
-                                                <col style="width:10%"></col>
+                                                <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
@@ -58,7 +58,7 @@
                                                     <th>Tipo</th>
                                                     <th>Cantidad</th>
                                                     <th>Reglamento</th>                                                    
-                                                    <th></th>
+                                                    <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

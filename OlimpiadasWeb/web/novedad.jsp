@@ -26,10 +26,10 @@
                                 <table class="table table-striped table-bordered table-condensed" id="tblNovedad">
                                     <colgroup>
                                         <col style="width:5%"></col>                                        
-                                        <col style="width:30%"></col>
-                                        <col style="width:15%"></col>
+                                        <col style="width:5%"></col>
                                         <col style=""></col>
-                                        <col style="width:10%"></col>
+                                        <col style=""></col>
+                                        <col class="acciones"></col>
                                     </colgroup>
                                     <thead>
                                         <tr>
@@ -38,7 +38,7 @@
                                             <th>T&iacute;tulo</th>
                                             <th>Subtitulo</th>                                            
                                             <th>Imagen</th>                                            
-                                            <th></th>
+                                            <th class="acciones">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>

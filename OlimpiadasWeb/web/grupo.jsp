@@ -41,14 +41,14 @@
                                                 <col style="width:5%"></col>                                        
                                                 <col style="width:30%"></col>
                                                 <col style=""></col>
-                                                <col style="width:10%"></col>
+                                                <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Nombre</th>
                                                     <th>Observacion</th>                                            
-                                                    <th></th>
+                                                    <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
