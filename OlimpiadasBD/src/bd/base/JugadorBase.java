@@ -7,6 +7,7 @@ public class JugadorBase {
 	public String fecha_nacimiento = "";
 	public String matricula = "";
 	public Integer id_delegacion = 0;
+	public String mail = "";
 
 	public JugadorBase() {
 	}
@@ -18,6 +19,7 @@ public class JugadorBase {
 		this.fecha_nacimiento = jugadorbase.getFecha_nacimiento();
 		this.matricula = jugadorbase.getMatricula();
 		this.id_delegacion = jugadorbase.getId_delegacion();
+		this.mail = jugadorbase.getMail();
 	}
 
 	public Integer getId() {
@@ -71,6 +73,15 @@ public class JugadorBase {
 
 	public JugadorBase setId_delegacion(Integer id_delegacion) {
 		this.id_delegacion = id_delegacion;
+		return this;
+	}
+
+	public String getMail() {
+		return this.mail;
+	}
+
+	public JugadorBase setMail(String mail) {
+		this.mail = mail;
 		return this;
 	}
 

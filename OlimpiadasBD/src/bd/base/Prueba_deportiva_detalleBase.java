@@ -5,6 +5,7 @@ public class Prueba_deportiva_detalleBase {
 	public Integer id_prueba = 0;
 	public Integer id_equipo = 0;
 	public String resultado = "";
+	public String medalla = "";
 
 	public Prueba_deportiva_detalleBase() {
 	}
@@ -15,6 +16,7 @@ public class Prueba_deportiva_detalleBase {
 		this.id_prueba = prueba_deportiva_detallebase.getId_prueba();
 		this.id_equipo = prueba_deportiva_detallebase.getId_equipo();
 		this.resultado = prueba_deportiva_detallebase.getResultado();
+		this.medalla = prueba_deportiva_detallebase.getMedalla();
 	}
 
 	public Integer getId() {
@@ -50,6 +52,15 @@ public class Prueba_deportiva_detalleBase {
 
 	public Prueba_deportiva_detalleBase setResultado(String resultado) {
 		this.resultado = resultado;
+		return this;
+	}
+
+	public String getMedalla() {
+		return this.medalla;
+	}
+
+	public Prueba_deportiva_detalleBase setMedalla(String medalla) {
+		this.medalla = medalla;
 		return this;
 	}
 

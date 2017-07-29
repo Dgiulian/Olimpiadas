@@ -11,6 +11,7 @@ public class Usuario_appBase {
 	public String fcreacion = "";
 	public String ultimoacceso = "";
 	public Integer activo = 0;
+	public Integer clienteapp_id = 0;
 	public String gcm_id = "";
 	public String facebook_id = "";
 	public String telefono = "";
@@ -32,6 +33,7 @@ public class Usuario_appBase {
 		this.fcreacion = usuario_appbase.getFcreacion();
 		this.ultimoacceso = usuario_appbase.getUltimoacceso();
 		this.activo = usuario_appbase.getActivo();
+		this.clienteapp_id = usuario_appbase.getClienteapp_id();
 		this.gcm_id = usuario_appbase.getGcm_id();
 		this.facebook_id = usuario_appbase.getFacebook_id();
 		this.telefono = usuario_appbase.getTelefono();
@@ -127,6 +129,15 @@ public class Usuario_appBase {
 
 	public Usuario_appBase setActivo(Integer activo) {
 		this.activo = activo;
+		return this;
+	}
+
+	public Integer getClienteapp_id() {
+		return this.clienteapp_id;
+	}
+
+	public Usuario_appBase setClienteapp_id(Integer clienteapp_id) {
+		this.clienteapp_id = clienteapp_id;
 		return this;
 	}
 

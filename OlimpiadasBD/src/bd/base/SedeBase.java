@@ -7,6 +7,8 @@ public class SedeBase {
 	public String telefono = "";
 	public String observaciones = "";
 	public String imagen = "";
+	public String latitud = "";
+	public String longitud = "";
 
 	public SedeBase() {
 	}
@@ -18,6 +20,8 @@ public class SedeBase {
 		this.telefono = sedebase.getTelefono();
 		this.observaciones = sedebase.getObservaciones();
 		this.imagen = sedebase.getImagen();
+		this.latitud = sedebase.getLatitud();
+		this.longitud = sedebase.getLongitud();
 	}
 
 	public Integer getId() {
@@ -71,6 +75,24 @@ public class SedeBase {
 
 	public SedeBase setImagen(String imagen) {
 		this.imagen = imagen;
+		return this;
+	}
+
+	public String getLatitud() {
+		return this.latitud;
+	}
+
+	public SedeBase setLatitud(String latitud) {
+		this.latitud = latitud;
+		return this;
+	}
+
+	public String getLongitud() {
+		return this.longitud;
+	}
+
+	public SedeBase setLongitud(String longitud) {
+		this.longitud = longitud;
 		return this;
 	}
 

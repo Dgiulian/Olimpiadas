@@ -3,6 +3,7 @@ public class DelegacionBase {
 
 	public Integer id = 0;
 	public String nombre = "";
+	public String nombre_corto = "";
 	public String observaciones = "";
 	public String imagen = "";
 	public String color = "";
@@ -13,6 +14,7 @@ public class DelegacionBase {
 	public DelegacionBase(DelegacionBase delegacionbase) {
 		this.id = delegacionbase.getId();
 		this.nombre = delegacionbase.getNombre();
+		this.nombre_corto = delegacionbase.getNombre_corto();
 		this.observaciones = delegacionbase.getObservaciones();
 		this.imagen = delegacionbase.getImagen();
 		this.color = delegacionbase.getColor();
@@ -33,6 +35,15 @@ public class DelegacionBase {
 
 	public DelegacionBase setNombre(String nombre) {
 		this.nombre = nombre;
+		return this;
+	}
+
+	public String getNombre_corto() {
+		return this.nombre_corto;
+	}
+
+	public DelegacionBase setNombre_corto(String nombre_corto) {
+		this.nombre_corto = nombre_corto;
 		return this;
 	}
 
