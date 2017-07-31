@@ -105,6 +105,20 @@ public class DownloadServlet extends HttpServlet {
                 
                 //filePath = "c:\\Users\\Diego\\Documents\\NetBeansProjects\\ActiSoft\\ActiSoftWeb\\data\\HaxLogs.log";
             }
+            else  if (tipo.equalsIgnoreCase("imagen")) {
+                
+                String fileName = "Imagen.jpg";
+                filePath = "c:" + File.separator + fileName; 
+                
+                File file = new File(filePath);
+                if(!file.exists()){
+                    //LLamo al WS para crear la imagen
+                }
+                
+                if (filePath==null || filePath.equals("")) throw new BaseException("ERROR", "La novedad no tiene ning&uacute;na  imagen asociada");
+                
+                //filePath = "c:\\Users\\Diego\\Documents\\NetBeansProjects\\ActiSoft\\ActiSoftWeb\\data\\HaxLogs.log";
+            }
             else   throw new BaseException("Error","El tipo de documento a descargar no es v&aacute;lido");
             
         // reads input file from an absolute path        
