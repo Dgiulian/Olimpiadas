@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringEscapeUtils;
 import transaccion.TParametro;
 import utils.BaseException;
 import utils.JsonRespuesta;
@@ -104,7 +103,8 @@ public class ParametroEdit extends HttpServlet {
             p.setNumero(numero);
             p.setCodigo(codigo);
             p.setNombre(nombre);
-            p.setValor(StringEscapeUtils.escapeJava(valor));
+            //p.setValor(StringEscapeUtils.escapeJava(valor));
+            p.setValor((valor));
    //         if(activo!=null && !"".equals(activo))
    //             p.setActivo(1);
    //         else p.setActivo(0);
