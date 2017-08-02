@@ -27,7 +27,24 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
 <html lang="en">
 
 <head>
-    <%@include file="tpl_head.jsp" %>    
+    <%@include file="tpl_head.jsp" %>  
+    <style>
+        .lblCategoria{
+            width:100%;
+            height: 100%;
+            cursor:pointer;
+            /*background-color: #ddd;*/
+/*            padding-top: 0px;
+            padding-bottom: 0px;*/
+        }
+        
+        td{ height: 100%;            
+            height: 100%;
+        }
+        td:hover{
+            
+        }
+    </style>
 </head>
 
 <body>
@@ -75,7 +92,7 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
                                     out.print("<tr>");
                                    } %>
                                     
-                                    <td><label for="<%=id_categoria%>"><%=categoria.getNombre()%></label></td>
+                                    <td><label for="<%=id_categoria%>" class="lblCategoria"><%=categoria.getNombre()%></label></td>
                                     <td><input type='checkbox' id='<%=id_categoria%>' name='<%=id_categoria%>' <%=checked%>></td>
                                         
                             
