@@ -41,10 +41,23 @@ public class TEquipo_detalle extends TransaccionBase<Equipo_detalle> {
         }*/
         return existe;
     }
-    public boolean eliminar(Integer id_equipo){
+    public boolean contiene(Integer id_equipo,Integer id_jugador){
+        boolean existe = false;
+        String query = String.format("select * from equipo_detalle where id_equipo = %d and id_jugador = %d",id_equipo,id_jugador);
+        return existe;
+    }
+    public boolean deleteByJugador(Integer id_jugador){
         boolean todoOk;
         conexion.conectarse();
-        String query = String.format("delete from equipo_detale where id_equipo = %d",id_equipo);
+        String query = String.format("delete from equipo_detalle where id_jugador = %d",id_jugador);
+        todoOk = conexion.ejecutarSQL(query);
+        conexion.desconectarse();
+        return todoOk;
+    }
+    public boolean deleteByEquipo(Integer id_equipo){
+        boolean todoOk;
+        conexion.conectarse();
+        String query = String.format("delete from equipo_detalle where id_equipo = %d",id_equipo);
         todoOk = conexion.ejecutarSQL(query);
         conexion.desconectarse();
         return todoOk;

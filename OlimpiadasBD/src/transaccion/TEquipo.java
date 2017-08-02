@@ -21,32 +21,37 @@ public class TEquipo extends TransaccionBase<Equipo> {
 		return super.getById(query);
 	}
 
-    public List<Equipo> getById_grupo(Integer id_grupo) {
-        String query = String.format("select equipo.* from equipo,grupo_detalle " +
-                                     " where grupo_detalle.id_equipo = equipo.id " +
-                                     "   and grupo_detalle.id_grupo = %d;",id_grupo);
-        return this.getList(query);
-    }
-
-    public List<Equipo> getById_prueba(Integer id_prueba) {
-        String query = String.format("select equipo.* from equipo,prueba_deportiva_detalle " +
-                                     " where prueba_deportiva_detalle.id_equipo = equipo.id " +
-                                     "   and prueba_deportiva_detalle.id_prueba = %d;",id_prueba);
-        System.out.println(query);
-        return this.getList(query);
-    }
-    
-    public void crearPorCategoria(Categoria categoria){
-        String categoria_nombre = categoria.getNombre_corto();
-        List<Delegacion> lstDelegacion = new TDelegacion().getList();        
-        for (Delegacion delegacion: lstDelegacion){
-            String nombre_equipo = delegacion.getNombre_corto() + " " + categoria_nombre;
-            Equipo equipo = new Equipo();
-            equipo.setId_delegacion(delegacion.getId());
-            equipo.setId_categoria(categoria.getId());
-            equipo.setNombre(nombre_equipo);
-            this.alta(equipo);
+        public List<Equipo> getById_grupo(Integer id_grupo) {
+            String query = String.format("select equipo.* from equipo,grupo_detalle " +
+                                         " where grupo_detalle.id_equipo = equipo.id " +
+                                         "   and grupo_detalle.id_grupo = %d;",id_grupo);
+            return this.getList(query);
         }
-        
-    }
+
+        public List<Equipo> getById_prueba(Integer id_prueba) {
+            String query = String.format("select equipo.* from equipo,prueba_deportiva_detalle " +
+                                         " where prueba_deportiva_detalle.id_equipo = equipo.id " +
+                                         "   and prueba_deportiva_detalle.id_prueba = %d;",id_prueba);
+            System.out.println(query);
+            return this.getList(query);
+        }
+    
+        public void crearPorCategoria(Categoria categoria){
+            String categoria_nombre = categoria.getNombre_corto();
+            List<Delegacion> lstDelegacion = new TDelegacion().getList();        
+            for (Delegacion delegacion: lstDelegacion){
+                String nombre_equipo = delegacion.getNombre_corto() + " " + categoria_nombre;
+                Equipo equipo = new Equipo();
+                equipo.setId_delegacion(delegacion.getId());
+                equipo.setId_categoria(categoria.getId());
+                equipo.setNombre(nombre_equipo);
+                this.alta(equipo);
+            }
+
+        }
+
+        public Equipo getByDelegacionCategoria(Integer id_delegacion, Integer id_categoria) {
+            String query = String.format("select * from equipo where id_delegacion = %d and id_categoria = %d",id_delegacion,id_categoria);
+            return this.getById(query);
+        }
 }

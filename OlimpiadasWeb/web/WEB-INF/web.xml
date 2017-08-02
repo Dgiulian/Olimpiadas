@@ -236,6 +236,10 @@
         <servlet-name>GrupoDel</servlet-name>
         <servlet-class>Grupo.GrupoDel</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>JugadorCategoria</servlet-name>
+        <servlet-class>Jugador.JugadorCategoria</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/Categoria</url-pattern>
@@ -439,6 +443,10 @@
     <servlet-mapping>
         <servlet-name>GrupoDel</servlet-name>
         <url-pattern>/GrupoDel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JugadorCategoria</servlet-name>
+        <url-pattern>/JugadorCategoria</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

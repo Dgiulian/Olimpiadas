@@ -101,37 +101,38 @@ public abstract class TransaccionBase<E> {
 
             Class claseGenerada = Class.forName(this.clase.getCanonicalName().trim());
             Object objeto = claseGenerada.newInstance();
-            
-            for (String key : filtro.keySet()) {
-                Object value = filtro.get(key);
-                try{
-//                    Field[] declaredFields = claseGenerada.getFields();
-//                    for(Field f: declaredFields){
-//                        System.out.println(f.getName());
-//                    }
-                    Field campo = null;
+            if(filtro!=null) {
+                for (String key : filtro.keySet()) {
+                    Object value = filtro.get(key);
                     try{
-                        campo = claseGenerada.getDeclaredField(key);
-                    } catch(NoSuchFieldException ex){
-                        campo = claseGenerada.getField(key);
-                    }
-                    //getDeclaredField(key);
-                    Class<?> type = campo.getType();
+    //                    Field[] declaredFields = claseGenerada.getFields();
+    //                    for(Field f: declaredFields){
+    //                        System.out.println(f.getName());
+    //                    }
+                        Field campo = null;
+                        try{
+                            campo = claseGenerada.getDeclaredField(key);
+                        } catch(NoSuchFieldException ex){
+                            campo = claseGenerada.getField(key);
+                        }
+                        //getDeclaredField(key);
+                        Class<?> type = campo.getType();
 
-                if (type.isAssignableFrom(String.class)){
-//                    where += String.format(" and %s = '%s'",key,value) ;
-                    where += String.format(" and %s like '%%%s%%'",key,value) ;
-                }else if (type.isAssignableFrom(Integer.class)){
-                    if (value != null)
-                        where += String.format(" and %s = %s",key,value) ;
-                };
-                } catch (NoSuchFieldException ex) {
-                    //Si no existe el campo ignoramos la excepción
-                     Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-                }
-                catch (SecurityException ex) {
-                    Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-                }
+                    if (type.isAssignableFrom(String.class)){
+    //                    where += String.format(" and %s = '%s'",key,value) ;
+                        where += String.format(" and %s like '%%%s%%'",key,value) ;
+                    }else if (type.isAssignableFrom(Integer.class)){
+                        if (value != null)
+                            where += String.format(" and %s = %s",key,value) ;
+                    };
+                    } catch (NoSuchFieldException ex) {
+                        //Si no existe el campo ignoramos la excepción
+                         Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
+                    }
+                    catch (SecurityException ex) {
+                        Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
+                    }
+                }            
             }            
         }catch (InstantiationException ex) {
             Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);

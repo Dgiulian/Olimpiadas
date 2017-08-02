@@ -52,6 +52,7 @@ public class PathCfg {
     public static final String JUGADOR_EDIT = JUGADOR + "Edit";
     public static final String JUGADOR_DEL  = JUGADOR + "Del";
     public static final String JUGADOR_SEARCH  = JUGADOR + "Search";
+    public static final String JUGADOR_CATEGORIA  = JUGADOR + "Categoria";
     
     public static final String NOVEDAD ="Novedad";
     public static final String NOVEDAD_LIST = NOVEDAD + "List";

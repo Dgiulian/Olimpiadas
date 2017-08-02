@@ -93,10 +93,9 @@ public class EquipoDetalleEdit extends HttpServlet {
         try {
             Equipo equipo = new TEquipo().getById(id_equipo);
             if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
-            boolean todoOk = tequipo_detalle.eliminar(equipo.getId());
+            boolean todoOk = tequipo_detalle.deleteByEquipo(equipo.getId());
             
             for (String jugador : arrJugadores) {
-                System.out.println(jugador);
                 Integer id_jugador = Parser.parseInt(jugador);                
                 equipo_detalle = new Equipo_detalle();
                 equipo_detalle.setId_equipo(id_equipo);
