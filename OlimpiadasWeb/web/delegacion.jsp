@@ -47,6 +47,7 @@
                                             <colgroup>
                                                 <col style="width:5%"></col>                                        
                                                 <col style="width:10%"></col>
+                                                <col style="width:10%"></col>
                                                 <col style=""></col>
                                                 <col class="acciones"></col>
                                             </colgroup>
@@ -54,6 +55,7 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Nombre</th>                                            
+                                                    <th>Nombre corto</th>                                            
                                                     <th>Observaciones</th>
                                                     <th class="acciones">Acciones</th>
                                                 </tr>
@@ -85,10 +87,11 @@
             <tr class="">
             <td class="">{{id}}</td>
             <td class="">{{nombre}}</td>
+            <td class="">{{nombre_corto}}</td>
             <td class="">{{observaciones}}</td>
             <td class="">
-            <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
-            <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+                <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
+                <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>
             </tr>
             {{else}}

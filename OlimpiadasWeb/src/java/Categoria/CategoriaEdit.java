@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TCategoria;
+import transaccion.TEquipo;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -71,6 +72,7 @@ public class CategoriaEdit extends HttpServlet {
         Integer id = Parser.parseInt(request.getParameter("id"));
         Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
         String nombre = request.getParameter("nombre");
+        String nombre_corto = request.getParameter("nombre_corto");
         String detalle = request.getParameter("detalle");
         TCategoria tcategoria = new TCategoria();
         Categoria categoria;
@@ -83,15 +85,19 @@ public class CategoriaEdit extends HttpServlet {
                 nuevo = true;
             }
             categoria.setNombre(nombre);
+            categoria.setNombre_corto(nombre_corto);
             categoria.setDetalle(detalle);
             categoria.setId_deporte(id_deporte);            
             boolean todoOk;
             if(nuevo) {
                 id = tcategoria.alta(categoria);
+                categoria.setId(id);
                 todoOk = id!=0; 
             } else todoOk = tcategoria.actualizar(categoria);
             
-            
+            if (nuevo){
+                new TEquipo().crearPorCategoria(categoria);
+            }
             if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
             jr.setResult("OK");
             jr.setRecord(categoria);

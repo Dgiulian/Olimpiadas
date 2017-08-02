@@ -62,6 +62,7 @@
                                                 <col style="width:5%"></col>                                        
                                                 <col style="width:30%"></col>
                                                 <col style="width:15%"></col>
+                                                <col style="width:15%"></col>
                                                 <col></col>                                                
                                                 <col style="width:5%"></col>
                                                 <col class="acciones"></col>
@@ -70,6 +71,7 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Nombre</th>
+                                                    <th>Abreviaci&oacute;n</th>
                                                     <th>Deporte</th>
                                                     <th>Detalle</th>
                                                     <th></th>                                                    
@@ -103,6 +105,7 @@
             <tr class="">
             <td class="">{{id}}</td>
             <td class="">{{nombre}}</td>
+            <td class="">{{nombre_corto}}</td>
             <td class="">{{deporte.nombre}}</td>
             <td class="">{{detalle}}</td>
             <td>
@@ -127,8 +130,12 @@
             <form class="form-vertical">
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
             <div class="form-group">
-            <label for="nombre">Nombre</label>                      
-            <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
+                <label for="nombre">Nombre</label>                      
+                <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
+            </div>
+            <div class="form-group">
+                <label for="nombre_corto">Nombre corto</label>                      
+                <input id="nombre_corto" name="nombre_corto" type="text" class="form-control input-group-lg" value="{{nombre_corto}}">
             </div>
             <div class="form-group">
             <label  for="id_deporte">Deporte</label>

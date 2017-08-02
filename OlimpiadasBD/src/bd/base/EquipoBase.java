@@ -4,6 +4,9 @@ public class EquipoBase {
 	public Integer id = 0;
 	public String nombre = "";
 	public Integer id_delegacion = 0;
+	public Integer id_categoria   = 0;
+
+    
 	public String observaciones = "";
 
 	public EquipoBase() {
@@ -42,7 +45,13 @@ public class EquipoBase {
 		this.id_delegacion = id_delegacion;
 		return this;
 	}
+        public Integer getId_categoria() {
+            return id_categoria;
+        }
 
+        public void setId_categoria(Integer id_categoria) {
+            this.id_categoria = id_categoria;
+        }
 	public String getObservaciones() {
 		return this.observaciones;
 	}
