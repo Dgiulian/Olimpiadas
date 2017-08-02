@@ -14,10 +14,11 @@ function filtrarGrupo(){
     loadDataGrupo(data);
 }
 function loadEquipos(filter){
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.EQUIPO.LIST,
         data: filter,
-        method:"POST",
+        method:"GET",
         dataType: "json",
     }).done(function(data) {
         if(data.Result === "OK") {
@@ -28,10 +29,11 @@ function loadEquipos(filter){
 function loadDataGrupo(filter){
     var $tabla = $('#tblGrupo');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.GRUPO.LIST,
         data: filter,
-        method:"POST",
+        method:"GET",
         dataType: "json"
     }).done(function(result) {
         if(result.Result === "OK") {

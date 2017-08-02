@@ -6,32 +6,34 @@ $(document).ready(function(){
         agregarCategoria({});
     });
     $('#btnSearch').click(filtrarCategoria);
-    loadDeportes();
+    loadDeportes({});
     filtrarCategoria();
 });
 function filtrarCategoria(){
     var data = getSearchData();
     loadDataCategoria(data);
 }
-function loadDeportes(data){
+function loadDeportes(filter){
+    if(typeof filter ==="undefined") filter = {};
     $.ajax({
         url: URLS.DEPORTE.LIST,
-        data: data,
-        method:"POST",
+        data: filter,
+        method:"GET",
         dataType: "json",
-    }).done(function(data) {
-        if(data.Result === "OK") {
-            deportes = data.Records;
+    }).done(function(result) {
+        if(result.Result === "OK") {
+            deportes = result.Records;
         }
     });
 }
 function loadDataCategoria(filter){
     var $tabla = $('#tblCategoria');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.CATEGORIA.LIST,
         data: filter,
-        method:"POST",
+        method:"GET",
         dataType: "json"
     }).done(function(result) {
         if(result.Result === "OK") {
@@ -107,11 +109,13 @@ function guardarCategoria(data){
     });   
 }
 function recuperarCampos(){
-    var data = {};
+    var data = getFormData($('form'));
+    /*var data = {};
     data.id = $('#id').val();
     data.id_deporte = $('#id_deporte').val();
     data.nombre = $('#nombre').val();
     data.detalle  = $('#detalle').val();
+    */
     return data;   
 }
 

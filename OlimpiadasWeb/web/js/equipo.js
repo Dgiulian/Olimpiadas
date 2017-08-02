@@ -14,11 +14,12 @@ function filtrarEquipo(){
     var data = getSearchData();
     loadDataEquipo(data);
 }
-function loadDelegaciones(data){
+function loadDelegaciones(filter){
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.DELEGACION.LIST,
-        data: data,
-        method:"POST",
+        data: filter,
+        method:"GET",
         dataType: "json",           
         success: function(data) {
             if(data.Result === "OK") {
@@ -30,18 +31,19 @@ function loadDelegaciones(data){
 function loadDataEquipo(filter){
     var $tabla = $('#tblEquipo');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
            url: URLS.EQUIPO.LIST,
            data: filter,
-           method:"POST",
+           method:"GET",
            dataType: "json",
-       }).done(function(result) {
-            if(result.Result === "OK") {
-                equipos = result.Records;
-                createTable($tabla,equipos)
-            }
-        });
-    }
+    }).done(function(result) {
+         if(result.Result === "OK") {
+             equipos = result.Records;
+             createTable($tabla,equipos)
+         }
+     });
+}
     function borrarEquipo(){
         var index = $(this).data('index');
         var id = equipos[index].id;        

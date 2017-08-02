@@ -18,11 +18,12 @@ function filtrarDeporte(){
 }
 function loadDataDeporte(filter){
     var $tabla = $('#tblDeporte');
-    setLoader($tabla);    
+    setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
            url: URLS.DEPORTE.LIST,
            data: filter,
-           method:"POST",
+           method:"GET",
            dataType: "json"
        }).done(function(result) {
             if(result.Result === "OK") {

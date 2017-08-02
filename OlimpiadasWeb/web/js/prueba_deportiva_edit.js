@@ -162,27 +162,30 @@ function recuperarCampos(){
     return data;   
 }
 
-function getDataDeportes(filtro){
+function getDataDeportes(filter){
+    if(typeof filter==="undefined") filter = {};
     return $.ajax({
         url: URLS.DEPORTE.LIST,
-        data: filtro,
-        method:"POST",
+        data: filter,
+        method:"GET",
         dataType: "json",
     });
 }
-function getDataEquipos(filtro){
+function getDataEquipos(filter){
+    if(typeof filter==="undefined") filter = {};
     return $.ajax({
         url: URLS.EQUIPO.LIST,
-        data: filtro,
+        data: filter,
         method:"POST",
         dataType: "json",
     });
 }
-function getDataCategorias(filtro){
+function getDataCategorias(filter){
+    if(typeof filter==="undefined") filter = {};
     return $.ajax({
         url: URLS.CATEGORIA.LIST,
-        data: filtro,
-        method:"POST",
+        data: filter,
+        method:"GET",
         dataType: "json",
     });
 }
@@ -194,10 +197,11 @@ function getDataPruebas(filtro){
            dataType: "json"
     });
 }
-function getDataGrupos(filtro){
+function getDataGrupos(filter){
+    if(typeof filter==="undefined") filter = {};
     return $.ajax({
         url: URLS.GRUPO.LIST,
-        data: filtro,
+        data: filter,
         method:"POST",
         dataType: "json",
     });

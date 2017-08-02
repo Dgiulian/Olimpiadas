@@ -6,13 +6,14 @@ function filtrarUsuario(){
     var data = getSearchData();
     loadData(data);
 }
-function loadData(data){
+function loadData(filter){
     var $tabla = $('#tblUsuario');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.USUARIO.LIST,
-        data: data,
-        method:"POST",
+        data: filter,
+        method:"GET",
         dataType: "json",
     }).done(function(data) {
         if(data.Result === "OK") {

@@ -13,10 +13,11 @@ function filtrarDelegacion(){
 function loadDataDelegacion(filter){
     var $tabla = $('#tblDelegacion');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
            url: URLS.DELEGACION.LIST,
            data: filter,
-           method:"POST",
+           method:"GET",
            dataType: "json"
        }).done( function(result) {
             if(result.Result === "OK") {

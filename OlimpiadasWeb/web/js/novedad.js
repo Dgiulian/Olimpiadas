@@ -15,10 +15,11 @@ function filtrarNovedad(){
 function loadDataNovedad(filter){
     var $tabla = $('#tblNovedad');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.NOVEDAD.LIST,
         data: filter,
-        method:"POST",
+        method:"GET",
         dataType: "json"
     }).done(function(result) {
         if(result.Result === "OK") {

@@ -19,10 +19,11 @@ function filtrarSede(){
 function loadDataSede(filter){
     var $tabla = $('#tblSede');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
            url: URLS.SEDE.LIST,
            data: filter,
-           method:"POST",
+           method:"GET",
            dataType: "json"
         }).done(function(result) {
             if(result.Result === "OK") {

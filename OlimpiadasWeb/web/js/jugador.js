@@ -13,11 +13,12 @@ $(document).ready(function() {
     loadDelegaciones();
     filtrarJugador();
 });
-function loadDelegaciones(data) {
+function loadDelegaciones(filter) {
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.DELEGACION.LIST,
-        data: data,
-        method: "POST",
+        data: filter,
+        method: "GET",
         dataType: "json",
         success: function(data) {
             if (data.Result === "OK") {
@@ -34,10 +35,11 @@ function filtrarJugador() {
 function loadDataJugador(filter) {
     var $tabla = $('#tblJugador');
     setLoader($tabla);
+    if(typeof filter==="undefined") filter = {};
     $.ajax({
         url: URLS.JUGADOR.LIST,
         data: filter,
-        method: "POST",
+        method: "GET",
         dataType: "json"
     }).done(function(result) {
         if (result.Result === "OK") {
