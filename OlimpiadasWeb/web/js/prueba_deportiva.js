@@ -17,6 +17,7 @@ function init(){
         return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
     });
     $('#btnSearch').click(filtrarPrueba);
+    $('#search_fecha').change(filtrarPrueba);
     $('#search_deporte').change(filtrarPrueba);
     $('#search_categoria').change(filtrarPrueba);
     $('#search_grupo').change(filtrarPrueba);
