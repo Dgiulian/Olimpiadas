@@ -5,10 +5,6 @@
  */
 package Prueba;
 
-import bd.Categoria;
-import bd.Delegacion;
-import bd.Deporte;
-import bd.Equipo;
 import bd.Prueba_deportiva;
 import bd.detalle.Prueba_deportivaDet;
 import com.google.gson.Gson;
@@ -21,11 +17,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TCategoria;
-import transaccion.TDeporte;
-import transaccion.TEquipo;
 import transaccion.TPrueba_deportiva;
 import utils.JsonRespuesta;
+import utils.Parser;
+import utils.TFecha;
 
 /**
  *
@@ -39,11 +34,23 @@ public class PruebaList extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        
+        String fecha = TFecha.formatearFechaVistaBd(request.getParameter("fecha"));
+        Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
+        Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
+        Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));        
+        Integer id_estado = Parser.parseInt(request.getParameter("id_estado"));
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            List<Prueba_deportiva> lista = new TPrueba_deportiva().getList();
+            HashMap<String,String> filtro = new HashMap<String,String>();
+            
+            if (fecha!=null && !"".equals(fecha)) filtro.put("fecha",fecha);
+            if (id_deporte!=0) filtro.put("id_deporte",id_deporte.toString());
+            if (id_categoria!=0) filtro.put("id_categoria",id_categoria.toString());
+            if (id_grupo!=0) filtro.put("id_grupo",id_grupo.toString());
+            if (id_estado!=0) filtro.put("id_estado",id_estado.toString());
+            
+            List<Prueba_deportiva> lista = new TPrueba_deportiva().getListFiltro(filtro);
             List<Prueba_deportivaDet> listaDet = new ArrayList();
             if (lista != null) {
                 for(Prueba_deportiva c:lista) listaDet.add(new Prueba_deportivaDet(c));

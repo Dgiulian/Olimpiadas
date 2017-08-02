@@ -21,7 +21,7 @@ List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias"
 List<Grupo> grupos = (List<Grupo>) request.getAttribute("grupos");
 List<Equipo> equipos = (List<Equipo>) request.getAttribute("equipos");
 List<Equipo> equipos_sel = (List<Equipo>) request.getAttribute("equipos_sel");
-String[] estados = {"En Agenda","En Curso","Finalizada","Suspendida"};
+String[] estados = {"","En Agenda","En Curso","Finalizada","Suspendida"};
 
 String[] puntajes = {"Puntos","Tiempo" };
 String[] ordenes = {"Ascendente","Descendente" };
@@ -141,15 +141,15 @@ String[] ordenes = {"Ascendente","Descendente" };
                    <div class="form-group">
                       <label class="col-md-2 control-label" for="id_categoria">Categor&iacute;a</label>
                       <div class="col-md-10">
-                      <select id="id_categoria" name="id_categoria" type="text" class="form-control input-md"  >
-                        <% for(Categoria categoria:categorias) {
-                            String selCategoria = categoria.getId().equals(prueba.getId_categoria())?"selected":"";
-                        %>
-                        <option value="<%=categoria.getId()%>" <%=selCategoria%>><%=categoria.getNombre()%></option>
-                        
-                        <% } %>
-                      </select>                      
-                   </div>
+                        <select id="id_categoria" name="id_categoria" type="text" class="form-control input-md"  >
+                          <% for(Categoria categoria:categorias) {
+                              String selCategoria = categoria.getId().equals(prueba.getId_categoria())?"selected":"";
+                          %>
+                          <option value="<%=categoria.getId()%>" <%=selCategoria%>><%=categoria.getNombre()%></option>
+
+                          <% } %>
+                        </select>                      
+                        </div>
                    </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="id_grupo">Grupo</label>

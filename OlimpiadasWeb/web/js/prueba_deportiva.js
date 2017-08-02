@@ -16,12 +16,17 @@ function init(){
         
         return "" + puntajes[tipo_puntaje] + " (" + ordenes[orden_puntaje] +")";
     });
+    $('#btnSearch').click(filtrarPrueba);
+    $('#search_deporte').change(filtrarPrueba);
+    $('#search_categoria').change(filtrarPrueba);
+    $('#search_grupo').change(filtrarPrueba);
+    $('#search_estado').change(filtrarPrueba);
     loadDeportes({});
     filtrarPrueba();
     
 }
 function filtrarPrueba(){
-    var data = {};
+    var data = getSearchData();
     loadDataPrueba(data);
 }
 
@@ -221,4 +226,14 @@ function getDataGrupos(filter){
         method:"GET",
         dataType: "json",
     });
+}
+
+function getSearchData(){
+    var data = {};
+    data.fecha = $('#search_fecha').val();
+    data.id_deporte = $('#search_deporte').val();    
+    data.id_categoria = $('#search_categoria').val();    
+    data.id_grupo = $('#search_grupo').val();    
+    data.id_estado = $('#search_estado').val();    
+    return data;
 }

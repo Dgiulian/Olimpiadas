@@ -1,3 +1,15 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="bd.Grupo"%>
+<%@page import="bd.Categoria"%>
+<%@page import="bd.Deporte"%>
+<%@page import="java.util.List"%>
+<%
+    List<Deporte> deportes = (List<Deporte>) request.getAttribute("deportes");
+    List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
+    List<Grupo> grupos = (List<Grupo>) request.getAttribute("grupos");
+    String[] estados = {"Todos","En Agenda","En Curso","Finalizada","Suspendida"};
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,13 +35,75 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                            <div class="row form-search">
+                                        <form class="form-inline">
+                                            <div class="form-group">                                                
+                                                    <label class="control-label" for="search_fecha">Fecha</label>
+                                                <div class="controls">
+                                                    <div class="input-group date date-picker" style="diplay:inline">
+                                                      <input type="text" id="search_fecha" name="search_fecha" class="form-control date-input "  value="">
+                                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>  
+                                                    </div>
+                                                </div>           
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="search_deportes">Deporte</label>
+                                                <div class="controls">
+                                                    <select type="text" class="form-control" id="search_deporte">
+                                                        <option value="0"> Todos</option>
+                                                        <% for(Deporte deporte:deportes){%>
+                                                        <option value="<%=deporte.getId()%>"><%=deporte.getNombre()%></option>
+                                                        <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class=" control-label" for="isearch_categoria">Categor&iacute;a</label>
+                                                <div class="">
+                                                    
+                                                  <select id="search_categoria" name="search_categoria" type="text" class="form-control input-md"  >
+                                                      <option value="0">Todas</option>
+                                                    <% for(Categoria categoria:categorias) { %>
+                                                    <option value="<%=categoria.getId()%>" ><%=categoria.getNombre()%></option>
+
+                                                    <% } %>
+                                                  </select>                      
+                                                  </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class=" control-label" for="search_grupo">Grupo</label>
+                                                <div class="">
+                                                    <select id="search_grupo" name="search_grupo" type="text" class="form-control input-md"  >
+                                                        <option value="0">Todos</option>
+                                                      <% for(Grupo grupo:grupos) { %>
+                                                      <option value="<%=grupo.getId()%>" ><%=grupo.getNombre()%></option>
+                                                    <% } %>
+                                                    </select>                      
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="controls">
+                                                    <label class=" control-label" for="search_estado">Estado</label>
+                                                    <div class="">
+                                                      <select id="search_estado" name="search_estado" type="text" class="form-control input-md">
+                                                          <% for(Integer i=0;i<estados.length;i++){ %>
+                                                            <option value="<%=i%>" ><%=estados[i]%></option>
+                                                           <%}%>
+                                                      </select>                      
+                                                     </div>
+                                                 </div>
+                                             </div>        
+                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                        </form> 
+                                    </div>
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-condensed" id="tblPrueba">
                                     <colgroup>
                                         <col style="width:5%"></col>                                        
+                                        <col style="width:10%"></col>
+                                        <col style="width:10%"></col>
                                         <col style=""></col>
-                                        <col style="width:10%"></col>
-                                        <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
                                         <col style="width:10%"></col>
@@ -87,7 +161,7 @@
           </tr>
         {{else}}
             <tr>
-            <td colspan="5"><center><strong>No se encontraron resultados</strong></center></td>
+            <td colspan="8"><center><strong>No se encontraron resultados</strong></center></td>
             </tr>
         {{/each}}
     </script>   
@@ -97,7 +171,7 @@
               <form class="form-vertical">
                    <input id="id" name="id" type="hidden" class="" value="{{id}}" >
                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="id_estado">Fecha y Hora</label>
+                            <label class="col-md-4 control-label" for="fecha">Fecha y Hora</label>
                             <div class="col-md-4">
                                 <div class="controls">
                                     <div class="input-group date date-picker">

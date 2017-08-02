@@ -5,12 +5,19 @@
  */
 package Prueba;
 
+import bd.Categoria;
+import bd.Deporte;
+import bd.Grupo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TCategoria;
+import transaccion.TDeporte;
+import transaccion.TGrupo;
 
 /**
  *
@@ -29,6 +36,18 @@ public class PruebaServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        List<Deporte> deportes = (List<Deporte>) new TDeporte().getList();
+//        List<Sede> sedes = (List<Sede>) new TSede().getList();
+        
+        List<Categoria> categorias = (List<Categoria>) new TCategoria().getList();
+        List<Grupo> grupos = (List<Grupo>) new TGrupo().getList();
+        
+        request.setAttribute("deportes",deportes);
+//        request.setAttribute("sedes",sedes);
+        request.setAttribute("categorias",categorias);
+        request.setAttribute("grupos",grupos);
+        request.setAttribute("deportes",deportes);
         request.getRequestDispatcher("prueba_deportiva.jsp").forward(request, response);
     }
 
