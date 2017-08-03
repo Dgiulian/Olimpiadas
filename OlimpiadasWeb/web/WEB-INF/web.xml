@@ -240,6 +240,22 @@
         <servlet-name>JugadorCategoria</servlet-name>
         <servlet-class>Jugador.JugadorCategoria</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsuarioAppServlet</servlet-name>
+        <servlet-class>UsuarioApp.UsuarioAppServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuarioAppList</servlet-name>
+        <servlet-class>UsuarioApp.UsuarioAppList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuarioAppEdit</servlet-name>
+        <servlet-class>UsuarioApp.UsuarioAppEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuarioAppDel</servlet-name>
+        <servlet-class>UsuarioApp.UsuarioAppDel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/Categoria</url-pattern>
@@ -447,6 +463,22 @@
     <servlet-mapping>
         <servlet-name>JugadorCategoria</servlet-name>
         <url-pattern>/JugadorCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioAppServlet</servlet-name>
+        <url-pattern>/UsuarioApp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioAppList</servlet-name>
+        <url-pattern>/UsuarioAppList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioAppEdit</servlet-name>
+        <url-pattern>/UsuarioAppEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioAppDel</servlet-name>
+        <url-pattern>/UsuarioAppDel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -83,5 +83,10 @@ var URLS = {
         EDIT:'UsuarioEdit',
         DEL:'UsuarioDel',
     },
-
+    USUARIOAPP:{
+        BASE:'UsuarioApp',
+        LIST:'UsuarioAppList',
+        EDIT:'UsuarioAppEdit',
+        DEL:'UsuarioAppDel',
+    },
 }

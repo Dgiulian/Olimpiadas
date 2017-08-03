@@ -238,6 +238,7 @@ $(document).ready(function(){
             return html;
         });
         window.Handlebars.registerHelper('convertirFecha', convertirFecha);
+        window.Handlebars.registerHelper('convertirFechayHora', convertirFechayHora);
     }
 });
 

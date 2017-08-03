@@ -61,6 +61,7 @@
                         <li><a href="<%=PathCfg.SEDE%>"><i class="fa fa-home fa-fw"></i> Sedes</a></li>     
                         <li>
                             <a href="<%=PathCfg.USUARIO%>"><i class="fa fa-user fa-fw"></i> Usuarios</a>
+                            <a href="<%=PathCfg.USUARIO_APP%>"><i class="fa fa-mobile-phone fa-fw"></i> Usuarios App</a>
                         </li>
 
 <!--                        <li>
