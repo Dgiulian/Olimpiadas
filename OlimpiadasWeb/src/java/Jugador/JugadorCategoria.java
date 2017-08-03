@@ -6,10 +6,12 @@
 package Jugador;
 
 import bd.Categoria;
+import bd.Deporte;
 import bd.Equipo;
 import bd.Equipo_detalle;
 import bd.Jugador;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TCategoria;
+import transaccion.TDeporte;
 import transaccion.TEquipo;
 import transaccion.TEquipo_detalle;
 import transaccion.TJugador;
@@ -50,11 +53,16 @@ public class JugadorCategoria extends HttpServlet {
             jugador = new TJugador().getById(id);
             if(jugador==null)
                 throw new BaseException("ERROR","No se encontr&oacute; el jugador");
-            List<Categoria> categorias = (List<Categoria>) new TCategoria().getList();
+            TCategoria tcategoria = new TCategoria();
+            tcategoria.setOrderBy(" id_deporte ");
+            List<Categoria> categorias = (List<Categoria>) tcategoria.getListFiltro(null);
             List<Categoria> inscripciones = (List<Categoria>) new TCategoria().getByJugador(jugador.getId());
+            HashMap<Integer, Deporte> deportes = new TDeporte().getMap();
             request.setAttribute("jugador",jugador);
             request.setAttribute("categorias",categorias);
             request.setAttribute("inscripciones",inscripciones);
+            request.setAttribute("deportes",deportes);
+            
             request.getRequestDispatcher("jugador_categoria.jsp").forward(request, response);
         } catch (BaseException ex) {
             request.setAttribute("titulo", ex.getResult());

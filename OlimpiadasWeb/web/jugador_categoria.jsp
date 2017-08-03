@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="transaccion.TCategoria"%>
 <%@page import="transaccion.TEquipo"%>
 <%@page import="bd.Sede"%>
@@ -18,7 +19,7 @@
 Jugador jugador = (Jugador) request.getAttribute("jugador");
 List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
 List<Categoria> inscripciones = (List<Categoria>) request.getAttribute("inscripciones");
-
+HashMap<Integer, Deporte> deportes = ( HashMap<Integer, Deporte> ) request.getAttribute("deportes");
 TCategoria tcategoria = new TCategoria();
 tcategoria.setOrderBy(" id_deporte ");
 if(categorias==null) categorias = tcategoria.getListFiltro(null);
@@ -33,6 +34,7 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
             width:100%;
             height: 100%;
             cursor:pointer;
+            font-weight: normal;
             /*background-color: #ddd;*/
 /*            padding-top: 0px;
             padding-bottom: 0px;*/
@@ -43,6 +45,13 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
         }
         td:hover{
             
+        }
+        tr.headDeporte{
+            background-color:#337ab7;
+            color:#eee;
+             /*font-weight: bold;*/
+            text-align: center;
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -70,7 +79,7 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
                             <form action="<%=PathCfg.JUGADOR_CATEGORIA%>" method="POST">
                             <div class="row">
                         <div class="col-md-12">
-                            <table class="table  table-bordered table-condensed" id="tblCategoria">
+                            <table class="table  table-bordered table-condensed " id="tblCategoria">
                             <% 
                                 Integer id_deporte = null;
                                 Integer cant = 0;
@@ -78,6 +87,7 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
                                 for(Categoria categoria: categorias) { 
                                     String id_categoria = "id_categoria_" + categoria.getId().toString();
                                     String checked = inscripciones.contains(categoria)?"checked":"";
+                                    boolean nuevo_deporte = false;
                                   cant +=1;
                                   if(!categoria.getId_deporte().equals(id_deporte) || cant >= max_col) {
                                     if(id_deporte!=null) { // Completo la FILA
@@ -88,7 +98,12 @@ if(categorias==null) categorias = tcategoria.getListFiltro(null);
                                         out.print("</tr>");
                                     }
                                     cant =0;
+                                    nuevo_deporte = (id_deporte != categoria.getId_deporte());
                                     id_deporte = categoria.getId_deporte();
+                                    Deporte deporte = deportes.get(id_deporte);
+                                    if(nuevo_deporte)
+                                        out.print("<tr class='headDeporte'><td colspan="+max_col * 2+">"+ deporte.getNombre()+"</td></tr>");
+                                    //else out.print("<tr><td colspan="+max_col * 2+"><h4 style='text-align:center'>"+deporte.getNombre()+"</h4></td></tr>");
                                     out.print("<tr>");
                                    } %>
                                     
