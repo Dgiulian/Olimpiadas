@@ -103,7 +103,7 @@
             <td class="">{{delegacion.nombre}}</td>
             <td class="">{{observaciones}}</td>
             <td>
-            <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-integrante">Integrantes</span>
+            <a href="EquipoDetalle?id_equipo={{id}}" data-index="{{@index}}" class="btn btn-link btn-block btn-integraste">Integrantes</a>
             </td>
             <td class="">
             <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
