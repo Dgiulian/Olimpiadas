@@ -1,12 +1,15 @@
 
 var equipos = [];
 var delegaciones   = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarEquipo({});
     });
     $('#id_delegacion_filtro').change(filtrarEquipo);
     $('#btnSearch').click(filtrarEquipo);
+    templates['list'] = Handlebars.compile($("#equipo_list").html());
+    templates['edit'] = Handlebars.compile($('#equipo_edit').html());
     loadDelegaciones();
     filtrarEquipo();
 });
@@ -54,11 +57,10 @@ function loadDataEquipo(filter){
         });
     }
     function createTable($tabla,data){
-        var template = Handlebars.compile($("#equipo_list").html());        
+        var template = templates['list'];
         $tabla.find('tbody').html(template({records:data}));
         $('.btn-del').click(borrarEquipo);
         $('.btn-edit').click(editarEquipo);
-        $('.btn-integrante').click(redirigir_integrante);
     }
     function editarEquipo(){
         var data = {};
@@ -68,7 +70,7 @@ function loadDataEquipo(filter){
     }
     
     function agregarEquipo(data){
-        var template = Handlebars.compile($('#equipo_edit').html());
+        var template = templates['edit'];
         data.delegaciones = delegaciones;
         bootbox.dialog({
                 title: "Configuraci&oacute;n de equipo",
@@ -117,12 +119,6 @@ function recuperarCampos(){
     data.nombre = $('#nombre').val();
     data.observaciones  = $('#observaciones').val();
     return data;   
-}
-
-function redirigir_integrante(){
-    var index = $(this).data('index');    
-    var id = equipos[index].id;        
-    window.location = URLS.EQUIPO_DETALLE.BASE +"?id_equipo="+id;    
 }
 
 function getSearchData(){

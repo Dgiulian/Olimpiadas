@@ -1,10 +1,13 @@
 
 var novedades = [];
 var deportes   = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarNovedad({});
     });
+    templates['list'] = Handlebars.compile($("#novedad_list").html());
+    templates['edit'] = Handlebars.compile($('#novedad_edit').html());
     filtrarNovedad();
 });
 function filtrarNovedad(){
@@ -38,7 +41,7 @@ function borrarNovedad(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#novedad_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarNovedad);
     $('.btn-edit').click(editarNovedad);
@@ -51,7 +54,7 @@ function editarNovedad(){
 }
 
 function agregarNovedad(data){
-    var template = Handlebars.compile($('#novedad_edit').html());
+    var template = templates['edit'];
     bootbox.dialog({
         title: "Configuraci&oacute;n de delegaci&oacute;n",
         message: template(data), 

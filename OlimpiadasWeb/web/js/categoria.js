@@ -1,11 +1,14 @@
 
 var categorias = [];
 var deportes   = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarCategoria({});
     });
     $('#btnSearch').click(filtrarCategoria);
+    templates['list'] = Handlebars.compile($("#categoria_list").html());
+    templates['edit'] = Handlebars.compile($('#categoria_edit').html());
     loadDeportes({});
     filtrarCategoria();
 });
@@ -52,7 +55,7 @@ function borrarCategoria(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#categoria_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarCategoria);
     $('.btn-edit').click(editarCategoria);
@@ -66,7 +69,7 @@ function editarCategoria(){
 }
 
 function agregarCategoria(data){
-    var template = Handlebars.compile($('#categoria_edit').html());
+    var template = templates['edit'];
     data.deportes = deportes;
     bootbox.dialog({
         title: "Configuraci&oacute;n de categoria",

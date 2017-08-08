@@ -1,6 +1,6 @@
 var jugadores = [];
 var delegaciones = [];
-
+var templates = {};
 $(document).ready(function() {
     $('#btnNuevo').click(function() {
         agregarJugador({});
@@ -10,6 +10,8 @@ $(document).ready(function() {
     });
     $('#id_delegacion_filtro').change(filtrarJugador);
     $('#btnSearch').click(filtrarJugador);
+    templates['edit'] = Handlebars.compile($('#jugador_edit').html());
+    templates['list'] = Handlebars.compile($("#jugador_list").html());
     loadDelegaciones();
     filtrarJugador();
 });
@@ -59,7 +61,7 @@ function borrarJugador() {
     });
 }
 function createTable($tabla, data) {
-    var template = Handlebars.compile($("#jugador_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records: data}));
     $('.btn-del').click(borrarJugador);
     $('.btn-edit').click(editarJugador);
@@ -72,7 +74,7 @@ function editarJugador() {
 }
 
 function agregarJugador(data) {
-    var template = Handlebars.compile($('#jugador_edit').html());
+    var template = templates['edit'];
     data.delegaciones = delegaciones;
     bootbox.dialog({
         title: "Configuraci&oacute;n de jugador",

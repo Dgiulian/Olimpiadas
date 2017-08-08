@@ -1,7 +1,10 @@
+var templates = {};
 $(document).ready(function() {
     $('#btnNuevo').click(function(){
         agregarParametro({id:0,numero:'',codigo:'',nombre:'',valor:'',activo:1});
     });
+    templates['list'] = Handlebars.compile($("#parametro_list").html());
+    templates['edit'] = Handlebars.compile($("#parametro_edit").html());
     filtrarParametros();
 });
 function filtrarParametros(){
@@ -32,7 +35,7 @@ function borrarParametro(){
     });
 }
 function createTable($tabla,data){   
-    var template = Handlebars.compile($("#parametro_list").html());
+    var template = templates['edit'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarParametro);
     $('.btn-edit').click(editarParametro);
@@ -48,7 +51,7 @@ function editarParametro(){
 }
 function agregarParametro(data){
     data.checked = (data.activo)?"checked":"";
-    var template = Handlebars.compile($('#parametro_edit').html());
+    var template = templates['edit'];
     bootbox.dialog({
         title: "Configuraci&oacute;n de par&aacute;metro",
         message: template(data), 

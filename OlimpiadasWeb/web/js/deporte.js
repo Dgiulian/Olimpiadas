@@ -1,5 +1,5 @@
 var deportes = [];
-
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarDeporte({});
@@ -9,6 +9,8 @@ $(document).ready(function(){
        return tiposDeporte[tipo];
     });
      $('#btnSearch').click(filtrarDeporte);
+    templates['list'] = Handlebars.compile($("#deporte_list").html());
+    templates['edit'] = Handlebars.compile($('#deporte_edit').html());
     filtrarDeporte();
     
 });
@@ -42,7 +44,7 @@ function borrarDeporte(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#deporte_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarDeporte);
     $('.btn-edit').click(editarDeporte);
@@ -55,7 +57,7 @@ function editarDeporte(){
 }
 
 function agregarDeporte(data){
-    var template = Handlebars.compile($('#deporte_edit').html());
+    var template = templates['edit'];
     bootbox.dialog({
         title: "Configuraci&oacute;n de deporte",
         message: template(data), 

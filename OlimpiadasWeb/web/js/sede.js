@@ -5,11 +5,14 @@
  */
 
 var sedes = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarSede({});
     });
-       $('#btnSearch').click(filtrarSede);
+    $('#btnSearch').click(filtrarSede);
+    templates['list'] = Handlebars.compile($("#sede_list").html());
+    templates['edit'] = Handlebars.compile($('#sede_edit').html());
     filtrarSede();
 });
 function filtrarSede(){
@@ -42,7 +45,7 @@ function borrarSede(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#sede_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarSede);
     $('.btn-edit').click(editarSede);
@@ -54,7 +57,7 @@ function editarSede(){
     agregarSede(data);
 }
 function agregarSede(data){
-    var template = Handlebars.compile($('#sede_edit').html());
+    var template = templates['edit'];
     bootbox.dialog({
         title: "Configuraci&oacute;n de sede",
         message: template(data), 

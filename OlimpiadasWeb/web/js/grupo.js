@@ -1,10 +1,13 @@
 
 var grupos = [];
 var equipos   = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarGrupo({});
     });
+    templates['list'] = Handlebars.compile($("#grupo_list").html());
+    templates['edit'] = Handlebars.compile($('#grupo_edit').html());
     loadEquipos();
     filtrarGrupo();
 });
@@ -52,7 +55,7 @@ function borrarGrupo(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#grupo_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarGrupo);
     $('.btn-edit').click(editarGrupo);
@@ -65,7 +68,7 @@ function editarGrupo(){
 }
 
 function agregarGrupo(data){
-    var template = Handlebars.compile($('#grupo_edit').html());
+    var template = templates['edit'];
     data.equipos = equipos;
     data.id_categoria = $('#search_categoria').val();
     if(data.detalle) data.selected = data.detalle.map(function(el,ind){ return el.id}).join(",");

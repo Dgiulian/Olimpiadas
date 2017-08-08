@@ -4,6 +4,7 @@ var deportes   = [];
 var equipos    = [];
 var grupos     = [];
 var categorias = [];
+var templates = {};
 var ms;
 $(document).ready(init);
 function init(){
@@ -22,6 +23,8 @@ function init(){
     $('#search_categoria').change(filtrarPrueba);
     $('#search_grupo').change(filtrarPrueba);
     $('#search_estado').change(filtrarPrueba);
+    templates['list'] = Handlebars.compile($("#prueba_list").html());
+    templates['edit'] = Handlebars.compile($('#prueba_edit').html());    
     loadDeportes({});
     filtrarPrueba();
     
@@ -85,7 +88,7 @@ function borrarPrueba(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#prueba_list").html());
+    var template = templates['list'];
     console.log(data.deporte);
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarPrueba);
@@ -100,7 +103,7 @@ function editarPrueba(){
 
 function agregarPrueba(data){
     Promise.all([loadDeportes,loadCategorias]).then(function(resolve,reject){
-        var template = Handlebars.compile($('#prueba_edit').html());    
+        var template = templates['edit'];
         data.deportes   = deportes;
         data.categorias = categorias;
         data.equipos    = equipos;

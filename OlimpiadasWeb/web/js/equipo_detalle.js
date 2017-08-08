@@ -1,12 +1,14 @@
 
 var equipo_detalles = [];
 var jugadores   = [];
+var templates = {};
 $(document).ready(function(){
     $('#id_jugador').multiSelect({        
         selectableHeader:"<h4 class='muliselect_headder'>Jugadores</h4>",
         selectionHeader:"<h4 class='muliselect_headder'>Incluidos</h4>"
     });    
-    
+//    templates['list'] = Handlebars.compile($("#equipo_detalle_list").html());
+//    templates['edit'] = Handlebars.compile($("#equipo_detalle_edit").html());
 //    $('#btnNuevo').click(function(){
 //        agregarEquipo_detalle({});
 //    });
@@ -56,7 +58,7 @@ function loadDataEquipo_detalle(filter){
         });
     }
     function createTable($tabla,data){        
-        var template = Handlebars.compile($("#equipo_detalle_list").html());        
+        var template = templates['list'];
         $tabla.find('tbody').html(template({records:data}));
         $('.btn-del').click(borrarEquipo_detalle);
         $('.btn-edit').click(editarEquipo_detalle);
@@ -69,7 +71,7 @@ function loadDataEquipo_detalle(filter){
     }
     
     function agregarEquipo_detalle(data){
-        var template = Handlebars.compile($('#equipo_detalle_edit').html());
+        var template = templates['edit'];
         data.jugadores = jugadores;
         bootbox.dialog({
             title: "Configuraci&oacute;n de equipo_detalle",

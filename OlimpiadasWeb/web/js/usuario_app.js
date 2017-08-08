@@ -1,11 +1,14 @@
 
 var usuarioapps = [];
 var deportes   = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarUsuarioApp({});
     });
     $('#btnSearch').click(filtrarUsuarioApp);
+    templates['list'] = Handlebars.compile($("#usuario_app_list").html());
+    templates['edit'] = Handlebars.compile($('#usuario_app_edit').html());
     loadDeportes({});
     filtrarUsuarioApp();
 });
@@ -52,7 +55,7 @@ function borrarUsuarioApp(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#usuario_app_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarUsuarioApp);
     $('.btn-edit').click(editarUsuarioApp);    
@@ -65,7 +68,7 @@ function editarUsuarioApp(){
 }
 
 function agregarUsuarioApp(data){
-    var template = Handlebars.compile($('#usuario_app_edit').html());
+    var template = templates['edit'];
     data.deportes = deportes;
     bootbox.dialog({
         title: "Configuraci&oacute;n de usuario App",

@@ -1,9 +1,12 @@
 var delegaciones = [];
+var templates = {};
 $(document).ready(function(){
     $('#btnNuevo').click(function(){
         agregarDelegacion({});
     });
     $('#btnSearch').click(filtrarDelegacion);
+    templates['list'] = Handlebars.compile($("#delegacion_list").html());
+    templates['edit'] = Handlebars.compile($('#delegacion_edit').html());
     filtrarDelegacion();
 });
 function filtrarDelegacion(){
@@ -36,7 +39,7 @@ function borrarDelegacion(){
     });
 }
 function createTable($tabla,data){
-    var template = Handlebars.compile($("#delegacion_list").html());
+    var template = templates['list'];
     $tabla.find('tbody').html(template({records:data}));
     $('.btn-del').click(borrarDelegacion);
     $('.btn-edit').click(editarDelegacion);        
@@ -49,7 +52,7 @@ function editarDelegacion(){
 }
 
 function agregarDelegacion(data){
-    var template = Handlebars.compile($('#delegacion_edit').html());
+    var template = templates['edit'];
     bootbox.dialog({
         title: "Configuraci&oacute;n de delegaci&oacute;n",
         message: template(data), 
