@@ -36,18 +36,29 @@ public class NovedadList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NovedadList</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NovedadList at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String pagNro = request.getParameter("pagNro");       
+                
+        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        
+        try {
+            JsonRespuesta jr = new JsonRespuesta();
+            List<Novedad> lista = new TNovedad().getList();
+            
+                        
+            if (lista != null) {
+                
+                jr.setTotalRecordCount(lista.size());
+            } else {
+                jr.setTotalRecordCount(0);
+            }            
+            jr.setResult("OK");
+            jr.setRecords(lista);
+            String jsonResult = new Gson().toJson(jr);
+            out.print(jsonResult);
+        } finally {            
+            out.close();
         }
     }
 
@@ -76,30 +87,7 @@ public class NovedadList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");       
-                
-        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
-        
-        try {
-            JsonRespuesta jr = new JsonRespuesta();
-            List<Novedad> lista = new TNovedad().getList();
-            
-                        
-            if (lista != null) {
-                
-                jr.setTotalRecordCount(lista.size());
-            } else {
-                jr.setTotalRecordCount(0);
-            }            
-            jr.setResult("OK");
-            jr.setRecords(lista);
-            String jsonResult = new Gson().toJson(jr);
-            out.print(jsonResult);
-        } finally {            
-            out.close();
-        }
+         processRequest(request, response);
     }
 
     /**
