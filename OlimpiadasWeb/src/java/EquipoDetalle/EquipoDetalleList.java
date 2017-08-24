@@ -51,7 +51,7 @@ public class EquipoDetalleList extends HttpServlet {
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();
+            HashMap<String,String> filtro = new HashMap<>();
             filtro.put("id_equipo", id_equipo.toString());
             List<Equipo_detalle> lista = new TEquipo_detalle().getListFiltro(filtro);
             List<Equipo_detalleDet> listaDet = new ArrayList();            

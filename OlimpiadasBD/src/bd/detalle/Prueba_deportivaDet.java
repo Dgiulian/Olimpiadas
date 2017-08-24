@@ -37,7 +37,7 @@ public class Prueba_deportivaDet extends Prueba_deportiva {
     Grupo grupo;
     Sede sede;
     String estado = "";
-    List<EquipoDet> equipos= new ArrayList<>();
+    List<EquipoDet> equipos= new ArrayList();
 
     //Tipo prueba indica si es un partido o de multiples equipos
     int tipo_prueba = 0;

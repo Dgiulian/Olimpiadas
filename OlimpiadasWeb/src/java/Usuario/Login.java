@@ -98,7 +98,7 @@ public class Login extends HttpServlet {
             
         }
         if (error){
-            ArrayList<String> errores = new ArrayList<String>();
+            ArrayList<String> errores = new ArrayList<>();
             errores.add("Usuario o Password no valido<br>");
             request.setAttribute("errores", errores );
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");        

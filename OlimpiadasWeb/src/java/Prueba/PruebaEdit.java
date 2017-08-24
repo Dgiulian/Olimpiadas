@@ -137,9 +137,7 @@ public class PruebaEdit extends HttpServlet {
             prueba_deportiva.setObservaciones(observaciones);
             prueba_deportiva.setId_deporte(id_deporte);
             prueba_deportiva.setId_estado(id_estado);
-            prueba_deportiva.setId_grupo(id_grupo);
-            prueba_deportiva.setTipo_puntaje(tipo_puntaje);
-            prueba_deportiva.setOrden_puntaje(orden_puntaje);
+            prueba_deportiva.setId_grupo(id_grupo);            
             prueba_deportiva.setFecha(fecha);
             prueba_deportiva.setHora(hora);
             boolean todoOk;

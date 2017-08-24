@@ -74,9 +74,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             u.setUsu_fcreacion(sdf.format(dt));
             id = this.alta(u);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
@@ -88,9 +86,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
             String password_hash = PasswordHash.createHash(newPassword);
             u.setUsu_password(password_hash);
             todoOk = this.actualizar(u);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return todoOk;
@@ -104,9 +100,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
                 u.setUsu_activo(1);
                 todoOk = this.actualizar(u);
             }
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return todoOk;
@@ -128,9 +122,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
         boolean valida = false;
         try {
             valida = PasswordHash.validatePassword(password, hash);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -157,9 +149,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
             String password_hash = PasswordHash.createHash(validate);
             u.setUsu_hash_activa(password_hash);
             todoOk = this.actualizar(u);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return todoOk;

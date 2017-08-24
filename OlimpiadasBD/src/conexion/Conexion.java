@@ -68,13 +68,7 @@ public class Conexion {
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } catch (ClassNotFoundException ex) {
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -196,16 +190,16 @@ public class Conexion {
 
     public boolean guardarSite(int idSite, String descripcion, String localidad, String organismo, String latitud, String longitud, String fecha) {
         try {
-            PreparedStatement st = conexion.prepareStatement("insert into ACT_SITE(SIT_IDENTIFICADOR,SIT_DESCRIPCION,SIT_FCH_ALTA,SIT_ORGANISMO,SIT_LOCALIDAD, SIT_LATITUD, SIT_LONGITUD) values(?,?,?,?,?,?,?)");
-            st.setInt(1, idSite);
-            st.setString(2, descripcion);
-            st.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
-            st.setString(4, organismo);
-            st.setString(5, localidad);
-            st.setFloat(6, Float.parseFloat(latitud));
-            st.setFloat(7, Float.parseFloat(longitud));
-            st.execute();
-            st.close();
+            try (PreparedStatement st = conexion.prepareStatement("insert into ACT_SITE(SIT_IDENTIFICADOR,SIT_DESCRIPCION,SIT_FCH_ALTA,SIT_ORGANISMO,SIT_LOCALIDAD, SIT_LATITUD, SIT_LONGITUD) values(?,?,?,?,?,?,?)")) {
+                st.setInt(1, idSite);
+                st.setString(2, descripcion);
+                st.setTimestamp(3, new Timestamp(new java.util.Date().getTime()));
+                st.setString(4, organismo);
+                st.setString(5, localidad);
+                st.setFloat(6, Float.parseFloat(latitud));
+                st.setFloat(7, Float.parseFloat(longitud));
+                st.execute();
+            }
             boolean salida = true;
             return salida;
         } catch (SQLException ex) {
@@ -242,28 +236,23 @@ public class Conexion {
             if (is5 != null) {
                 is5 = new FileInputStream(imagen5);
             }
-
-            PreparedStatement st = conexion.prepareStatement("UPDATE ACT_SITE SET ACT_SITE.sit_foto1 = ?, ACT_SITE.sit_fotoverano= ? , ACT_SITE.sit_fotootonio= ? , ACT_SITE.sit_fotoinvierno=?,  ACT_SITE.sit_fotoprimavera= ? where ACT_SITE.sit_identificador=" + id_Site);
-
-            st.setBlob(1, is1);
-            st.setBlob(2, is2);
-            st.setBlob(3, is3);
-            st.setBlob(4, is4);
-            st.setBlob(5, is5);
-
-            st.execute();
-            is1.close();
-            is2.close();
-            is3.close();
-            is4.close();
-            is5.close();
-            st.close();
+            try (PreparedStatement st = conexion.prepareStatement("UPDATE ACT_SITE SET ACT_SITE.sit_foto1 = ?, ACT_SITE.sit_fotoverano= ? , ACT_SITE.sit_fotootonio= ? , ACT_SITE.sit_fotoinvierno=?,  ACT_SITE.sit_fotoprimavera= ? where ACT_SITE.sit_identificador=" + id_Site)) {
+                st.setBlob(1, is1);
+                st.setBlob(2, is2);
+                st.setBlob(3, is3);
+                st.setBlob(4, is4);
+                st.setBlob(5, is5);
+                
+                st.execute();
+                is1.close();
+                is2.close();
+                is3.close();
+                is4.close();
+                is5.close();
+            }
             salida =
                     true;
-        } catch (IOException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            salida = false;
-        } catch (SQLException ex) {
+        } catch (IOException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             salida = false;
         } finally {
@@ -292,19 +281,15 @@ public class Conexion {
         boolean salida = true;
         try {
             is1 = new FileInputStream(caminoFoto);
-            //System.out.println("CAMINO FOTO = " + caminoFoto);
-            PreparedStatement st1 = conexion.prepareStatement("UPDATE ACT_EQUIPO SET EQU_FOTOGRAFIA = ? WHERE EQU_IDENTIFICADOR = ?");
-            st1.setBlob(1, is1);
-            st1.setInt(2, id);
-            st1.execute();
-            is1.close();
-            st1.close();
+            try (PreparedStatement st1 = conexion.prepareStatement("UPDATE ACT_EQUIPO SET EQU_FOTOGRAFIA = ? WHERE EQU_IDENTIFICADOR = ?")) {
+                st1.setBlob(1, is1);
+                st1.setInt(2, id);
+                st1.execute();
+                is1.close();
+            }
             salida =
                     true;
-        } catch (IOException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            salida = false;
-        } catch (SQLException ex) {
+        } catch (IOException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             salida = false;
         } finally {

@@ -44,7 +44,7 @@ public class DeporteList extends HttpServlet {
          
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();
+            HashMap<String,String> filtro = new HashMap<>();
             if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             List<Deporte> lista = new TDeporte().getListFiltro(filtro);
             List<DeporteList.DeporteDet> listaDet = new ArrayList();            

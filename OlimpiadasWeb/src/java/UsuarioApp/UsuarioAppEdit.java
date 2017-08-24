@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TUsuario_app;
-import transaccion.TEquipo;
 import utils.BaseException;
 import utils.JsonRespuesta;
 import utils.Parser;

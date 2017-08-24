@@ -5,7 +5,7 @@
  */
 package Categoria;
 
-import Categoria.CategoriaList;
+
 import bd.Categoria;
 import bd.Deporte;
 import com.google.gson.Gson;
@@ -51,12 +51,13 @@ public class CategoriaList extends HttpServlet {
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();
+            HashMap<String,String> filtro = new HashMap<>();
             if(id_deporte!=0) filtro.put("id_deporte",id_deporte.toString());
             if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             
+                       
             List<Categoria> lista = new TCategoria().getListFiltro(filtro);
-            List<CategoriaDet> listaDet = new ArrayList();            
+            List<CategoriaDet> listaDet = new ArrayList();             
                         
             if (lista != null) {
                 for(Categoria c:lista) listaDet.add(new CategoriaDet(c));

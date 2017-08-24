@@ -5,7 +5,6 @@
  */
 package Grupo;
 
-import Grupo.GrupoList;
 import bd.Equipo;
 import bd.Grupo;
 import com.google.gson.Gson;
@@ -18,9 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transaccion.TGrupo;
-import transaccion.TDeporte;
 import transaccion.TEquipo;
+import transaccion.TGrupo;
 import utils.JsonRespuesta;
 import utils.Parser;
 
@@ -50,10 +48,10 @@ public class GrupoList extends HttpServlet {
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();
+            HashMap<String,String> filtro = new HashMap<>();
             //if(id_categoria!=0) 
                 filtro.put("id_categoria", id_categoria.toString());
-            List<Grupo> lista = new TGrupo().getListFiltro(filtro);
+            List<Grupo> lista = new TGrupo().getListFiltro(filtro);            
             List<GrupoList.GrupoDet> listaDet = new ArrayList();                        
             if (lista != null) {
                 for(Grupo c:lista) listaDet.add(new GrupoList.GrupoDet(c));

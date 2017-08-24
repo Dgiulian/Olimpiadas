@@ -76,9 +76,7 @@ public class TUsuario_app extends TransaccionBase<Usuario_app> {
             u.setUltimoacceso(sdf.format(dt));
             u.setFcreacion(sdf.format(dt));
             id = this.alta(u);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario_app.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario_app.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
@@ -90,9 +88,7 @@ public class TUsuario_app extends TransaccionBase<Usuario_app> {
         boolean valida = false;
         try {
             valida = PasswordHash.validatePassword(password, hash);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(TUsuario_app.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario_app.class.getName()).log(Level.SEVERE, null, ex);
         }
 

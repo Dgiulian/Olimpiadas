@@ -7,9 +7,7 @@ public class Prueba_deportivaBase {
 	public Integer id_grupo = 0;
 	public Integer id_estado = 0;
 	public String fecha = "";
-	public String hora = "";
-	public Integer tipo_puntaje = 0;
-	public Integer orden_puntaje = 0;
+	public String hora = "";	
 	public Integer id_sede = 0;
 	public String observaciones = "";
 
@@ -23,9 +21,7 @@ public class Prueba_deportivaBase {
 		this.id_grupo = prueba_deportivabase.getId_grupo();
 		this.id_estado = prueba_deportivabase.getId_estado();
 		this.fecha = prueba_deportivabase.getFecha();
-		this.hora = prueba_deportivabase.getHora();
-		this.tipo_puntaje = prueba_deportivabase.getTipo_puntaje();
-		this.orden_puntaje = prueba_deportivabase.getOrden_puntaje();
+		this.hora = prueba_deportivabase.getHora();		
 		this.id_sede = prueba_deportivabase.getId_sede();
 		this.observaciones = prueba_deportivabase.getObservaciones();
 	}
@@ -93,23 +89,7 @@ public class Prueba_deportivaBase {
 		return this;
 	}
 
-	public Integer getTipo_puntaje() {
-		return this.tipo_puntaje;
-	}
-
-	public Prueba_deportivaBase setTipo_puntaje(Integer tipo_puntaje) {
-		this.tipo_puntaje = tipo_puntaje;
-		return this;
-	}
-
-	public Integer getOrden_puntaje() {
-		return this.orden_puntaje;
-	}
-
-	public Prueba_deportivaBase setOrden_puntaje(Integer orden_puntaje) {
-		this.orden_puntaje = orden_puntaje;
-		return this;
-	}
+	
 
 	public Integer getId_sede() {
 		return this.id_sede;

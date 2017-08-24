@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TUsuario_app;
 import utils.JsonRespuesta;
-import utils.Parser;
 
 /**
  *
@@ -50,7 +49,7 @@ public class UsuarioAppList extends HttpServlet {
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();  
+            HashMap<String,String> filtro = new HashMap<>();  
             
             if(username != null && !"".equals(username)) filtro.put("username",username);
             if(email != null    && !"".equals(email))    filtro.put("email",email);

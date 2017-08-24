@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  * @author Diego
  */
 public abstract class TransaccionBase<E> {
+
     protected String orderBy = " ";
     protected Conexion conexion;
     Class<E> clase;
@@ -39,6 +40,57 @@ public abstract class TransaccionBase<E> {
         return id;
     }
 
+    public List<E> getListFiltro(HashMap<String, String> filtro) {
+
+        String where = " where True ";
+        String order = this.getOrderBy();
+        try {
+
+            Class claseGenerada = Class.forName(this.clase.getCanonicalName().trim());
+            Object objeto = claseGenerada.newInstance();
+            if (filtro != null) {
+                for (String key : filtro.keySet()) {
+                    Object value = filtro.get(key);
+                    try {
+    //                    Field[] declaredFields = claseGenerada.getFields();
+                        //                    for(Field f: declaredFields){
+                        //                        System.out.println(f.getName());
+                        //                    }
+                        Field campo = null;
+                        try {
+                            campo = claseGenerada.getDeclaredField(key);
+                        } catch (NoSuchFieldException ex) {
+                            campo = claseGenerada.getField(key);
+                        }
+                        //getDeclaredField(key);
+                        Class<?> type = campo.getType();
+
+                        if (type.isAssignableFrom(String.class)) {
+                            //                    where += String.format(" and %s = '%s'",key,value) ;
+                            where += String.format(" and %s like '%%%s%%'", key, value);
+                        } else if (type.isAssignableFrom(Integer.class)) {
+                            if (value != null) {
+                                where += String.format(" and %s = %s", key, value);
+                            }
+                        };
+                    } catch (            NoSuchFieldException | SecurityException ex) {
+                        //Si no existe el campo ignoramos la excepción
+                        Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
+            Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
+        }
+        //System.out.println(this.clase.getPackage().toString() + );
+        //String tabla = this.clase.getCanonicalName().replace("bd.", "").toLowerCase();
+        String tabla = this.clase.getCanonicalName().replace(this.clase.getPackage().getName() + ".", "").toLowerCase();
+
+        String query = "select * from " + tabla + " " + where + " " + order;
+        System.out.println(query);
+        return this.getList(query);
+    }
+
     public boolean baja(Object obj) {
         boolean todoOk = false;
         todoOk = new TransaccionRS().eliminarObjeto(obj);
@@ -51,11 +103,11 @@ public abstract class TransaccionBase<E> {
 
     public List<E> getList(String query) {
         List<E> lista = null;
-        try {            
+        try {
             conexion.conectarse();
-            ResultSet rs = conexion.ejecutarSQLSelect(query);            
-            lista = new TransaccionRS().recuperarLista(this.clase.getCanonicalName(), rs);
-            rs.close();            
+            try (ResultSet rs = conexion.ejecutarSQLSelect(query)) {
+                lista = new TransaccionRS().recuperarLista(this.clase.getCanonicalName(), rs);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -63,9 +115,9 @@ public abstract class TransaccionBase<E> {
             return lista;
         }
     }
+
     
-    public abstract List<E> getList() ;
-    
+
     public List<E> getListFilter(Object object, String extendSQL) {
         String sql = new TransaccionRS().recuperarListaDefault(object, extendSQL);
         if (sql != null && !sql.equalsIgnoreCase("")) {
@@ -93,71 +145,20 @@ public abstract class TransaccionBase<E> {
         Object object = t.altaObjeto(this.clase.getCanonicalName(), map);
         return (E) object;
     }
-    public List<E> getListFiltro(Map<String,String> filtro){
 
-        String where =  " where True ";
-        String order = this.getOrderBy();
-        try {
-
-            Class claseGenerada = Class.forName(this.clase.getCanonicalName().trim());
-            Object objeto = claseGenerada.newInstance();
-            if(filtro!=null) {
-                for (String key : filtro.keySet()) {
-                    Object value = filtro.get(key);
-                    try{
-    //                    Field[] declaredFields = claseGenerada.getFields();
-    //                    for(Field f: declaredFields){
-    //                        System.out.println(f.getName());
-    //                    }
-                        Field campo = null;
-                        try{
-                            campo = claseGenerada.getDeclaredField(key);
-                        } catch(NoSuchFieldException ex){
-                            campo = claseGenerada.getField(key);
-                        }
-                        //getDeclaredField(key);
-                        Class<?> type = campo.getType();
-
-                    if (type.isAssignableFrom(String.class)){
-    //                    where += String.format(" and %s = '%s'",key,value) ;
-                        where += String.format(" and %s like '%%%s%%'",key,value) ;
-                    }else if (type.isAssignableFrom(Integer.class)){
-                        if (value != null)
-                            where += String.format(" and %s = %s",key,value) ;
-                    };
-                    } catch (NoSuchFieldException ex) {
-                        //Si no existe el campo ignoramos la excepción
-                         Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-                    }
-                    catch (SecurityException ex) {
-                        Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-                    }
-                }            
-            }            
-        }catch (InstantiationException ex) {
-            Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(this.clase.getCanonicalName()).log(Level.SEVERE, null, ex);
-        }
-        //System.out.println(this.clase.getPackage().toString() + );
-        //String tabla = this.clase.getCanonicalName().replace("bd.", "").toLowerCase();
-         String tabla = this.clase.getCanonicalName().replace(this.clase.getPackage().getName()+".", "").toLowerCase();
-      
-        
-        String query = "select * from " + tabla  + " " + where + " " + order;
-        System.out.println(query);
-        return this.getList(query);
-    }
-    
-    protected String getByDateRangeQuery(String fecha_desde,String hora_desde,String fecha_hasta, String hora_hasta){
+    protected String getByDateRangeQuery(String fecha_desde, String hora_desde, String fecha_hasta, String hora_hasta) {
         return "";
-    };
+    }
+
+    ;
     
-    public List<E> getByDateRange(String fecha_desde,String hora_desde,String fecha_hasta, String hora_hasta){
-        if (hora_desde == null) hora_desde = "00:00:00";
-        if (hora_hasta == null) hora_hasta = "24:59:59";
+    public List<E> getByDateRange(String fecha_desde, String hora_desde, String fecha_hasta, String hora_hasta) {
+        if (hora_desde == null) {
+            hora_desde = "00:00:00";
+        }
+        if (hora_hasta == null) {
+            hora_hasta = "24:59:59";
+        }
         String query = this.getByDateRangeQuery(fecha_desde, hora_desde, fecha_hasta, hora_hasta);
         System.out.println(query);
         return this.getList(query);
@@ -166,40 +167,38 @@ public abstract class TransaccionBase<E> {
      ** Devuelve el criterio de ordenamiento de la tabla
      ** Cada clase que herede puede implementar este método 
      */
-    public String getOrderBy(){
+
+    public String getOrderBy() {
         return this.orderBy;
     }
-     
-     public TransaccionBase<E> setOrderBy(String orderBy){
-        if(!orderBy.trim().startsWith("order by")) orderBy = " order by " + orderBy;
+
+    public TransaccionBase<E> setOrderBy(String orderBy) {
+        if (!orderBy.trim().startsWith("order by")) {
+            orderBy = " order by " + orderBy;
+        }
         this.orderBy = orderBy;
         return this;
-        
+
     }
-    public HashMap<Integer,E> getMap(){        
-        HashMap<Integer,E> mapa = new HashMap<Integer,E>();   
+
+    public HashMap<Integer, E> getMap() {
+        HashMap<Integer, E> mapa = new HashMap<>();
         try {
             Method getterId = this.clase.getMethod("getId");
             Object id = null;
             List<E> lista = this.getList();
-            if(lista!=null){
+            if (lista != null) {
                 for (E e : lista) {
                     id = getterId.invoke(e, new Object[0]);
-                    mapa.put(Integer.valueOf(String.valueOf(id)),e);
+                    mapa.put(Integer.valueOf(String.valueOf(id)), e);
                 }
             }
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(TransaccionBase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return mapa;        
+
+        return mapa;
     }
+    
+    public abstract List<E> getList();
 }

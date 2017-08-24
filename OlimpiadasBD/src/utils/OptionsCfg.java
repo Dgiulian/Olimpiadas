@@ -25,7 +25,7 @@ public class OptionsCfg {
     }
    
    public static HashMap<Integer,Option> getMap(List<Option> lista){
-        HashMap<Integer,Option> mapa = new HashMap<>();
+        HashMap<Integer,Option> mapa = new HashMap();
         if (lista!=null){
             for(Option o:lista){
                 mapa.put(o.getId(), o);

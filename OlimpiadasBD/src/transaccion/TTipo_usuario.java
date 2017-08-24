@@ -20,7 +20,7 @@ public class TTipo_usuario extends TransaccionBase<Tipo_usuario>{
         return super.actualizar(tipo_usuario, "id");
     }
     public HashMap<Integer,Tipo_usuario> getMap(){
-        HashMap<Integer,Tipo_usuario> map = new HashMap<Integer,Tipo_usuario>();
+        HashMap<Integer,Tipo_usuario> map = new HashMap<>();
         for(Tipo_usuario cli:this.getList()){
             map.put(cli.getId(), cli);
         }

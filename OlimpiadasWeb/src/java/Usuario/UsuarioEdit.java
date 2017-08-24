@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-//import transaccion.TAuditoria;
 import transaccion.TUsuario;
 import utils.BaseException;
-//import utils.OptionsCfg;
 import utils.PathCfg;
 import utils.TFecha;
 
@@ -42,8 +40,7 @@ public class UsuarioEdit extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -54,8 +51,6 @@ public class UsuarioEdit extends HttpServlet {
             out.println("<h1>Servlet UsuarioEdit at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
-            out.close();
         }
     }
 
@@ -130,9 +125,7 @@ public class UsuarioEdit extends HttpServlet {
                 if(!password.equals(password2)) throw new BaseException("ERROR","El password no coincide con la confirmaci&oacute;n");
                 try {
                     passwordHash = utils.PasswordHash.createHash(password);
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(UsuarioEdit.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvalidKeySpecException ex) {
+                } catch (        NoSuchAlgorithmException | InvalidKeySpecException ex) {
                     Logger.getLogger(UsuarioEdit.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 usuario.setUsu_password(passwordHash);

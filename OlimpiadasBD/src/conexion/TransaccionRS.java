@@ -53,11 +53,7 @@ public class TransaccionRS {
                             where += getNombre.toLowerCase() + " like '%" + valor + "%'";
                             band = true;
                         }
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InvocationTargetException ex) {
+                    } catch (            IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                         Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (tipo.equals("Integer") == true || tipo.equals("int") == true || tipo.equals("float") == true || tipo.equals("double") == true) {
@@ -86,23 +82,11 @@ public class TransaccionRS {
                                 }
                             }
                         } else { }
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InvocationTargetException ex) {
+                    } catch (            IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                         Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
+            } catch (    IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -210,30 +194,15 @@ public class TransaccionRS {
             } else {
                 return null;
             }
-        } catch (InstantiationException ex) {
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (InvocationTargetException ex) {
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException | SQLException ex) {
             Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } catch (NoSuchMethodException ex) {
             System.out.println("No se pudo recuperar el metodo " + tipobd + " / " + clase);
             Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } catch (SecurityException ex) {
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
         } catch (ClassNotFoundException ex) {
             System.out.println("No se pudo recuperar la clase " + tipobd + " / " + clase);
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (SQLException ex) {
             Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
@@ -245,7 +214,7 @@ public class TransaccionRS {
 
     }*/
     public ArrayList<Field> recuperarAtributos(Class clase){
-        ArrayList<Field> fields = new ArrayList<Field>();
+        ArrayList<Field> fields = new ArrayList<>();
         Field[] atributos = clase.getFields();
         for (int i = 0; i <= atributos.length - 1; i++) {
             fields.add(atributos[i]);
@@ -316,8 +285,8 @@ public class TransaccionRS {
         Field[] atributos = objeto.getClass().getFields();
         if(atributos.length==0) atributos = objeto.getClass().getDeclaredFields();
         
-        ArrayList<String> lstCampos  = new ArrayList<String>();
-        ArrayList<String> lstValores = new ArrayList<String>();
+        ArrayList<String> lstCampos  = new ArrayList<>();
+        ArrayList<String> lstValores = new ArrayList<>();
         String query = "";
         for (int i = 0; i <= atributos.length - 1; i++) {
             try {
@@ -346,16 +315,10 @@ public class TransaccionRS {
                             lstCampos.add(field.getName());
                             lstValores.add(valor.toString());
                     } 
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalArgumentException ex) {
-                    Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex) {
+                } catch (         IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                     Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
+            } catch (     NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -402,11 +365,7 @@ public class TransaccionRS {
                     try {
                         Object valor = getter.invoke(objeto, new Object[0]);
                         query += "'" + valor + "'";
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InvocationTargetException ex) {
+                    } catch (            IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                         Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (tipo.equals("Integer") == true || tipo.equals("int") == true
@@ -414,17 +373,11 @@ public class TransaccionRS {
                     try {
                         Object valor = getter.invoke(objeto, new Object[0]);
                         query += valor;
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InvocationTargetException ex) {
+                    } catch (            IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                         Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
+            } catch (    NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -471,16 +424,10 @@ public class TransaccionRS {
                 if (i != atributos.length - 1) {
                     query+=",";
                 }
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalArgumentException ex) {
-                    Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex) {
+                } catch (        IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                     Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
+            } catch (    NoSuchMethodException | SecurityException ex) {
                 Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -551,18 +498,10 @@ public class TransaccionRS {
                 }
             }
             return objeto;
-        } catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException | SecurityException | InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             return null;
         } catch (InvocationTargetException ex) {
             return false;
-        } catch (SecurityException ex) {
-            return null;
-        } catch (InstantiationException ex) {
-            return null;
-        } catch (IllegalAccessException ex) {
-            return null;
-        } catch (ClassNotFoundException ex) {
-            return null;
         }
 
     }
@@ -597,13 +536,7 @@ public class TransaccionRS {
             Class claseGenerada = Class.forName(clase.trim());
             Object objeto = claseGenerada.newInstance();
             return objeto;
-        } catch (InstantiationException ex) {
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (ClassNotFoundException ex) {
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             Logger.getLogger(TransaccionRS.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

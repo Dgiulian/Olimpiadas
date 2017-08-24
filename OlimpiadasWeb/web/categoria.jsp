@@ -1,7 +1,6 @@
 <%@page import="bd.Deporte"%>
 <%@page import="java.util.List"%>
-<%
-    List<Deporte> deportes = (List<Deporte>) request.getAttribute("deportes");
+<%    List<Deporte> deportes = (List<Deporte>) request.getAttribute("deportes");
 %>
 <!DOCTYPE html>
 
@@ -30,7 +29,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                 <div class="panel-heading text-right">
+                                <div class="panel-heading text-right">
 
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
                                     <span id="btnPrint" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
@@ -38,52 +37,55 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row form-search">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <label for="search_nombre">Nombre:</label>
-                                                <input type="text" class="form-control" id="search_nombre">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="search_deportes">Deporte:</label>
-                                                <select type="text" class="form-control" id="search_deporte">
-                                                    <option value="0"> Todos</option>
-                                                    <% for(Deporte deporte:deportes){%>
-                                                    <option value="<%=deporte.getId()%>"><%=deporte.getNombre()%></option>
-                                                    <% } %>
-                                                </select>
-                                            </div>
-                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
-                                        </form> 
-                                    </div>
-                                    <div class="dataTable_wrapper">
-                                        <table class="table table-striped table-bordered table-condensed" id="tblCategoria">
-                                            <colgroup>
-                                                <col style="width:5%"></col>                                        
-                                                <col style="width:30%"></col>
-                                                <col style="width:15%"></col>
-                                                <col style="width:15%"></col>
-                                                <col></col>                                                
-                                                <col style="width:5%"></col>
-                                                <col class="acciones"></col>
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Nombre</th>
-                                                    <th>Abreviaci&oacute;n</th>
-                                                    <th>Deporte</th>
-                                                    <th>Detalle</th>
-                                                    <th></th>                                                    
-                                                    <th class="acciones">Acciones</th>                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <form class="form-inline">                                                                
+                                        <div class="form-group">
+                                            <label for="search_nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="search_nombre">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="search_deportes">Deporte:</label>
+                                            <select type="text" class="form-control" id="search_deporte">
+                                                <option value="0"> Todos</option>
+                                                <% for (Deporte deporte : deportes) {%>
+                                                <option value="<%=deporte.getId()%>"><%=deporte.getNombre()%></option>
+                                                <% }%>
+                                            </select>
+                                        </div>
 
+                                        <div class="form-group">         
+                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                        </div>
+
+                                    </form>
+                                    <br>
+
+                                    <table class="table table-striped table-bordered table-condensed" id="tblCategoria">
+                                        <colgroup>
+                                            <col style="width:5%"></col>                                        
+                                            <col style="width:30%"></col>
+                                            <col style="width:15%"></col>
+                                            <col style="width:15%"></col>
+                                            <col></col>                                                
+                                            <col style="width:5%"></col>
+                                            <col class="acciones"></col>
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Nombre</th>
+                                                <th>Abreviaci&oacute;n</th>
+                                                <th>Deporte</th>
+                                                <th>Detalle</th>
+                                                <th></th>                                                    
+                                                <th class="acciones">Acciones</th>                                                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
+
+
                                 <!-- /.panel-body -->
                             </div>
                             <!-- /.panel -->
@@ -130,12 +132,12 @@
             <form class="form-vertical">
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
             <div class="form-group">
-                <label for="nombre">Nombre</label>                      
-                <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
+            <label for="nombre">Nombre</label>                      
+            <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
             </div>
             <div class="form-group">
-                <label for="nombre_corto">Nombre corto</label>                      
-                <input id="nombre_corto" name="nombre_corto" type="text" class="form-control input-group-lg" value="{{nombre_corto}}">
+            <label for="nombre_corto">Nombre corto</label>                      
+            <input id="nombre_corto" name="nombre_corto" type="text" class="form-control input-group-lg" value="{{nombre_corto}}">
             </div>
             <div class="form-group">
             <label  for="id_deporte">Deporte</label>

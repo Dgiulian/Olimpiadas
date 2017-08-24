@@ -6,8 +6,6 @@
 package Equipo;
 
 import bd.Equipo;
-import bd.Delegacion;
-import bd.Equipo;
 import bd.Grupo_detalle;
 import bd.detalle.EquipoDet;
 import com.google.gson.Gson;
@@ -21,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transaccion.TEquipo;
-import transaccion.TDelegacion;
 import transaccion.TGrupo_detalle;
 import utils.JsonRespuesta;
 import utils.Parser;
@@ -56,7 +53,7 @@ public class EquipoList extends HttpServlet {
         TGrupo_detalle tgrupo_detalle = new TGrupo_detalle();
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();
+            HashMap<String,String> filtro = new HashMap<>();
              
             if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             if(id_delegacion!=0) filtro.put("id_delegacion",id_delegacion.toString());

@@ -42,7 +42,7 @@ public class PruebaList extends HttpServlet {
         
         try {
             JsonRespuesta jr = new JsonRespuesta();
-            HashMap<String,String> filtro = new HashMap<String,String>();
+            HashMap<String,String> filtro = new HashMap<>();
             
             if (fecha!=null && !"".equals(fecha)) filtro.put("fecha",fecha);
             if (id_deporte!=0) filtro.put("id_deporte",id_deporte.toString());

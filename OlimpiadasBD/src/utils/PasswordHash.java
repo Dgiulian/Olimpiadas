@@ -226,7 +226,7 @@ public class PasswordHash
             else
                 System.out.println("TESTS PASSED!");
         }
-        catch(Exception ex)
+        catch(NoSuchAlgorithmException | InvalidKeySpecException ex)
         {
             System.out.println("ERROR: " + ex);
         }

@@ -5,7 +5,6 @@
  */
 package Delegacion;
 
-import Delegacion.DelegacionList;
 import bd.Delegacion;
 import com.google.gson.Gson;
 import java.io.IOException;
