@@ -76,6 +76,8 @@
                                                 <th>Abreviaci&oacute;n</th>
                                                 <th>Deporte</th>
                                                 <th>Detalle</th>
+                                                <th>Tipo</th>
+                                                <th>Orden</th>
                                                 <th></th>                                                    
                                                 <th class="acciones">Acciones</th>                                                    
                                             </tr>
@@ -110,6 +112,8 @@
             <td class="">{{nombre_corto}}</td>
             <td class="">{{deporte.nombre}}</td>
             <td class="">{{detalle}}</td>
+            <td class="">{{tipo}}</td>
+            <td class="">{{orden}}</td>
             <td>
             <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-grupo">Grupos</span>
             </td>
@@ -149,6 +153,29 @@
             {{/select}}
             </select>
             </div>
+            
+            <div class="form-group">
+                <label  for="tipo_puntaje">Tipo puntaje</label>
+                <select id="tipo_puntaje" name="tipo_puntaje" type="text" class="form-control input-group-lg">
+                {{#select tipo_puntaje}}
+                    <option value=0 >Seleccione el tipo de puntaje</option>
+                    <option value=1 >Puntos</option>
+                    <option value=2 >Tiempo</option>
+                {{/select}}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label  for="orden_puntaje">Orden puntaje</label>
+                <select id="orden_puntaje" name="orden_puntaje" type="text" class="form-control input-group-lg">
+                {{#select orden_puntaje}}
+                    <option value=0 >Seleccione el orden</option>
+                    <option value=1 >Ascendente</option>
+                    <option value=2 >Descendente</option>
+                {{/select}}
+                </select>
+            </div>
+            
             <div class="form-group">
             <label  for="detalle">Detalle:</label>
             <textarea id="detalle" name="detalle" type="text" class="form-control input-group-lg" >{{detalle}}</textarea>

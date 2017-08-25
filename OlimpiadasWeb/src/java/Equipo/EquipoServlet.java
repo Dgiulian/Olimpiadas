@@ -5,6 +5,7 @@
  */
 package Equipo;
 
+import bd.Categoria;
 import bd.Delegacion;
 import java.io.IOException;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transaccion.TCategoria;
 import transaccion.TDelegacion;
 
 /**
@@ -32,7 +34,10 @@ public class EquipoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Delegacion> delegaciones = new TDelegacion().getList();
+        List<Categoria> categorias = new TCategoria().getList();
         request.setAttribute("delegaciones", delegaciones);
+        System.out.println(categorias);
+        request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("equipo.jsp").forward(request, response);
     }
 

@@ -8,13 +8,18 @@ $(document).ready(function(){
     });
     templates['list'] = Handlebars.compile($("#grupo_list").html());
     templates['edit'] = Handlebars.compile($('#grupo_edit').html());
-    loadEquipos();
+    filtrarEquipos();
     filtrarGrupo();
 });
 function filtrarGrupo(){
     var data = {};
     data.id_categoria = $('#search_categoria').val();
     loadDataGrupo(data);
+}
+function filtrarEquipos(){
+    var data = {};
+    data.id_categoria = $('#search_categoria').val();        
+    loadEquipos(data);
 }
 function loadEquipos(filter){
     if(typeof filter==="undefined") filter = {};
