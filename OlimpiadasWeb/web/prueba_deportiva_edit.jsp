@@ -21,10 +21,6 @@
     List<Equipo> equipos = (List<Equipo>) request.getAttribute("equipos");
     List<Equipo> equipos_sel = (List<Equipo>) request.getAttribute("equipos_sel");
     String[] estados = {"", "En Agenda", "En Curso", "Finalizada", "Suspendida"};
-
-    String[] puntajes = {"Puntos", "Tiempo"};
-    String[] ordenes = {"Ascendente", "Descendente"};
-
 %>
 <!DOCTYPE html>
 <html lang="en">

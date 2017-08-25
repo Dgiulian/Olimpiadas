@@ -117,7 +117,6 @@
                                             <th>Categor&iacute;a</th>
                                             <th>Grupo</th>
                                             <th>Estado</th>
-                                            <th>Puntaje</th>
                                             <th class="acciones">Acciones</th>
                                         </tr>
                                     </thead>
@@ -153,7 +152,6 @@
             <td class="">{{categoria.nombre}}</td>
             <td class="">{{grupo.nombre}}</td>
             <td class="">{{estado}}</td>
-            <td class="">{{descPuntaje tipo_puntaje orden_puntaje }}</td>             
             <td class="acciones">
               <a  href="PruebaEdit?id={{id}}" class="btn btn-xs btn-circle  btn-warning  "><span class="fa fa-edit fw"></span></a>              
               <span  data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
