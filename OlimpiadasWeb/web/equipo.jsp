@@ -1,9 +1,8 @@
 <%@page import="bd.Categoria"%>
 <%@page import="bd.Delegacion"%>
 <%@page import="java.util.List"%>
-<%    
-    List<Delegacion> delegaciones = (List<Delegacion>) request.getAttribute("delegaciones");
-    List<Categoria> categorias    = (List<Categoria>)  request.getAttribute("categorias");
+<%    List<Delegacion> delegaciones = (List<Delegacion>) request.getAttribute("delegaciones");
+    List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,33 +36,33 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row form-search">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <label for="search_nombre">Nombre:</label>
-                                                <input type="text" class="form-control" id="search_nombre">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="id_delegacion_filtro">Delegacion:</label>
-                                                <select id="id_delegacion_filtro" name="id_delegacion" type="text" class="form-control input-md">
-                                                    <option value="0">Seleccione la delegaci&oacute;n</option>
-                                                    <% for (Delegacion delegacion : delegaciones) {%>
-                                                    <option value="<%=delegacion.getId()%>"><%=delegacion.getNombre()%></option>
-                                                    <% }%>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="id_categoria_filtro">Categor&iacute;a:</label>
-                                                <select id="id_categoria_filtro" name="id_categoria" type="text" class="form-control input-md">
-                                                    <option value="0">Seleccione la categor&iacute;a</option>
-                                                    <% for (Categoria categoria : categorias) {%>
-                                                    <option value="<%=categoria.getId()%>"><%=categoria.getNombre()%></option>
-                                                    <% }%>
-                                                </select>
-                                            </div>    
-                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
-                                        </form> 
-                                    </div>
+
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="search_nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="search_nombre">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_delegacion_filtro">Delegacion:</label>
+                                            <select id="id_delegacion_filtro" name="id_delegacion" type="text" class="form-control input-md">
+                                                <option value="0">Seleccione la delegaci&oacute;n</option>
+                                                <% for (Delegacion delegacion : delegaciones) {%>
+                                                <option value="<%=delegacion.getId()%>"><%=delegacion.getNombre()%></option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_categoria_filtro">Categor&iacute;a:</label>
+                                            <select id="id_categoria_filtro" name="id_categoria" type="text" class="form-control input-md">
+                                                <option value="0">Seleccione la categor&iacute;a</option>
+                                                <% for (Categoria categoria : categorias) {%>
+                                                <option value="<%=categoria.getId()%>"><%=categoria.getNombre()%></option>
+                                                <% }%>
+                                            </select>
+                                        </div>    
+                                        <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                    </form> 
+                                    <br>
                                     <div class="dataTable_wrapper">
                                         <table class="table table-striped table-bordered table-condensed" id="tblEquipo">
                                             <colgroup>

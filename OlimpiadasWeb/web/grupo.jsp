@@ -19,7 +19,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header">Grupos</h3>
+                        <h3 class="page-header">Grupos - <%=categoria.getNombre()%></h3>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -98,13 +98,11 @@
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
                   <input id="id_categoria" name="id_categoria" type="hidden" class="" value="{{id_categoria}}" >
             <div class="form-group">
-            <label class="col-md-4 control-label" for="nombre">Nombre</label>
-            <div class="col-md-8">
+            <label  for="nombre">Nombre</label>            
             <input id="nombre" name="nombre" type="text" class="form-control input-md" value="{{nombre}}">
             </div>                   
             <div class="form-group">
-            <label class="col-md-4 control-label" for="arrEquipo">Equipos</label>
-            <div class="col-md-8">
+            <label for="arrEquipo">Equipos</label>            
             <select id="arrEquipo" name="arrEquipo" type="text" class="form-control input-md" multiple>
             {{#select selected}}
             {{#each equipos}}
@@ -114,11 +112,10 @@
             </select>                      
             </div>
             <div class="form-group">
-            <label class="col-md-4 control-label" for="observacion">Observaci&oacute;n</label>
-            <div class="col-md-8">                      
+            <label  for="observacion">Observaci&oacute;n</label>            
             <textarea id="observacion" name="observacion" type="text" class="form-control input-md" >{{observacion}}</textarea>
             </div>    
-            </div>                  
+            
             </form>
             </div>
             </div>                     

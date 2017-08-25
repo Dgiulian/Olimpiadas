@@ -113,8 +113,7 @@
                                                 <col style="width:10%"></col>
                                                 <col style=""></col>
                                                 <col style="width:10%"></col>
-                                                <col style="width:10%"></col>
-                                                <col style="width:10%"></col>
+                                                <col style="width:10%"></col>                                                
                                                 <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
@@ -124,8 +123,7 @@
                                                     <th>Deporte</th>
                                                     <th>Categor&iacute;a</th>
                                                     <th>Grupo</th>
-                                                    <th>Estado</th>
-                                                    <th>Puntaje</th>
+                                                    <th>Estado</th>                                                    
                                                     <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>

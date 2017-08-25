@@ -16,9 +16,15 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
+                        <h3 class="page-header">Listado de Novedades</h3>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Listado de Novedades <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
+                        <div class="panel-heading text-right">
+                             <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
