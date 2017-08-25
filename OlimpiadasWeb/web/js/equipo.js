@@ -7,6 +7,7 @@ $(document).ready(function(){
         agregarEquipo({});
     });
     $('#id_delegacion_filtro').change(filtrarEquipo);
+    $('#id_categoria_filtro').change(filtrarEquipo);
     $('#btnSearch').click(filtrarEquipo);
     templates['list'] = Handlebars.compile($("#equipo_list").html());
     templates['edit'] = Handlebars.compile($('#equipo_edit').html());
@@ -125,5 +126,6 @@ function getSearchData(){
     var data = {};
     data.nombre = $('#search_nombre').val();
     data.id_delegacion = $('#id_delegacion_filtro').val()
+    data.id_categoria  = $('#id_categoria_filtro').val()
     return data;
 }
