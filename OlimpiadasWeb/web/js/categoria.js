@@ -113,12 +113,6 @@ function guardarCategoria(data){
 }
 function recuperarCampos(){
     var data = getFormData($('form'));
-    /*var data = {};
-    data.id = $('#id').val();
-    data.id_deporte = $('#id_deporte').val();
-    data.nombre = $('#nombre').val();
-    data.detalle  = $('#detalle').val();
-    */
     return data;   
 }
 

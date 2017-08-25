@@ -115,9 +115,16 @@ public class CategoriaList extends HttpServlet {
 
     private class CategoriaDet extends Categoria {
         Deporte deporte;
+        String orden = "";
+        String tipo = "";
+        String[] arrOrden = {"","Ascendente","Descendente"};
+        String[] arrTipo = {"","Puntos","Tiempo"};
+        
         public CategoriaDet(Categoria categoria) {
             super(categoria);
-            deporte = mapDeportes.get(categoria.getId_deporte());            
+            deporte = mapDeportes.get(categoria.getId_deporte());  
+            orden = arrOrden[orden_puntaje];
+            tipo = arrTipo[tipo_puntaje];
         }
     }
 
