@@ -32,16 +32,16 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row form-search">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <label for="search_nombre">Nombre:</label>
-                                                <input type="text" class="form-control" id="search_nombre">
-                                            </div>
-                                            
-                                            <button type="button" id="btnSearch" class="btn btn-default">Buscar</button>
-                                        </form> 
-                                    </div>
+
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="search_nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="search_nombre">
+                                        </div>
+
+                                        <button type="button" id="btnSearch" class="btn btn-default">Buscar</button>
+                                    </form> 
+                                    <br>
                                     <div class="dataTable_wrapper">
                                         <table class="table table-striped table-bordered table-condensed" id="tblDelegacion">
                                             <colgroup>
@@ -90,8 +90,8 @@
             <td class="">{{nombre_corto}}</td>
             <td class="">{{observaciones}}</td>
             <td class="">
-                <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
-                <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+            <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
+            <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>
             </tr>
             {{else}}

@@ -32,15 +32,15 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row form-search">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <label for="search_nombre">Nombre:</label>
-                                                <input type="text" class="form-control" id="search_nombre">
-                                            </div>                                            
-                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
-                                        </form> 
-                                    </div>
+
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="search_nombre">Nombre:</label>
+                                            <input type="text" class="form-control" id="search_nombre">
+                                        </div>                                            
+                                        <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                    </form> 
+                                    <br>                                    
                                     <div class="dataTable_wrapper">
                                         <table class="table table-striped table-bordered table-condensed" id="tblDeporte">
                                             <colgroup>

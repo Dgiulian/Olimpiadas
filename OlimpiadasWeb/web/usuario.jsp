@@ -19,7 +19,7 @@
                     </div>
 
                 </div>
-                
+
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
@@ -29,17 +29,17 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row form-search">
-                    
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="search_username">Username</label>
+                                            <input type="text" class="form-control" name="search_username" id="search_username">
+                                        </div>                                            
+                                        <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                    </form> 
+                                    <br>
                                     <div class="dataTable_wrapper">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <label for="search_username">Username</label>
-                                                <input type="text" class="form-control" name="search_username" id="search_username">
-                                            </div>                                            
-                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
-                                        </form> 
-                                    
+
+
                                         <table class="table table-striped table-bordered table-hover" id="tblUsuario">
                                             <thead>
                                                 <tr>
@@ -61,27 +61,27 @@
                                                                     <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images. For complete documentation on DataTables, visit their website at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.</p>
                                                                     <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
                                                                 </div>-->
+
+                                    <!-- /.panel-body -->
                                 </div>
-                                <!-- /.panel-body -->
+                                <!-- /.panel -->
                             </div>
-                            <!-- /.panel -->
+                            <!-- /.col-lg-12 -->
                         </div>
-                        <!-- /.col-lg-12 -->
+                        <!-- /.row -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /#page-wrapper -->
+
                 </div>
-                <!-- /#page-wrapper -->
+                <!-- /#wrapper -->
 
-            </div>
-            <!-- /#wrapper -->
+                <%@include file="tpl_scripts.jsp" %>
+                <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+                <script src="js/usuario.js">
 
-            <%@include file="tpl_scripts.jsp" %>
-            <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-            <script src="js/usuario.js">
-               
-            </script>
-        </script>
-        <%@include file="tpl_footer.jsp"%>
-</body>
+                </script>
+                </script>
+                <%@include file="tpl_footer.jsp"%>
+                </body>
 
-</html>
+                </html>

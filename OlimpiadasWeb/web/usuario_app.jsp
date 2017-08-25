@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                 <div class="panel-heading text-right">
+                                <div class="panel-heading text-right">
 
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nuevo</span>
                                     <span id="btnPrint" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
@@ -36,27 +36,27 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <div class="row form-search">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <label for="search_username">Username</label>
-                                                <input type="text" class="form-control" id="search_username">
-                                            </div>
-                                             <div class="form-group">
-                                                <label for="search_email">Email</label>
-                                                <input type="text" class="form-control" id="search_email">
-                                            </div>
-<!--                                            <div class="form-group">
-                                                <label for="search_nombre">Nombre:</label>
-                                                <input type="text" class="form-control" id="search_nombre">
-                                            </div>
-                                             <div class="form-group">
-                                                <label for="search_apellido">Apellido:</label>
-                                                <input type="text" class="form-control" id="search_apellido">
-                                            </div>-->
-                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
-                                        </form> 
-                                    </div>
+
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="search_username">Username</label>
+                                            <input type="text" class="form-control" id="search_username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="search_email">Email</label>
+                                            <input type="text" class="form-control" id="search_email">
+                                        </div>
+                                        <!--                                            <div class="form-group">
+                                                                                        <label for="search_nombre">Nombre:</label>
+                                                                                        <input type="text" class="form-control" id="search_nombre">
+                                                                                    </div>
+                                                                                     <div class="form-group">
+                                                                                        <label for="search_apellido">Apellido:</label>
+                                                                                        <input type="text" class="form-control" id="search_apellido">
+                                                                                    </div>-->
+                                        <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                    </form> 
+                                    <br>
                                     <div class="dataTable_wrapper">
                                         <table class="table table-striped table-bordered table-condensed" id="tblUsuarioApp">
                                             <colgroup>
@@ -113,8 +113,8 @@
             <td class="">{{convertirFechayHora fcreacion}}</td>
             <td class="">{{convertirFechayHora ultimoacceso}}</td>
             <td class="">
-                <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
-                <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+            <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
+            <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>            
             </tr>
             {{else}}
@@ -130,20 +130,20 @@
             <form class="form-vertical">
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
             <div class="form-group">
-                <label for="username">Username</label>                      
-                <input id="username" name="username" type="text" class="form-control input-group-lg" value="{{username}}">
+            <label for="username">Username</label>                      
+            <input id="username" name="username" type="text" class="form-control input-group-lg" value="{{username}}">
             </div>    
             <div class="form-group">
-                <label for="nombre">Nombre</label>                      
-                <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
+            <label for="nombre">Nombre</label>                      
+            <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
             </div>
             <div class="form-group">
-                <label for="apellido">Apellido</label>                      
-                <input id="apellido" name="apellido" type="text" class="form-control input-group-lg" value="{{apellido}}">
+            <label for="apellido">Apellido</label>                      
+            <input id="apellido" name="apellido" type="text" class="form-control input-group-lg" value="{{apellido}}">
             </div>
-             <div class="form-group">
-                <label for="email">Email</label>                      
-                <input id="email" name="email" type="text" class="form-control input-group-lg" value="{{email}}">
+            <div class="form-group">
+            <label for="email">Email</label>                      
+            <input id="email" name="email" type="text" class="form-control input-group-lg" value="{{email}}">
             </div>
             </form>
             </div>

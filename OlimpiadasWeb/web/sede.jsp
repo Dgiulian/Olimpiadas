@@ -33,15 +33,15 @@
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <div class="dataTable_wrapper">
-                                        <div class="row form-search">
-                                            <form class="form-inline">
-                                                <div class="form-group">
-                                                    <label for="search_nombre">Nombre:</label>
-                                                    <input type="text" class="form-control" id="search_nombre">
-                                                </div>                                               
-                                                <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
-                                            </form> 
-                                        </div>
+
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label for="search_nombre">Nombre:</label>
+                                                <input type="text" class="form-control" id="search_nombre">
+                                            </div>                                               
+                                            <button id="btnSearch" type="button" class="btn btn-default">Buscar</button>
+                                        </form> 
+                                        <br>
                                         <table class="table table-striped table-bordered table-condensed" id="tblSede">
                                             <colgroup>
                                                 <col style="width:5%"></col>
@@ -101,26 +101,21 @@
         </script>   
         <script id="sede_edit" type="text/x-handlebars-template">
             <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12"> 
             <form class="form-vertical">
-            <input id="id" name="id" type="hidden" class="" value="{{id}}" >
+            <input id="id" name="id" type="hidden" class="" value="{{id}}">
             <div class="form-group">
-            <label class="col-md-4 control-label" for="nombre">Nombre</label>
-            <div class="col-md-8">
-            <input id="nombre" name="nombre" type="text" class="form-control input-md" value="{{nombre}}">
+            <label for="nombre">Nombre</label>            
+            <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
             </div>
-
             <div class="form-group">
-            <label class="col-md-4 control-label" for="direccion">Direcci&oacute;n:</label>
-            <div class="col-md-8">
+            <label for="direccion">Direcci&oacute;n:</label>            
             <input id="direccion" name="direccion" type="text" class="form-control input-md" value="{{direccion}}">
             </div>
             <div class="form-group">
-            <label class="col-md-4 control-label" for="observaciones">Observaciones:</label>
-            <div class="col-md-8">                      
+            <label for="observaciones">Observaciones:</label>                            
             <textarea id="observaciones" name="observaciones" type="text" class="form-control input-md" >{{observaciones}}</textarea>
-            </div>    
-            </div>                  
+            </div>                
             </form>
             </div>
             </div>                     
