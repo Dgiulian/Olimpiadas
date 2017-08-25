@@ -45,6 +45,7 @@ public class EquipoList extends HttpServlet {
         String pagNro = request.getParameter("pagNro");       
         Integer id_grupo = Parser.parseInt(request.getParameter("id_grupo"));
         Integer id_delegacion = Parser.parseInt(request.getParameter("id_delegacion"));
+        Integer id_categoria  = Parser.parseInt(request.getParameter("id_categoria"));
         String nombre     = request.getParameter("nombre");
         boolean fitroByGrupo = (request.getParameter("id_grupo")!=null);
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
@@ -57,6 +58,7 @@ public class EquipoList extends HttpServlet {
              
             if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             if(id_delegacion!=0) filtro.put("id_delegacion",id_delegacion.toString());
+            if(id_categoria!=0) filtro.put("id_categoria",id_categoria.toString());
             
             List<Equipo> lista = new TEquipo().getListFiltro(filtro);
             List<EquipoDet> listaDet = new ArrayList();            
