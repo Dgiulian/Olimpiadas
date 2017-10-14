@@ -17,6 +17,7 @@ public class OptionsCfg {
     public static final String  REGLAMENTO_PATH = "reglamento_path";
     public static final String  NOVEDAD_PATH    = "novedad_path";
     public static final String  LOGO_IMAGE           = "logo_image";
+    public static final String  SEDE_PATH          = "sede_path";
     
     public static ArrayList<Option> getTipoRemitos(){
         ArrayList<Option> lista = new ArrayList();

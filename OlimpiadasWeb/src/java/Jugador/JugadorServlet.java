@@ -31,7 +31,7 @@ public class JugadorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Delegacion> delegaciones = new TDelegacion().getList();
+        List<Delegacion> delegaciones = new TDelegacion().setOrderBy("nombre").getList();
         request.setAttribute("delegaciones", delegaciones);
         request.getRequestDispatcher("jugador.jsp").forward(request, response);
     }

@@ -95,8 +95,7 @@
               <form class="form-vertical" enctype="multipart/form-data">
                   <input id="id" name="id" type="hidden" class="" value="{{id}}" >
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="fecha">Fecha</label>
-                      <div class="col-md-8">
+                      <label class="control-label" for="fecha">Fecha</label>                      
                         <div class="controls">
                             <div class="input-group date date-picker">
                               <input type="text" id="fecha" name="fecha" class="form-control date-input "  value="{{convertirFecha fecha}}">
@@ -106,30 +105,20 @@
                    </div>
                     
                   <div class="form-group">
-                      <label class="col-md-4 control-label" for="titulo">T&iacute;tulo</label>
-                      <div class="col-md-8">
+                      <label class="control-label" for="titulo">T&iacute;tulo</label>                      
                       <input id="titulo" name="titulo" type="text" class="form-control input-md" value="{{titulo}}">
                    </div>
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="subtitulo">Subt&iacute;tulo</label>
-                      <div class="col-md-8">
+                      <label class="control-label" for="subtitulo">Subt&iacute;tulo</label>                      
                       <input id="subtitulo" name="subtitulo" type="text" class="form-control input-md" value="{{subtitulo}}">
                    </div>
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="no">Imagen</label>
-                      <div class="col-md-8">
+                      <label class="control-label" for="no">Imagen</label>                      
                       <input id="imagen" name="imagen" type="file" class="form-control input-md" value="">
-                   </div>
+                   </div>                   
                    <div class="form-group">
-                      <label class="col-md-4 control-label" for="subtitulo">Youtube</label>
-                      <div class="col-md-8">
-                      <input id="youtube" name="youtube" type="text" class="form-control input-md" value="{{youtube}}">
-                   </div> 
-                   <div class="form-group">
-                      <label class="col-md-4 control-label" for="detalle">Detalle:</label>
-                      <div class="col-md-8">                      
-                      <textarea id="detalle" name="detalle" type="text" class="form-control input-md" >{{detalle}}</textarea>
-                      </div>    
+                      <label class="control-label" for="detalle">Detalle:</label>                      
+                      <textarea id="detalle" name="detalle" type="text" class="form-control input-md" >{{detalle}}</textarea>                         
                    </div>                  
                 </form>
           </div>

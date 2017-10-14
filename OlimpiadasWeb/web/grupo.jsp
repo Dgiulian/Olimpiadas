@@ -31,7 +31,7 @@
                                 <div class="panel-heading text-right">
                                     <span id="btnNuevo" class="btn btn-primary"><span class="fa fa-file-o fa-fw"> </span>Nueva</span>
                                     <span id="btnNuevo" class="btn btn-link"><span class="fa fa-print fa-fw"> </span>Imprimir</span>
-                            <input type="hidden" id="search_categoria" name="search_categoria" value="<%=categoria.getId()%>">
+                                    <input type="hidden" id="search_categoria" name="search_categoria" value="<%=categoria.getId()%>">
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -79,6 +79,9 @@
             <td class="">{{id}}</td>
             <td class="">{{nombre}}</td>
             <td class="">{{observacion}}</td>
+            <td>
+            <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-tablaresultado">TABLA</span>
+            </td>
             <td class="">
             <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning  btn-edit"><span class="fa fa-edit fw"></span></span>
             <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
@@ -100,9 +103,18 @@
             <div class="form-group">
             <label  for="nombre">Nombre</label>            
             <input id="nombre" name="nombre" type="text" class="form-control input-md" value="{{nombre}}">
-            </div>                   
+            </div>  
             <div class="form-group">
-            <label for="arrEquipo">Equipos</label>            
+                <label  for="tipo_vista_tabla">Tipo TABLA</label>
+                <select id="tipo_vista_tabla" name="tipo_vista_tabla" type="text" class="form-control input-group-lg">
+                {{#select tipo_vista_tabla}}                    
+                    <option value="1" >TABLA</option>
+                    <option value="2" >X RESULTADO</option>
+                {{/select}}
+                </select>
+            </div>
+            <div class="form-group">
+            <label for="arrEquipo">Equipos (con jugadores cargados)</label>            
             <select id="arrEquipo" name="arrEquipo" type="text" class="form-control input-md" multiple>
             {{#select selected}}
             {{#each equipos}}

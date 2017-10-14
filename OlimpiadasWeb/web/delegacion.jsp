@@ -49,6 +49,7 @@
                                                 <col style="width:10%"></col>
                                                 <col style="width:10%"></col>
                                                 <col style=""></col>
+                                                <col style=""></col>
                                                 <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
@@ -57,6 +58,7 @@
                                                     <th>Nombre</th>                                            
                                                     <th>Nombre corto</th>                                            
                                                     <th>Observaciones</th>
+                                                    <th></th>
                                                     <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -89,6 +91,12 @@
             <td class="">{{nombre}}</td>
             <td class="">{{nombre_corto}}</td>
             <td class="">{{observaciones}}</td>
+            <td>
+            <a href="Delegacion_masiva?id={{id}}" data-index="{{@index}}" class="btn btn-link btn-block btn-integraste">CARGA MASIVA</a>
+            </td>
+            <td>
+            <a href="DelegacionEquipo?id={{id}}" data-index="{{@index}}" class="btn btn-link btn-block btn-integraste">CONTROL EQUIPOS</a>
+            </td>
             <td class="">
             <span href="" data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
             <span href="" data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
@@ -108,9 +116,11 @@
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
             <div class="form-group">
             <label for="nombre">Nombre</label>
-
             <input id="nombre" name="nombre" type="text" class="form-control input-md" value="{{nombre}}">
-
+            </div>
+            <div class="form-group">
+            <label for="nombre_corto">Nombre Corto</label>
+            <input id="nombre_corto" name="nombre_corto" type="text" class="form-control input-md" value="{{nombre_corto}}">
             </div>
             <div class="form-group">
             <label  for="observaciones">Observaciones:</label>

@@ -2,6 +2,9 @@ var jugadores = [];
 var delegaciones = [];
 var templates = {};
 $(document).ready(function() {
+
+    
+
     $('#btnNuevo').click(function() {
         agregarJugador({});
     });
@@ -16,7 +19,8 @@ $(document).ready(function() {
     filtrarJugador();
 });
 function loadDelegaciones(filter) {
-    if(typeof filter==="undefined") filter = {};
+    if (typeof filter === "undefined")
+        filter = {};
     $.ajax({
         url: URLS.DELEGACION.LIST,
         data: filter,
@@ -37,12 +41,13 @@ function filtrarJugador() {
 function loadDataJugador(filter) {
     var $tabla = $('#tblJugador');
     setLoader($tabla);
-    if(typeof filter==="undefined") filter = {};
+    if (typeof filter === "undefined")
+        filter = {};
     $.ajax({
         url: URLS.JUGADOR.LIST,
         data: filter,
-        method: "GET",
-        dataType: "json"
+        method: "POST",
+        dataType: "json",
     }).done(function(result) {
         if (result.Result === "OK") {
             jugadores = result.Records;
@@ -101,29 +106,41 @@ function guardarJugador(data) {
         url: URLS.JUGADOR.EDIT,
         data: data,
         method: 'POST',
-        dataType: 'json'
+        dataType: 'json',
+        processData: false,
+        contentType: false,
     }).done(function() {
         filtrarJugador();
     });
 }
 function recuperarCampos() {
-    var data = {};
-    data.id = $('#id').val();
-    data.nombre_apellido = $('#nombre_apellido').val();
-    data.matricula = $('#matricula').val();
-    data.dni = $('#dni').val();
-    data.fecha_nacimiento = $('#fecha_nacimiento').val();
-    data.id_delegacion = $('#id_delegacion').val();
+    /*var data = {};
+     data.id = $('#id').val();
+     data.nombre_apellido = $('#nombre_apellido').val();
+     data.matricula = $('#matricula').val();
+     data.dni = $('#dni').val();
+     data.fecha_nacimiento = $('#fecha_nacimiento').val();
+     data.id_delegacion = $('#id_delegacion').val();
+     alert(JSON.stringify(data));
+     
+     return data;*/
+
+
+    var data = new FormData();
+    var campos = getFormData($('form'));
+    for (let d in campos) {
+        data.append(d, campos[d]);
+    }
 
     return data;
 }
 
 function imprimir(id) {
     var url = "http://179.43.127.107/reportes_olimpiadas/delegacion.php?id=" + id;
-    window.open(url,'_blank'); 
+    window.open(url, '_blank');
 }
 
-function getSearchData(){
+function getSearchData() {
     var data = {};
     data.nombre = $('#search_nombre').val();
     data.id_delegacion = $('#id_delegacion_filtro').val()

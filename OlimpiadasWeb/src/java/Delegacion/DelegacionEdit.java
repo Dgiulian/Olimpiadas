@@ -41,7 +41,7 @@ public class DelegacionEdit extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DelegacionEdit</title>");            
+            out.println("<title>Servlet DelegacionEdit</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DelegacionEdit at " + request.getContextPath() + "</h1>");
@@ -77,38 +77,44 @@ public class DelegacionEdit extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");                       
-        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+        String pagNro = request.getParameter("pagNro");
+        Integer page = (pagNro != null) ? Integer.parseInt(pagNro) : 0;
         Integer id = Parser.parseInt(request.getParameter("id"));
         String nombre = request.getParameter("nombre");
         String observaciones = request.getParameter("observaciones");
+        String nombre_corto = request.getParameter("nombre_corto");
         TDelegacion tdelegacion = new TDelegacion();
         Delegacion delegacion;
         boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
         try {
             delegacion = tdelegacion.getById(id);
-            if(delegacion==null){
+            if (delegacion == null) {
                 delegacion = new Delegacion();
                 nuevo = true;
             }
-            delegacion.setNombre(nombre);            
+            delegacion.setNombre(nombre);
+            delegacion.setNombre_corto(nombre_corto);
             delegacion.setObservaciones(observaciones);
             boolean todoOk;
-            if(nuevo) {
+            if (nuevo) {
                 id = tdelegacion.alta(delegacion);
-                todoOk = id!=0;
-            } else todoOk = tdelegacion.actualizar(delegacion);
-            
-            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
+                todoOk = id != 0;
+            } else {
+                todoOk = tdelegacion.actualizar(delegacion);
+            }
+
+            if (!todoOk) {
+                throw new BaseException("ERROR", "Ocurri&oacute; un error al guardar la categor&iacute;a");
+            }
             jr.setResult("OK");
             jr.setRecord(delegacion);
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
-        } catch(BaseException ex){
+        } catch (BaseException ex) {
             jr.setResult(ex.getResult());
             jr.setMessage(ex.getMessage());
-        } finally {            
+        } finally {
             out.close();
         }
     }

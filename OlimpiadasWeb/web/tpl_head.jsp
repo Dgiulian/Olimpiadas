@@ -1,5 +1,6 @@
 
-<meta charset="utf-8">
+<meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -18,7 +19,8 @@
 
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/multiselect/css/multi-select.dist.css" rel="stylesheet" type="text/css">
+    <link href="vendor/multiselect/css/multi-select.css" rel="stylesheet" type="text/css">
+    <link href="css/template_evento.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

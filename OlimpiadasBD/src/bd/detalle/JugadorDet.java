@@ -14,14 +14,17 @@ import transaccion.TDelegacion;
  *
  * @author JuanMa
  */
-public class JugadorDet extends Jugador{
+public class JugadorDet extends Jugador {
 
     public static final HashMap<Integer, Delegacion> mapDelegaciones = new TDelegacion().getMap();
-    Delegacion delegacion;
+    DelegacionDet delegacion;
 
     public JugadorDet(Jugador c) {
         super(c);
-        delegacion = mapDelegaciones.get(c.getId_delegacion());
+        Delegacion d = mapDelegaciones.get(c.getId_delegacion());
+        delegacion = new DelegacionDet(d);
+        delegacion.setearMedallero();
+
     }
 
 }

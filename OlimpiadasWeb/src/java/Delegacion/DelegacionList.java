@@ -6,6 +6,7 @@
 package Delegacion;
 
 import bd.Delegacion;
+import bd.detalle.DelegacionDet;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,11 +49,11 @@ public class DelegacionList extends HttpServlet {
             HashMap<String,String> filtro = new HashMap<>();
             if(search_nombre!=null && !"".equals(search_nombre)) filtro.put("nombre",search_nombre);
             
-            List<Delegacion> lista = new TDelegacion().getListFiltro(filtro);
+            List<Delegacion> lista = new TDelegacion().setOrderBy("nombre").getListFiltro(filtro);
             List<DelegacionDet> listaDet = new ArrayList();            
                         
             if (lista != null) {
-                for(Delegacion c:lista) listaDet.add(new DelegacionList.DelegacionDet(c));
+                for(Delegacion c:lista) listaDet.add(new DelegacionDet(c));
                 jr.setTotalRecordCount(listaDet.size());
             } else {
                 jr.setTotalRecordCount(0);
@@ -105,11 +106,6 @@ public class DelegacionList extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static class DelegacionDet extends Delegacion {
-
-        public DelegacionDet(Delegacion delegacion) {
-            super(delegacion);
-        }
-    }
+    
 
 }

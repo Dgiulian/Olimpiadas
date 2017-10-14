@@ -87,7 +87,7 @@ public abstract class TransaccionBase<E> {
         String tabla = this.clase.getCanonicalName().replace(this.clase.getPackage().getName() + ".", "").toLowerCase();
 
         String query = "select * from " + tabla + " " + where + " " + order;
-        System.out.println(query);
+        //System.out.println(query);
         return this.getList(query);
     }
 
@@ -104,7 +104,7 @@ public abstract class TransaccionBase<E> {
     public List<E> getList(String query) {
         List<E> lista = null;
         try {
-            conexion.conectarse();
+            conexion.conectarse();            
             try (ResultSet rs = conexion.ejecutarSQLSelect(query)) {
                 lista = new TransaccionRS().recuperarLista(this.clase.getCanonicalName(), rs);
             }

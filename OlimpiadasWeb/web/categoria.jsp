@@ -115,6 +115,12 @@
             <td class="">{{tipo}}</td>
             <td class="">{{orden}}</td>
             <td>
+            <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-inscriptos">Inscriptos</span>
+            </td>
+            <td>
+            <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-control-grupos">Control Grupos</span>
+            </td>
+            <td>
             <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-grupo">Grupos</span>
             </td>
             <td class="">
@@ -148,34 +154,46 @@
             <select id="id_deporte" name="id_deporte" type="text" class="form-control input-group-lg">
             {{#select id_deporte}}
             {{#each deportes}}
-            <option value={{id}} >{{nombre}}</option>
+            <option value="{{id}}" >{{nombre}}</option>
             {{/each}}
             {{/select}}
             </select>
             </div>
-            
+
             <div class="form-group">
-                <label  for="tipo_puntaje">Tipo puntaje</label>
-                <select id="tipo_puntaje" name="tipo_puntaje" type="text" class="form-control input-group-lg">
-                {{#select tipo_puntaje}}
-                    <option value=0 >Seleccione el tipo de puntaje</option>
-                    <option value=1 >Puntos</option>
-                    <option value=2 >Tiempo</option>
-                {{/select}}
-                </select>
+            <label  for="modalidad">Modalidad</label>
+            <select id="modalidad" name="modalidad" type="text" class="form-control input-group-lg">
+            {{#select tipo_modalidad}}
+            <option value="0" >Seleccione el tipo de puntaje</option>
+            <option value="1" >Partido</option>
+            <option value="2" >Prueba Colectiva</option>
+            <option value="3" >Personalizada</option>
+            {{/select}}
+            </select>
             </div>
-            
+
             <div class="form-group">
-                <label  for="orden_puntaje">Orden puntaje</label>
-                <select id="orden_puntaje" name="orden_puntaje" type="text" class="form-control input-group-lg">
-                {{#select orden_puntaje}}
-                    <option value=0 >Seleccione el orden</option>
-                    <option value=1 >Ascendente</option>
-                    <option value=2 >Descendente</option>
-                {{/select}}
-                </select>
+            <label  for="tipo_puntaje">Tipo puntaje</label>
+            <select id="tipo_puntaje" name="tipo_puntaje" type="text" class="form-control input-group-lg">
+            {{#select tipo_puntaje}}
+            <option value="0" >Seleccione el tipo de puntaje</option>
+            <option value="1" >Puntos</option>
+            <option value="2" >Tiempo</option>
+            {{/select}}
+            </select>
             </div>
-            
+
+            <div class="form-group">
+            <label  for="orden_puntaje">Orden puntaje</label>
+            <select id="orden_puntaje" name="orden_puntaje" type="text" class="form-control input-group-lg">
+            {{#select orden_puntaje}}
+            <option value="0" >Seleccione el orden</option>
+            <option value="1" >Menor a Mayor</option>
+            <option value="2" >Mayor a Menor</option>
+            {{/select}}
+            </select>
+            </div>
+
             <div class="form-group">
             <label  for="detalle">Detalle:</label>
             <textarea id="detalle" name="detalle" type="text" class="form-control input-group-lg" >{{detalle}}</textarea>

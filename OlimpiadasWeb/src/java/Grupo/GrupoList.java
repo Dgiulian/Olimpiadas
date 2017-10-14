@@ -7,6 +7,7 @@ package Grupo;
 
 import bd.Equipo;
 import bd.Grupo;
+import bd.detalle.GrupoDet;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,9 +53,9 @@ public class GrupoList extends HttpServlet {
             //if(id_categoria!=0) 
                 filtro.put("id_categoria", id_categoria.toString());
             List<Grupo> lista = new TGrupo().getListFiltro(filtro);            
-            List<GrupoList.GrupoDet> listaDet = new ArrayList();                        
+            List<GrupoDet> listaDet = new ArrayList();                         
             if (lista != null) {
-                for(Grupo c:lista) listaDet.add(new GrupoList.GrupoDet(c));
+                for(Grupo c:lista) listaDet.add(new GrupoDet(c));
                 jr.setTotalRecordCount(listaDet.size());
             } else {
                 jr.setTotalRecordCount(0);
@@ -67,13 +68,7 @@ public class GrupoList extends HttpServlet {
             out.close();
         }
     }
-    private class GrupoDet extends Grupo{
-        List<Equipo> detalle;
-        public GrupoDet(Grupo g){
-            super(g);
-            detalle = new TEquipo().getById_grupo(g.getId());
-        }
-    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

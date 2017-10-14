@@ -38,7 +38,7 @@ public class JugadorList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json;charset=UTF-8");
+        response.setContentType("application/json;charset=ISO-8859-1");
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
         Integer id_delegacion = Parser.parseInt(request.getParameter("id_delegacion"));
@@ -51,7 +51,8 @@ public class JugadorList extends HttpServlet {
             if(id_delegacion!=0) filtro.put("id_delegacion",id_delegacion.toString());
             if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             JsonRespuesta jr = new JsonRespuesta();
-            List<Jugador> lista = new TJugador().getListFiltro(filtro);
+            
+            List<Jugador> lista = new TJugador().setOrderBy("nombre_apellido").getListFiltro(filtro);
             List<JugadorDet> listaDet = new ArrayList();            
                         
             if (lista != null) {

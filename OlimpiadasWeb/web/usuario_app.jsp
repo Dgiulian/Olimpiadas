@@ -72,8 +72,7 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Username</th>
-                                                    <th>Nombre</th>
-                                                    <th>Apellido</th>
+                                                    <th>DNI</th>                                                    
                                                     <th>Email</th>
                                                     <th>Creaci&oacute;n</th>
                                                     <th>Acceso</th>
@@ -107,8 +106,7 @@
             <tr class="">
             <td class="">{{id}}</td>
             <td class="">{{username}}</td>
-            <td class="">{{nombre}}</td>
-            <td class="">{{apellido}}</td>
+            <td class="">{{documento}}</td>            
             <td class="">{{email}}</td>
             <td class="">{{convertirFechayHora fcreacion}}</td>
             <td class="">{{convertirFechayHora ultimoacceso}}</td>
@@ -134,12 +132,12 @@
             <input id="username" name="username" type="text" class="form-control input-group-lg" value="{{username}}">
             </div>    
             <div class="form-group">
-            <label for="nombre">Nombre</label>                      
-            <input id="nombre" name="nombre" type="text" class="form-control input-group-lg" value="{{nombre}}">
+            <label for="nombre">Documento</label>                      
+            <input id="documento" name="documento" type="text" class="form-control input-group-lg" value="{{documento}}">
             </div>
             <div class="form-group">
-            <label for="apellido">Apellido</label>                      
-            <input id="apellido" name="apellido" type="text" class="form-control input-group-lg" value="{{apellido}}">
+            <label for="apellido">F. Creacion</label>                      
+            <input id="apellido" name="apellido" type="text" class="form-control input-group-lg" value="{{fcreacion}}">
             </div>
             <div class="form-group">
             <label for="email">Email</label>                      

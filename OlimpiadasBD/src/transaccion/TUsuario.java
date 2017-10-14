@@ -24,34 +24,38 @@ import utils.PasswordHash;
 
 public class TUsuario extends TransaccionBase<Usuario> {
 
-     @Override
+    public static String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz";
+
+    @Override
     public List<Usuario> getList() {
         return super.getList("select id,usu_mail,usu_fcreacion,usu_activo,id_tipo_usuario from usuario");
     }
-     
+
     /*
      Dado el mail de un usuario, recupera el objeto de la BD.
      */
-
     public Usuario getByEmail(String email) {
         Usuario u = new Usuario();
-        String query = String.format("SELECT id,usu_mail,usu_password,usu_activo,usu_hash_activa,usu_fcreacion,id_tipo_usuario from usuario where usuario.usu_mail = '%s'",email);
+        String query = String.format("SELECT id,usu_mail,usu_password,usu_activo,usu_hash_activa,usu_fcreacion,id_tipo_usuario from usuario where usuario.usu_mail = '%s'", email);
         List<Usuario> listaUsuario = this.getList(query);
 
-        if (listaUsuario.size() > 0) return (Usuario) listaUsuario.get(0);
-                                     else return null;        
+        if (listaUsuario.size() > 0) {
+            return (Usuario) listaUsuario.get(0);
+        } else {
+            return null;
+        }
     }
-    
-     public List<Usuario> getUsuarios() {
+
+    public List<Usuario> getUsuarios() {
         String query = "SELECT * from usuario";
         return this.getList(query);
     }
 
     public Usuario getById(int id) {
-        Usuario u = new Usuario();        
+        Usuario u = new Usuario();
         String query = "SELECT id,usu_mail,usu_password,usu_activo,usu_hash_activa,usu_fcreacion,id_tipo_usuario from usuario where usuario.id = " + id;
         return this.getById(query);
-        
+
     }
     /*
      * Inserta un usuario en la BD
@@ -71,10 +75,10 @@ public class TUsuario extends TransaccionBase<Usuario> {
             u.setUsu_activo(0);
 
             java.util.Date dt = new java.util.Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
             u.setUsu_fcreacion(sdf.format(dt));
             id = this.alta(u);
-        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
@@ -86,7 +90,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
             String password_hash = PasswordHash.createHash(newPassword);
             u.setUsu_password(password_hash);
             todoOk = this.actualizar(u);
-        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return todoOk;
@@ -100,7 +104,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
                 u.setUsu_activo(1);
                 todoOk = this.actualizar(u);
             }
-        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return todoOk;
@@ -122,7 +126,7 @@ public class TUsuario extends TransaccionBase<Usuario> {
         boolean valida = false;
         try {
             valida = PasswordHash.validatePassword(password, hash);
-        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -135,12 +139,21 @@ public class TUsuario extends TransaccionBase<Usuario> {
     }
 
     public final static String createPassNueva() {
-        SecureRandom random = new SecureRandom();
-        return new BigInteger(130, random).toString(32);
+
+        String key = MINUSCULAS;
+        int length = 5;
+        String pswd = "";
+
+        for (int i = 0; i < length; i++) {
+            pswd += (key.charAt((int) (Math.random() * key.length())));
+        }
+
+        return pswd;
+
     }
 
     public boolean actualizar(Usuario usuario) {
-        return this.actualizar(usuario, "id");        
+        return this.actualizar(usuario, "id");
     }
 
     public boolean cambiarActiva(Usuario u, String validate) {
@@ -149,11 +162,10 @@ public class TUsuario extends TransaccionBase<Usuario> {
             String password_hash = PasswordHash.createHash(validate);
             u.setUsu_hash_activa(password_hash);
             todoOk = this.actualizar(u);
-        } catch ( NoSuchAlgorithmException | InvalidKeySpecException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return todoOk;
     }
 
-   
 }

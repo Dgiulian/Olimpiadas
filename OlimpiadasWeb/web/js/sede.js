@@ -26,7 +26,7 @@ function loadDataSede(filter){
     $.ajax({
            url: URLS.SEDE.LIST,
            data: filter,
-           method:"GET",
+           method:"POST",
            dataType: "json"
         }).done(function(result) {
             if(result.Result === "OK") {
@@ -82,18 +82,23 @@ function guardarSede(data){
         url:URLS.SEDE.EDIT,
         data: data,
         method:'POST',
-        dataType:'json'        
-    }).done(function(){
+        processData:false,                
+        contentType:false,
+        dataType:'json' 
+    }).done(function(response){
+        if(response.Result !=="OK") bootbox.alert(response.Message);
         filtrarSede();
     });
 }
 function recuperarCampos(){
-    var data = {};
-    data.id = $('#id').val();
-    data.nombre = $('#nombre').val();
-    data.direccion = $('#direccion').val();
-    data.observaciones  = $('#observaciones').val();
-    return data;   
+    var data = new FormData();
+    var campos = getFormData($('form'));
+    for( let d in campos){    
+        data.append(d,campos[d]);
+    }
+    data.append('imagen', $('#imagen')[0].files[0]);    
+    
+    return data;
 }
 function getSearchData(){
     var data = {};

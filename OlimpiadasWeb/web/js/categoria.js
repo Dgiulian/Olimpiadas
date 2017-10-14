@@ -60,6 +60,8 @@ function createTable($tabla,data){
     $('.btn-del').click(borrarCategoria);
     $('.btn-edit').click(editarCategoria);
     $('.btn-grupo').click(redirigir_grupo);
+    $('.btn-inscriptos').click(redirigir_inscriptos);
+    $('.btn-control-grupos').click(redirigir_control_grupo);
 }
 function editarCategoria(){
     var data = {};
@@ -120,6 +122,18 @@ function redirigir_grupo(){
     var index = $(this).data('index');
     var id = categorias[index].id;        
     window.location = URLS.GRUPO.BASE + "?id_categoria=" + id;
+}
+
+function redirigir_control_grupo(){
+    var index = $(this).data('index');
+    var id = categorias[index].id;        
+    window.location = URLS.CATEGORIA.CONTROL_GRUPO + "?id_categoria=" + id;
+}
+
+function redirigir_inscriptos(){
+    var index = $(this).data('index');
+    var id = categorias[index].id;        
+    window.location = URLS.CATEGORIA.INS + "?id_categoria=" + id;
 }
 function getSearchData(){
     var data = {};

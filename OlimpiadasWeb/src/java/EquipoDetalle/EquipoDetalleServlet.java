@@ -40,25 +40,33 @@ public class EquipoDetalleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Integer id_equipo = Parser.parseInt(request.getParameter("id_equipo"));
-        try{
-            Equipo equipo = new TEquipo().getById(id_equipo);            
-            if(equipo==null) throw new BaseException("ERROR","No se encontr&oacute; el equipo");
+        try {
+            Equipo equipo = new TEquipo().getById(id_equipo);
+            if (equipo == null) {
+                throw new BaseException("ERROR", "No se encontr&oacute; el equipo");
+            }
             System.out.println("recupero jugadores");
             List<Jugador> lstJugadores = new TJugador().getById_delegacion(equipo.getId_delegacion());
+            if (equipo.getObservaciones().equalsIgnoreCase("SI")) {
+                lstJugadores = new TJugador().getList();
+            }
+
             System.out.println("recuperao equipo");
             List<Equipo_detalle> lstEquipo_detalle = new TEquipo_detalle().getById_equipo(equipo.getId());
             System.out.println("recupero delegacion");
             Delegacion delegacion = new TDelegacion().getById(equipo.getId_delegacion());
             System.out.println("error");
-            if(delegacion==null) throw new BaseException("ERROR","No se encontr&oacute; la delegaci&oacute;n");
+            if (delegacion == null) {
+                throw new BaseException("ERROR", "No se encontr&oacute; la delegaci&oacute;n");
+            }
             System.out.println("seteo atributps");
             request.setAttribute("equipo", equipo);
             request.setAttribute("delegacion", delegacion);
             request.setAttribute("lstJugadores", lstJugadores);
             request.setAttribute("lstEquipo_detalle", lstEquipo_detalle);
-            
+
             request.getRequestDispatcher("equipo_detalle.jsp").forward(request, response);
-        } catch(BaseException ex) {
+        } catch (BaseException ex) {
             request.setAttribute("titulo", ex.getResult());
             request.setAttribute("mensaje", ex.getMessage());
         }

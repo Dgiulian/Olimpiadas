@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-ago-2017, 17:52:43
+    Author     : JuanMa
+*/
+
+.games-schedule .well {    
+    border-top: 2px #1761a6 solid;
+    border-radius: 0px;
+    padding: 0 10px 0 10px;
+}
+.games-schedule .col-md-2 {
+    padding: 5px;
+}
+.games-schedule-title {
+    background-color: #1761a6;
+    color: #ffffff;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.games-schedule-title h5 {
+    font-size: 18px;
+    text-align: center;
+    margin: 3px 0 3px 0;
+}
+.games-schedule-items {
+    padding: 5px;
+    background-color: #d6e9c6;
+    margin-bottom: 5px;
+    
+}
+.last-item {
+    margin-bottom: 0px;
+}
+.games-team {    
+    font-weight: bold;
+}
+.games-team h4 {
+    color: #59a1e8;
+    text-align: center;
+    margin-top: 20px;
+    border: 1px #c8d8e7 dotted;
+    padding: 5px;
+    width: 100%;
+}
+.games-team img {
+    border-bottom: 2px #6b9fd3 solid;
+    margin-bottom: 3px;
+}
+.games-team span {
+    color: #de6c10;
+    font-size: 13px;
+}
+.games-dash {
+    border: none;
+    border-top: 1px #95b3d0 dotted;
+}
+.games-info p {
+    margin: 0;
+    padding: 0;
+    color: #0a2948;
+    line-height: 20px;
+}
+.games-schedule-footer {
+    background-color: #1761a6;
+    color: #ffffff;
+    font-size: 10px;
+    padding: 5px;
+}
+.games-schedule-footer p {
+    margin: 0;
+}

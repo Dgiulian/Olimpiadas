@@ -59,8 +59,8 @@ public class TFecha {
         return "";
     }
 
-    public static String ahora() {
-        return ahora("yyyy-MM-dd hh:mm:ss");
+    public String ahora() {
+        return ahora("yyyy-MM-dd HH:mm:ss");
     }
 
     public static String ahora(String formato) {

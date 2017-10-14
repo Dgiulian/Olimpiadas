@@ -59,6 +59,13 @@ public class Conexion {
             String nombrebd = "/olimpiadas_kinesiologia";
             String usr = "olimpiadas";
             String password = "Olimpiada**2017";
+            
+             /* Base produccion */
+            //String host = "179.43.127.107";
+            /*String port = ":3306";
+            String nombrebd = "/olimpiadas_kinesiologia";
+            String usr = "olimpiadas";
+            String password = "Olimpiada**2017";*/
 
             Class.forName(driver).newInstance();
             try {

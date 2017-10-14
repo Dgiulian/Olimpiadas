@@ -36,7 +36,7 @@ public class EquipoServlet extends HttpServlet {
         List<Delegacion> delegaciones = new TDelegacion().getList();
         List<Categoria> categorias = new TCategoria().getList();
         request.setAttribute("delegaciones", delegaciones);
-        System.out.println(categorias);
+        
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("equipo.jsp").forward(request, response);
     }

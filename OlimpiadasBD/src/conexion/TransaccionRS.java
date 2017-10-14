@@ -124,7 +124,7 @@ public class TransaccionRS {
                         int tipo = rsm.getColumnType(i);
                         Object valor = null;
                         tipobd = "";
-//                        System.out.println(rsm.getColumnTypeName(i)  + ":" + tipo);
+                        
                         switch (tipo) {
                             case 1:
                                 valor = rs.getString(i);
@@ -180,8 +180,7 @@ public class TransaccionRS {
 
                         Class[] clasesParamSetEmail = new Class[1];
                         clasesParamSetEmail[0] = Class.forName(tipobd);
-                        name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
-
+                        name = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());                        
                         Method metSetEmail = claseGenerada.getMethod("set" + name, clasesParamSetEmail);
                         Object[] paramSetEmail = new Object[1];
                         paramSetEmail[0] = valor;
@@ -445,8 +444,7 @@ public class TransaccionRS {
         return result;
     }
     public int altaObjetoAutonumerico(Object objeto) {       
-        String sql = queryInsert(objeto);
-        System.out.println(sql);
+        String sql = queryInsert(objeto);        
         Conexion conexion = new Conexion();
         conexion.conectarse();
         int result = conexion.EjecutarInsertAutonumerico(sql);
@@ -458,7 +456,7 @@ public class TransaccionRS {
     public boolean eliminarObjeto(Object objeto) {
         String sql = queryDelete(objeto);
         Conexion conexion = new Conexion();
-        conexion.conectarse();
+        conexion.conectarse();        
         boolean result = conexion.EjecutarInsert(sql);
         conexion.desconectarse();
 

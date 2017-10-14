@@ -10,6 +10,7 @@ import bd.Grupo_detalle;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class GrupoEdit extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GrupoEdit</title>");            
+            out.println("<title>Servlet GrupoEdit</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet GrupoEdit at " + request.getContextPath() + "</h1>");
@@ -79,53 +80,65 @@ public class GrupoEdit extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String pagNro = request.getParameter("pagNro");                       
-        Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
+
+       
+
+        String pagNro = request.getParameter("pagNro");
+        Integer page = (pagNro != null) ? Integer.parseInt(pagNro) : 0;
         Integer id = Parser.parseInt(request.getParameter("id"));
         Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
-        String[] arrEquipos = request.getParameterValues("arrEquipo[]");        
+
+        String[] arrEquipos = request.getParameterValues("arrEquipo[]");
         String nombre = request.getParameter("nombre");
         String observacion = request.getParameter("observacion");
+        Integer id_tipo_tabla = Parser.parseInt(request.getParameter("tipo_vista_tabla"));
         TGrupo tgrupo = new TGrupo();
         Grupo grupo;
         boolean nuevo = false;
         JsonRespuesta jr = new JsonRespuesta();
         try {
             grupo = tgrupo.getById(id);
-            if(grupo==null){
+            if (grupo == null) {
                 grupo = new Grupo();
                 nuevo = true;
             }
             grupo.setNombre(nombre);
             grupo.setObservacion(observacion);
-            grupo.setId_categoria(id_categoria);            
+            grupo.setId_categoria(id_categoria);
+            grupo.setTipo_vista_tabla(id_tipo_tabla);
             boolean todoOk;
-            if(nuevo) {
+            if (nuevo) {
                 id = tgrupo.alta(grupo);
                 grupo.setId(id);
-                todoOk = id!=0; 
-            } else todoOk = tgrupo.actualizar(grupo);
+                todoOk = id != 0;
+            } else {
+                todoOk = tgrupo.actualizar(grupo);
+            }
 
-            
-            if(todoOk){
+            System.out.println("estado acutalizacion: " + todoOk);
+            System.out.println(arrEquipos);
+
+            if (todoOk) {
                 TGrupo_detalle tgrupo_detalle = new TGrupo_detalle();
                 tgrupo_detalle.eliminar(grupo.getId());
-                for(String eq:arrEquipos){
+                for (String eq : arrEquipos) {
                     Integer id_equipo = Parser.parseInt(eq);
                     Grupo_detalle grupo_detalle = new Grupo_detalle();
                     grupo_detalle.setId_grupo(grupo.getId());
-                    grupo_detalle.setId_equipo(id_equipo);                    
+                    grupo_detalle.setId_equipo(id_equipo);
                     tgrupo_detalle.alta(grupo_detalle);
                 }
             }
-            
-            if(!todoOk) throw new BaseException("ERROR","Ocurri&oacute; un error al guardar la categor&iacute;a");
+
+            if (!todoOk) {
+                throw new BaseException("ERROR", "Ocurri&oacute; un error al guardar la categor&iacute;a");
+            }
             jr.setResult("OK");
             jr.setRecord(grupo);
-        } catch(BaseException ex){
+        } catch (BaseException ex) {
             jr.setResult(ex.getResult());
             jr.setMessage(ex.getMessage());
-        }finally {            
+        } finally {
             String jsonResult = new Gson().toJson(jr);
             out.print(jsonResult);
             out.close();

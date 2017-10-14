@@ -114,6 +114,7 @@
                                                 <col style=""></col>
                                                 <col style="width:10%"></col>
                                                 <col style="width:10%"></col>                                                
+                                                <col style="width:10%"></col>       
                                                 <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
@@ -124,6 +125,7 @@
                                                     <th>Categor&iacute;a</th>
                                                     <th>Grupo</th>
                                                     <th>Estado</th>                                                    
+                                                    <th>Resultados</th>                                                    
                                                     <th class="acciones">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -159,9 +161,12 @@
             <td class="">{{categoria.nombre}}</td>
             <td class="">{{grupo.nombre}}</td>
             <td class="">{{estado}}</td>
+            <td class="">
+            <span href="" data-index="{{@index}}" class="btn btn-link btn-block btn-resultados">Resultados</span>
+            </td>
             <td class="acciones">
             <a  href="PruebaEdit?id={{id}}" class="btn btn-xs btn-circle  btn-warning  "><span class="fa fa-edit fw"></span></a>              
-            <span  data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
+            <span data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
             </td>
             </tr>
             {{else}}
@@ -282,6 +287,9 @@
             </div>                     
         </script>    
         <script src="js/prueba_deportiva.js"></script>
+        <script type="text/javascript">
+            $(document).ready(init_prueba);
+        </script>
     </body>
 
 </html>

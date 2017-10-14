@@ -74,6 +74,7 @@ public class CategoriaEdit extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String nombre_corto = request.getParameter("nombre_corto");
         String detalle = request.getParameter("detalle");
+        Integer modalidad = Parser.parseInt(request.getParameter("modalidad"));
         Integer orden_puntaje = Parser.parseInt(request.getParameter("orden_puntaje"));
         Integer tipo_puntaje = Parser.parseInt(request.getParameter("tipo_puntaje"));
         TCategoria tcategoria = new TCategoria();
@@ -90,6 +91,7 @@ public class CategoriaEdit extends HttpServlet {
             categoria.setNombre_corto(nombre_corto);
             categoria.setDetalle(detalle);
             categoria.setId_deporte(id_deporte); 
+            categoria.setTipo_modalidad(modalidad);
             categoria.setOrden_puntaje(orden_puntaje);
             categoria.setTipo_puntaje(tipo_puntaje);
             boolean todoOk;

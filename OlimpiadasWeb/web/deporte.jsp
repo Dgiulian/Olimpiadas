@@ -46,17 +46,13 @@
                                             <colgroup>
                                                 <col style="width:5%"></col>
                                                 <col style="width:20%"></col>
-                                                <col style="width:10%"></col>
-                                                <col style="width:10%"></col>
                                                 <col></col>                                                
                                                 <col class="acciones"></col>
                                             </colgroup>
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Nombre</th>
-                                                    <th>Tipo</th>
-                                                    <th>Cantidad</th>
+                                                    <th>Nombre</th>                                                    
                                                     <th>Reglamento</th>                                                    
                                                     <th class="acciones">Acciones</th>
                                                 </tr>
@@ -87,9 +83,7 @@
             {{#each records}}
             <tr class="">
             <td class="">{{id}}</td>
-            <td class="">{{nombre}}</td>
-            <td class="">{{tipoDeporte tipo}}</td>
-            <td class="">{{cantidad_jugadores}}</td>
+            <td class="">{{nombre}}</td>            
             <td class="">
             {{#if reglamento}}
             <a href="Download?type=reglamento&id={{id}}">{{reglamento}}</a>
@@ -115,17 +109,7 @@
             <div class="form-group">
             <label for="nombre">Nombre</label>                      
             <input id="nombre" name="nombre" type="text" class="form-control input-md" value="{{nombre}}">
-            </div>
-            <div class="form-group">
-            <label for="tipo">Tipo</label>                      
-            <select id="tipo" name="tipo" type="text" class="form-control input-md">
-            {{#select tipo}}
-            <option value="0">Seleccione el tipo de deporte</option>
-            <option value="1">Individual</option>
-            <option value="2">Colectivo</option>
-            {{/select}}
-            </select>
-            </div>
+            </div>            
             <div class="form-group"> 
             <label for="cantidad_jugadores">Cantidad Jugadores</label>
 

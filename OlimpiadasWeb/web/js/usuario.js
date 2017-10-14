@@ -43,7 +43,7 @@ function createTable($tabla,data){
         var activo = d.usu_activo?"Si":"No";
 
         html += wrapTag('td',activo,'');
-        var htmlEdit = "<a href='<%= PathCfg.USUARIO_EDIT%>?id="+ d.id +"' class='btn btn-xs btn-circle  btn-warning'><span class='fa fa-edit fw'></span></a> ";
+        var htmlEdit = "<a href='" + URLS.USUARIO.EDIT + "?id="+ d.id +"' class='btn btn-xs btn-circle  btn-warning'><span class='fa fa-edit fw'></span></a> ";
         var htmlDel = "<span href='' data-index='"+ d.id + "' class='btn btn-xs btn-danger btn-circle btn-del'><span class='fa fa-trash fw'></span></span> ";
 
         html +=wrapTag('td',htmlEdit + htmlDel,'');

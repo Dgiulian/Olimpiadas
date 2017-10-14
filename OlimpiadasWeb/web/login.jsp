@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= PathCfg.PAGE_TITLE %></title>
+    <title>Olimpiadas Kinésiologicas</title>
      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

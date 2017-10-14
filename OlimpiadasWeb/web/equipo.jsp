@@ -78,7 +78,7 @@
                                                     <th>Id</th>
                                                     <th>Nombre</th>
                                                     <th>Delegacion</th>
-                                                    <th>Observaciones</th>
+                                                    <th>Bolsa de Jugadores</th>
                                                     <th>Integrantes</th>
                                                     <th class="acciones">Acciones</th>
                                                 </tr>
@@ -147,8 +147,17 @@
             </select>
             </div>
             <div class="form-group">
-            <label for="observaciones">Detalle:</label>            
-            <textarea id="observaciones" name="observaciones" type="text" class="form-control input-md" >{{detalle}}</textarea>            
+            
+            <label for="observaciones">Bolsa de Jugadores: </label>            
+            <select id="observaciones" name="observaciones" type="text" class="form-control input-md">
+            {{#select observaciones}}            
+            <option value="" >¿Es bolsa de jugadores?</option>
+            <option value="SI" >Es bolsa de jugadores</option>
+            <option value="NO" >Equipo Delegacion</option>            
+            {{/select}}
+            </select>
+            
+            
             </div>                  
             </form>
             </div>

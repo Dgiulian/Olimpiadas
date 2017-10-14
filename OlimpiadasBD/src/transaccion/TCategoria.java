@@ -20,6 +20,7 @@ public class TCategoria extends TransaccionBase<Categoria> {
     public Categoria getById(Integer id) {
         String query = String.format(
                 "select * from categoria where categoria.id = %d ", id);
+        System.out.println("categoria: " + query);
         return super.getById(query);
     }
 
@@ -29,12 +30,12 @@ public class TCategoria extends TransaccionBase<Categoria> {
     }
 
     public List<Categoria> getByJugador(Integer id_jugador) {
-        String query = String.format("select categoria.`*`\n"
+        String query = String.format("select categoria.* \n"
                 + "  from categoria,equipo,equipo_detalle\n"
                 + " where categoria.id = equipo.id_categoria\n"
                 + "   and equipo.id = equipo_detalle.id_equipo\n"
                 + "   and equipo_detalle.id_jugador = %d ", id_jugador);
-
+        System.out.println("getbyjugador= " + query);
         return this.getList(query);
     }
 

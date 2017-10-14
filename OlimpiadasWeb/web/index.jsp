@@ -1,3 +1,7 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="bd.Deporte"%>
+<%@page import="java.util.List"%>
+<%@page import="transaccion.TDeporte"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,40 +15,35 @@
         <%@include file="tpl_navbar.jsp" %>
         <div id="wrapper">
             <div id="page-wrapper">
+                <br>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <!--<h1 class="page-header"> <center>Olimpiadas de Kinesiolog&iacute;a 2017</center></h1>-->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <div class="row">
-                    <div class="col-lg-offset-3 col-lg-6">
-                        <!--                        <div class="panel panel-default">
-                                                    <div class="panel-body">-->
-                        <img style="margin-top: 30px;" src="images/logotipo-OLI.png" class="img-responsive"/>
-                        <!--</div>-->
-                        <!--</div>-->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /#page-wrapper -->
+                    <%                    List<Deporte> lista = new TDeporte().getList();
+                        Iterator it = lista.iterator();
+                        while (it.hasNext()) {
+                            Deporte deporte = (Deporte) it.next();
+                    %>
+                    <div class="col-md-2 panel-primary">
 
+                        <div class="panel-heading">
+                            <div class="row text-center">
+                                <b><%=deporte.getNombre()%></b>                                
+                            </div>
+
+                        </div>
+                        <a data-id='<%=deporte.getId()%>' data-nombre='<%=deporte.getNombre()%>' data-toggle='modal' data-target='#categoria_view' class=""><img src="images/deportes/<%=deporte.getImagen()%>" class="img-responsive"/></a>
+
+                    </div>
+                    <%
+                        }
+                    %>  
+                </div>
             </div>
             <!-- /#wrapper -->
         </div>
-        <!-- jQuery -->
-        <script src="vendor/jquery/jquery.min.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="vendor/metisMenu/metisMenu.min.js"></script>
-
-
-        <!-- Custom Theme JavaScript -->
-        <script src="js/sb-admin-2.js"></script>
-
+        <%@include file="categoria_modal.jsp" %>        
+        <%@include file="tpl_scripts.jsp" %>
+        <script src="js/categoria_modal.js"></script>
 
     </body>
 </html>

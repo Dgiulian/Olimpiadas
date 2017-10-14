@@ -44,6 +44,7 @@ public class CategoriaList extends HttpServlet {
         PrintWriter out = response.getWriter();
         String pagNro = request.getParameter("pagNro");       
         Integer id_deporte = Parser.parseInt(request.getParameter("id_deporte"));
+        Integer id_categoria = Parser.parseInt(request.getParameter("id_categoria"));
         String nombre     = request.getParameter("nombre");
                 
         Integer page = (pagNro!=null)?Integer.parseInt(pagNro):0;
@@ -53,6 +54,7 @@ public class CategoriaList extends HttpServlet {
             JsonRespuesta jr = new JsonRespuesta();
             HashMap<String,String> filtro = new HashMap<>();
             if(id_deporte!=0) filtro.put("id_deporte",id_deporte.toString());
+            if(id_categoria!=0) filtro.put("id",id_categoria.toString());
             if(nombre!=null && !"".equals(nombre)) filtro.put("nombre",nombre);
             
                        

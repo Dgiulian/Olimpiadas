@@ -3,6 +3,7 @@
 <%@page import="bd.Delegacion"%>
 <%@page import="java.util.List"%>
 <%@page import="transaccion.TDelegacion"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="search_delegacion">Delegacion:</label>
-                                                <select id="id_delegacion_filtro" name="id_delegacion" type="text" class="form-control input-md">
+                                                <select id="id_delegacion_filtro" name="id_delegacion_filtro" type="text" class="form-control input-md">
                                                     <option value="0">Seleccione la delegaci&oacute;n</option>
                                                     <% for (Delegacion delegacion : delegaciones) {%>
                                                     <option value="<%=delegacion.getId()%>"><%=delegacion.getNombre()%></option>
@@ -107,7 +108,7 @@
 
             <td class="">{{convertirFecha fecha_nacimiento}}</td>
             <td class="">{{delegacion.nombre}}</td>
-            <td class=""><a href="JugadorCategoria?id={{id}}">Categor&iacute;as</a></td>
+            <td class=""></td>
             <td class="">
             <span data-index="{{@index}}" class="btn btn-xs btn-circle  btn-warning btn-edit"><span class="fa fa-edit fw"></span></span>
             <span data-index="{{@index}}" class="btn btn-xs btn-danger btn-circle btn-del"><span class="fa fa-trash fw"></span></span>
@@ -123,7 +124,7 @@
         <script id="jugador_edit" type="text/x-handlebars-template">
             <div class="row">
             <div class="col-md-12">
-            <form class="form-vertical">
+            <form class="form-vertical" enctype="multipart/form-data">
             <input id="id" name="id" type="hidden" class="" value="{{id}}" >
             <div class="form-group">
             <label for="nombre_appellido">Nombre</label>            
@@ -153,7 +154,7 @@
             <select id="id_delegacion" name="id_delegacion" type="text" class="form-control input-md">
             {{#select id_delegacion}}
             {{#each delegaciones}}
-            <option value={{id}} >{{nombre}}</option>
+            <option value="{{id}}" >{{nombre}}</option>
             {{/each}}
             {{/select}}
             </select>

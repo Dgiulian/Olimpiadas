@@ -86,6 +86,7 @@ function recuperarCampos(){
     var data = {};
     data.id = $('#id').val();
     data.nombre = $('#nombre').val();
+    data.nombre_corto = $('#nombre_corto').val();
     data.observaciones  = $('#observaciones').val();
     return data;   
 }
